@@ -4,24 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Keuangan Toko</title>
-    <!-- Menggunakan Play CDN Tailwind CSS Versi Stabil -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Perbaikan Link Tailwind CSS agar bisa jalan 100% -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <!-- Google Fonts Premium: Playfair Display & Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Mengaplikasikan Font Premium */
         .font-elegant {
             font-family: 'Playfair Display', serif;
         }
         .font-sans-premium {
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
-        /* Efek Tekstur Kertas Lembut pada Background agar tidak terlalu "suci"/polos */
+        /* Efek Tekstur Kertas Lembut Retro-Scrapbook */
         .bg-scrapbook {
             background-color: #faf6f0;
             background-image: radial-gradient(#e5dec9 1px, transparent 0);
@@ -29,18 +26,18 @@
         }
     </style>
 </head>
-<body class="bg-scrapbook font-sans-premium text-slate-800 min-h-screen">
+<body class="bg-scrapbook font-sans-premium text-slate-800 min-h-screen pb-24">
 
-    <!-- TOP BAR: Akses Login & Register (Request 4) -->
-    <div class="w-full max-w-6xl mx-auto px-6 pt-4 flex justify-end gap-4 text-sm font-semibold text-amber-900/80">
+    <!-- TOP BAR: Akses Login & Register -->
+    <div class="w-full max-w-6xl mx-auto px-6 pt-6 flex justify-end gap-4 text-sm font-semibold text-amber-900/80">
         <a href="#login" class="hover:text-amber-700 transition duration-200">Login</a>
         <span class="text-amber-900/30">|</span>
         <a href="#register" class="hover:text-amber-700 transition duration-200">Register</a>
     </div>
 
-    <!-- HERO SECTION: Headline & Dedikasi Spesial -->
+    <!-- HERO SECTION: Headline & Dedikasi Spesial untuk Ibu -->
     <header class="max-w-6xl mx-auto px-6 py-12 text-center select-none">
-        <!-- Request 5: Spesial untuk Ibu -->
+        <!-- Request Spesial Ibu -->
         <div class="mb-4 inline-block">
             <h2 class="font-elegant text-2xl md:text-3xl font-bold text-rose-600 tracking-wide italic">
                 Special For My Mom!
@@ -50,24 +47,22 @@
             </p>
         </div>
         
-        <!-- Request 1: Headline Beranda Baru -->
+        <!-- Headline Utama -->
         <h1 class="font-elegant text-4xl md:text-6xl font-black text-slate-900 tracking-tight mt-2">
             Sistem Keuangan Toko
         </h1>
         <div class="w-24 h-1 bg-amber-700 mx-auto mt-4 rounded-full"></div>
     </header>
 
-    <!-- MAIN CONTENT: Menu & Fitur Utama -->
-    <main class="max-w-6xl mx-auto px-6 pb-24">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- MAIN CONTENT: Grid 5 Fitur Utama -->
+    <main class="max-w-6xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
             
-            <!-- CARD 1: DAFTAR PRODUK (Request 2 & Premium Asset) -->
+            <!-- CARD 1: DAFTAR PRODUK -->
             <div class="bg-[#fffdf9] border-2 border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group">
-                <!-- Dekorasi Tab Folder Terinspirasi image_79e478.jpg -->
-                <div class="absolute top-0 left-6 -translate-y-1/2 bg-teal-600 text-white text-xs px-4 py-1 rounded-t-md font-bold tracking-wider uppercase">
+                <div class="absolute top-0 left-6 -translate-y-1/2 bg-teal-600 text-white text-[10px] px-3 py-0.5 rounded-t-md font-bold tracking-wider uppercase">
                     Folder 01
                 </div>
-                <!-- Ikon Grafis Premium 3D Minimalis Terinspirasi image_79ef27.png (Request 6) -->
                 <div class="w-14 h-14 bg-teal-50 rounded-xl flex items-center justify-center mb-6 mt-2 group-hover:scale-110 transition-transform duration-300">
                     <svg class="w-7 h-7 text-teal-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
@@ -80,13 +75,11 @@
                 </div>
             </div>
 
-            <!-- CARD 2: STOK PRODUK (Request 3 & Premium Asset) -->
+            <!-- CARD 2: STOK PRODUK -->
             <div class="bg-[#fffdf9] border-2 border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group">
-                <!-- Dekorasi Tab Folder -->
-                <div class="absolute top-0 left-6 -translate-y-1/2 bg-amber-600 text-white text-xs px-4 py-1 rounded-t-md font-bold tracking-wider uppercase">
+                <div class="absolute top-0 left-6 -translate-y-1/2 bg-amber-600 text-white text-[10px] px-3 py-0.5 rounded-t-md font-bold tracking-wider uppercase">
                     Folder 02
                 </div>
-                <!-- Ikon Grafis Premium (Request 6) -->
                 <div class="w-14 h-14 bg-amber-50 rounded-xl flex items-center justify-center mb-6 mt-2 group-hover:scale-110 transition-transform duration-300">
                     <svg class="w-7 h-7 text-amber-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
@@ -99,20 +92,52 @@
                 </div>
             </div>
 
-            <!-- CARD 3: LAPORAN KEUANGAN (Premium Asset Retro Office) -->
+            <!-- CARD 3: TRACKING PEMASUKAN & PENGELUARAN (Fitur Baru!) -->
             <div class="bg-[#fffdf9] border-2 border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group">
-                <!-- Dekorasi Tab Folder -->
-                <div class="absolute top-0 left-6 -translate-y-1/2 bg-rose-600 text-white text-xs px-4 py-1 rounded-t-md font-bold tracking-wider uppercase">
+                <div class="absolute top-0 left-6 -translate-y-1/2 bg-emerald-600 text-white text-[10px] px-3 py-0.5 rounded-t-md font-bold tracking-wider uppercase">
                     Folder 03
                 </div>
-                <!-- Ikon Grafis Premium (Request 6) -->
+                <div class="w-14 h-14 bg-emerald-50 rounded-xl flex items-center justify-center mb-6 mt-2 group-hover:scale-110 transition-transform duration-300">
+                    <svg class="w-7 h-7 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="font-elegant text-xl font-bold text-slate-900 mb-2">Tracking Arus Kas</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">Catat dan lacak setiap uang masuk serta biaya pengeluaran operasional warung harian.</p>
+                <div class="mt-6 flex items-center text-sm font-bold text-emerald-600 group-hover:translate-x-2 transition-transform duration-200">
+                    Catat Kas &rarr;
+                </div>
+            </div>
+
+            <!-- CARD 4: TRACKING PENJUALAN (Fitur Baru!) -->
+            <div class="bg-[#fffdf9] border-2 border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group">
+                <div class="absolute top-0 left-6 -translate-y-1/2 bg-indigo-600 text-white text-[10px] px-3 py-0.5 rounded-t-md font-bold tracking-wider uppercase">
+                    Folder 04
+                </div>
+                <div class="w-14 h-14 bg-indigo-50 rounded-xl flex items-center justify-center mb-6 mt-2 group-hover:scale-110 transition-transform duration-300">
+                    <svg class="w-7 h-7 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                    </svg>
+                </div>
+                <h3 class="font-elegant text-xl font-bold text-slate-900 mb-2">Tracking Penjualan</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">Pantau riwayat transaksi nota belanja konsumen dan performa produk terlaris.</p>
+                <div class="mt-6 flex items-center text-sm font-bold text-indigo-600 group-hover:translate-x-2 transition-transform duration-200">
+                    Cek Transaksi &rarr;
+                </div>
+            </div>
+
+            <!-- CARD 5: LAPORAN KEUANGAN -->
+            <div class="bg-[#fffdf9] border-2 border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group">
+                <div class="absolute top-0 left-6 -translate-y-1/2 bg-rose-600 text-white text-[10px] px-3 py-0.5 rounded-t-md font-bold tracking-wider uppercase">
+                    Folder 05
+                </div>
                 <div class="w-14 h-14 bg-rose-50 rounded-xl flex items-center justify-center mb-6 mt-2 group-hover:scale-110 transition-transform duration-300">
                     <svg class="w-7 h-7 text-rose-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 114 0v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                     </svg>
                 </div>
                 <h3 class="font-elegant text-xl font-bold text-slate-900 mb-2">Laporan Keuangan</h3>
-                <p class="text-sm text-slate-500 leading-relaxed">Catat total pemasukan harian, laba bersih, serta pengeluaran operasional toko otomatis.</p>
+                <p class="text-sm text-slate-500 leading-relaxed">Rangkuman kalkulasi laba bersih otomatis bulanan untuk bahan evaluasi bisnis.</p>
                 <div class="mt-6 flex items-center text-sm font-bold text-rose-600 group-hover:translate-x-2 transition-transform duration-200">
                     Analisis Data &rarr;
                 </div>
@@ -121,8 +146,8 @@
         </div>
     </main>
 
-    <!-- FOOTER: Aksen Pita Lembut Terinspirasi image_797f43.png -->
-    <footer class="w-full bg-rose-200 py-3 fixed bottom-0 left-0 shadow-inner flex items-center justify-center gap-2">
+    <!-- FOOTER: Aksen Ribbon Lembut -->
+    <footer class="w-full bg-rose-200 py-3 fixed bottom-0 left-0 shadow-inner flex items-center justify-center gap-2 z-50">
         <div class="w-2 h-2 bg-rose-500 rounded-full"></div>
         <p class="text-xs font-bold text-rose-800 tracking-wider uppercase font-sans-premium">
             Sistem Keuangan Toko Premium — Kasual & Estetik
