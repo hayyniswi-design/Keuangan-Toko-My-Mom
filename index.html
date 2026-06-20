@@ -4,267 +4,436 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Keuangan Toko - Kaluna Edition</title>
-    <!-- Google Fonts Premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* --- GLOBAL STYLES & BACKGROUND DENIM MODERN --- */
+        /* --- GLOBAL STYLES & RESET --- */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
+        /* BACKGROUND UTAMA: CELANA BIRU DENIM DENGAN TEKSTUR SERAT KAIN */
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #1e2e42; /* Warna Denim Elegan */
+            background-color: #2b4461;
             background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 20px 20px;
-            color: #ffffff;
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                radial-gradient(circle at 50% 50%, #405e85 0%, #1e324a 100%);
+            background-size: 4px 4px, 4px 4px, 100% 100%;
+            color: #2c3e50;
             min-height: 100vh;
-            padding-bottom: 60px;
+            padding-bottom: 80px;
+            position: relative;
+            overflow-x: hidden;
         }
 
         .font-elegant { font-family: 'Playfair Display', serif; }
-
-        /* --- LOGIKA NAVIGASI TAB (PASTI BISA DIPENCET) --- */
-        .page { display: none; }
-        .page:target { display: block; }
-        #authPage { display: block; } /* Halaman awal */
-        #authPage:has(~ .page:target) { display: none; } 
-
-        /* --- HALAMAN 1: LOGIN & REGISTER --- */
-        .auth-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 80vh;
-        }
-
-        .auth-card {
-            background: #ffffff;
-            color: #1e293b;
-            width: 100%;
-            max-width: 400px;
-            padding: 40px 30px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            text-align: center;
-        }
-
-        .auth-title { font-size: 28px; font-weight: 700; margin-bottom: 24px; color: #1e2e42; }
-        .form-group { text-align: left; margin-bottom: 20px; }
-        .form-group label { display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 8px; text-transform: uppercase; }
-        .form-group input { width: 100%; padding: 14px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 14px; }
-        .form-group input:focus { outline: none; border-color: #ff477e; }
         
-        .btn-auth { 
-            display: inline-block; 
-            width: 100%; 
-            padding: 14px; 
-            background-color: #1e2e42; 
-            color: white; 
-            border-radius: 10px; 
-            font-weight: 700; 
-            text-decoration: none;
-            margin-top: 10px;
-        }
-        .btn-auth:hover { background-color: #ff477e; }
-
-        /* --- HALAMAN 2: BERANDA --- */
-        .hero-section {
+        /* LOGIKA SELEKTOR HALAMAN */
+        .page {
+            display: none;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 50px 20px 30px 20px;
-            text-align: center;
-        }
-
-        .brand-logo {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 4px solid #ffffff;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-
-        .mom-dedication {
-            font-size: 24px;
-            color: #ffb3c1;
-            font-weight: 700;
-            font-style: italic;
-            margin-bottom: 10px;
-        }
-
-        .main-headline { font-size: 40px; font-weight: 700; color: #ffffff; }
-
-        /* GRID MENU UTAMA */
-        .grid-container {
-            max-width: 1100px;
-            margin: 0 auto;
             padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 30px;
+        }
+        .page.active {
+            display: block;
         }
 
-        /* CARD MENU MINIMALIS MODERN */
-        .menu-card {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            padding: 35px 25px;
-            text-align: center;
-            text-decoration: none;
-            color: #ffffff;
-            backdrop-filter: blur(10px);
-            transition: transform 0.2s, background 0.2s;
-        }
-
-        .menu-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
-            border-color: #ffb3c1;
-        }
-
-        .feature-img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 16px;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-        }
-
-        .card-title { font-size: 20px; font-weight: 700; }
-
-        /* --- SUB-HALAMAN FITUR (AKTIF SAAT MENU DIKLIK) --- */
-        .sub-container {
-            max-width: 600px;
+        /* --- STYLE HALAMAN 1: LOGIN & REGISTER --- */
+        .auth-container {
+            max-width: 420px;
             margin: 80px auto;
-            background: white;
-            color: #1e293b;
-            padding: 40px;
-            border-radius: 20px;
+            padding: 40px 30px;
+            background-color: #fffdf9;
+            border-radius: 16px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            border: 2px solid #eaddca;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            position: relative;
         }
-        .btn-back {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 10px 20px;
-            background: #1e2e42;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
+        /* Menggunakan Gambar ke-1 (Pin) sebagai penusuk kertas login */
+        .auth-container::before {
+            content: "";
+            position: absolute;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background-image: url('image_93688b.png');
+            background-size: contain;
+            background-repeat: no-repeat;
         }
-        .btn-back:hover { background: #ff477e; }
+        .auth-title { font-size: 28px; font-weight: 900; color: #1e293b; margin-bottom: 5px; }
+        .auth-subtitle { font-size: 13px; color: #ff477e; font-weight: 700; margin-bottom: 30px; letter-spacing: 1px; }
+        .form-group { text-align: left; margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px; text-transform: uppercase; }
+        .form-group input, .form-group select { width: 100%; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px; background-color: #fafafa; font-family: inherit; }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: #ff477e; }
+        .btn-auth { width: 100%; padding: 14px; background-color: #2b4461; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 15px; cursor: pointer; }
+        .btn-auth:hover { background-color: #ff477e; }
+
+        /* --- STYLE HALAMAN 2: BERANDA --- */
+        .hero-section { text-align: center; padding: 40px 20px 20px 20px; }
+        .mom-dedication h2 { font-size: 28px; color: #ffb3c1; font-weight: 800; font-style: italic; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .mom-dedication p { font-size: 13px; font-weight: 600; color: #ffe5ec; text-transform: uppercase; letter-spacing: 2px; margin-top: 4px; }
+        .main-headline { font-size: 48px; font-weight: 900; color: #ffffff; text-shadow: 3px 3px 6px rgba(0,0,0,0.4); margin-top: 10px; }
+        .divider-line { width: 80px; height: 4px; background-color: #ffb3c1; margin: 16px auto 0 auto; border-radius: 2px; }
+        
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; padding: 20px 0; }
+        
+        /* CARD MENU SCRAPBOOK DENGAN PIN ASLI */
+        .scrapbook-card {
+            background-color: #fffdf9;
+            border-radius: 12px;
+            padding: 40px 30px 30px 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+            cursor: pointer;
+            border: 1px solid #eaddca;
+            background-image: radial-gradient(circle at bottom, transparent 8px, #fffdf9 8px);
+            background-size: 20px 100%;
+            transition: transform 0.2s;
+        }
+        /* Penempatan Pin di Atas Setiap Folder */
+        .scrapbook-card::before {
+            content: "";
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 36px;
+            height: 36px;
+            background-image: url('image_93688b.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 10;
+        }
+        .scrapbook-card:hover { transform: translateY(-5px); }
+        .card-title { font-size: 24px; font-weight: 800; color: #1e293b; text-align: center; padding: 10px 0; }
+
+        /* --- SUB-LAYOUT DALAM FITUR FORMULIR --- */
+        .btn-back { display: inline-block; padding: 10px 20px; background-color: #2b4461; color: white; border: none; border-radius: 8px; font-weight: 700; margin-bottom: 20px; cursor: pointer; }
+        .btn-back:hover { background-color: #ff477e; }
+        .sub-layout { background-color: #fffdf9; border-radius: 16px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); color: #1e293b; border: 2px solid #eaddca; }
+        .sub-title { font-size: 28px; font-weight: 900; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
+        
+        /* DATA ENTRY FORM DAN TABEL */
+        .form-inline { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) auto; gap: 15px; margin-bottom: 20px; background: #f8fafc; padding: 20px; border-radius: 10px; border: 1px solid #e2e8f0; }
+        .btn-add { padding: 12px 24px; background-color: #10b981; color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; align-self: end; }
+        .btn-add:hover { background-color: #059669; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; border-radius: 8px; overflow: hidden; }
+        th, td { padding: 12px 15px; border: 1px solid #e2e8f0; text-align: left; font-size: 14px; }
+        th { background-color: #f1f5f9; color: #1e293b; font-weight: 700; }
+
+        /* BLOK RINGKASAN LAPORAN */
+        .report-box { background: #faf8f5; padding: 25px; border-radius: 12px; margin-top: 20px; border: 2px dashed #2b4461; line-height: 2; }
+        .report-box strong { font-size: 16px; }
+
+        /* --- FOOTER RIBBON --- */
+        .ribbon-footer { position: fixed; bottom: 0; left: 0; width: 100%; background-color: #ffe5ec; border-top: 3px solid #ffb3c1; padding: 14px 0; text-align: center; box-shadow: 0 -4px 15px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; gap: 10px; z-index: 100; }
+        .ribbon-dot { width: 6px; height: 6px; background-color: #ff477e; border-radius: 50%; }
+        .ribbon-text { font-size: 12px; font-weight: 800; color: #ff477e; text-transform: uppercase; letter-spacing: 1.5px; }
     </style>
 </head>
 <body>
 
-    <!-- ================= HALAMAN 1: LOGIN ================= -->
-    <div id="authPage" class="page">
-        <div class="auth-wrapper">
-            <div class="auth-card">
-                <h2 class="auth-title">Selamat Datang</h2>
+    <div id="authPage" class="page active">
+        <div class="auth-container">
+            <h2 class="font-elegant auth-title">Selamat Datang</h2>
+            <p class="auth-subtitle">— Masuk ke Sistem Toko —</p>
+            <form onsubmit="navigateTo('dashboardPage'); return false;">
                 <div class="form-group">
                     <label>Username</label>
-                    <input type="text" placeholder="Masukkan username...">
+                    <input type="text" placeholder="Masukkan username..." required value="admin">
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" placeholder="Masukkan password...">
+                    <input type="password" placeholder="Masukkan password..." required value="admin">
                 </div>
-                <!-- Pindah ke beranda menggunakan tag anchor HTML murni -->
-                <a href="#beranda" class="btn-auth">Masuk Sistem</a>
+                <button type="submit" class="btn-auth">Masuk Sistem &rarr;</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="dashboardPage" class="page">
+        <header class="hero-section">
+            <div class="mom-dedication">
+                <h2 class="font-elegant">Special For My Mom!</h2>
+                <p>— Spesial untuk My Mamah ku! —</p>
+            </div>
+            <h1 class="font-elegant main-headline">Sistem Keuangan Toko</h1>
+            <div class="divider-line"></div>
+        </header>
+
+        <main class="grid-container">
+            <div class="scrapbook-card" onclick="navigateTo('produkPage')">
+                <h3 class="font-elegant card-title">Daftar Produk</h3>
+            </div>
+            <div class="scrapbook-card" onclick="navigateTo('stokPage')">
+                <h3 class="font-elegant card-title">Stok Produk</h3>
+            </div>
+            <div class="scrapbook-card" onclick="navigateTo('arusKasPage')">
+                <h3 class="font-elegant card-title">Tracking Arus Kas</h3>
+            </div>
+            <div class="scrapbook-card" onclick="navigateTo('penjualanPage')">
+                <h3 class="font-elegant card-title">Tracking Penjualan</h3>
+            </div>
+            <div class="scrapbook-card" onclick="navigateTo('laporanPage')">
+                <h3 class="font-elegant card-title">Laporan Keuangan</h3>
+            </div>
+        </main>
+    </div>
+
+    <div id="produkPage" class="page">
+        <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali ke Beranda</button>
+        <div class="sub-layout">
+            <h2 class="font-elegant sub-title">Daftar Produk</h2>
+            <div class="form-inline">
+                <div class="form-group">
+                    <label>Nama Produk</label>
+                    <input type="text" id="p_nama" placeholder="Nama barang...">
+                </div>
+                <div class="form-group">
+                    <label>Harga Modal (Rp)</label>
+                    <input type="number" id="p_modal" placeholder="0">
+                </div>
+                <div class="form-group">
+                    <label>Harga Jual (Rp)</label>
+                    <input type="number" id="p_jual" placeholder="0">
+                </div>
+                <button class="btn-add" onclick="tambahProduk()">Tambah</button>
+            </div>
+            <table>
+                <thead>
+                    <tr><th>Nama Produk</th><th>Harga Modal</th><th>Harga Jual</th></tr>
+                </thead>
+                <tbody id="tabel_produk"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="stokPage" class="page">
+        <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali ke Beranda</button>
+        <div class="sub-layout">
+            <h2 class="font-elegant sub-title">Stok Produk</h2>
+            <div class="form-inline">
+                <div class="form-group">
+                    <label>Pilih Produk</label>
+                    <select id="s_produk"></select>
+                </div>
+                <div class="form-group">
+                    <label>Jumlah Stok Masuk</label>
+                    <input type="number" id="s_jumlah" placeholder="0">
+                </div>
+                <button class="btn-add" onclick="tambahStok()">Update</button>
+            </div>
+            <table>
+                <thead>
+                    <tr><th>Nama Produk</th><th>Sisa Stok Fisik</th></tr>
+                </thead>
+                <tbody id="tabel_stok"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="arusKasPage" class="page">
+        <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali ke Beranda</button>
+        <div class="sub-layout">
+            <h2 class="font-elegant sub-title">Tracking Arus Kas</h2>
+            <div class="form-inline">
+                <div class="form-group">
+                    <label>Jenis Arus</label>
+                    <select id="k_jenis">
+                        <option value="Pemasukan">Pemasukan Lain-lain</option>
+                        <option value="Pengeluaran">Pengeluaran Operasional</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Keterangan</label>
+                    <input type="text" id="k_ket" placeholder="Contoh: Bayar Listrik">
+                </div>
+                <div class="form-group">
+                    <label>Nominal (Rp)</label>
+                    <input type="number" id="k_nominal" placeholder="0">
+                </div>
+                <button class="btn-add" onclick="tambahKas()">Catat</button>
+            </div>
+            <table>
+                <thead>
+                    <tr><th>Jenis Arus</th><th>Keterangan</th><th>Nominal</th></tr>
+                </thead>
+                <tbody id="tabel_kas"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="penjualanPage" class="page">
+        <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali ke Beranda</button>
+        <div class="sub-layout">
+            <h2 class="font-elegant sub-title">Tracking Penjualan</h2>
+            <div class="form-inline">
+                <div class="form-group">
+                    <label>Produk Terjual</label>
+                    <select id="j_produk"></select>
+                </div>
+                <div class="form-group">
+                    <label>Jumlah Kuantitas (Qty)</label>
+                    <input type="number" id="j_qty" placeholder="0">
+                </div>
+                <button class="btn-add" onclick="tambahPenjualan()">Catat Nota</button>
+            </div>
+            <table>
+                <thead>
+                    <tr><th>Nama Produk</th><th>Jumlah Terjual</th><th>Total Omset</th></tr>
+                </thead>
+                <tbody id="tabel_penjualan"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="laporanPage" class="page">
+        <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali ke Beranda</button>
+        <div class="sub-layout">
+            <h2 class="font-elegant sub-title">Laporan Keuangan Otomatis</h2>
+            <div class="report-box">
+                <p>Total Pendapatan Jual (Omset): <strong id="rep_omset">Rp 0</strong></p>
+                <p>Total Harga Pokok Jual (Modal): <strong id="rep_modal">Rp 0</strong></p>
+                <p>Total Pemasukan Kas Lain: <strong id="rep_kas_in">Rp 0</strong></p>
+                <p>Total Pengeluaran Kas Operasional: <strong id="rep_kas_out">Rp 0</strong></p>
+                <hr style="margin: 15px 0; border: 0; border-top: 1px solid #e2e8f0;">
+                <h3 style="font-size: 20px;">Keuntungan Bersih (Laba Toko): <span id="rep_netto" style="font-weight: 900;">Rp 0</span></h3>
             </div>
         </div>
     </div>
 
-    <!-- ================= HALAMAN 2: BERANDA UTAMA ================= -->
-    <div id="beranda" class="page">
-        <header class="hero-section">
-            <!-- Logo Utama (Gambar ke-10) -->
-            <img src="image_8458ea.jpg" class="brand-logo" alt="Logo">
-            <div class="mom-dedication font-elegant">Special For My Mom!</div>
-            <h1 class="main-headline">Sistem Keuangan Toko</h1>
-        </header>
+    <footer class="ribbon-footer">
+        <div class="ribbon-dot"></div>
+        <p class="ribbon-text">Sistem Keuangan Toko Premium — Scrapbook Edition</p>
+        <div class="ribbon-dot"></div>
+    </footer>
 
-        <main class="grid-container">
-            <!-- MENU 1 (Gambar ke-6) -->
-            <a href="#fitur1" class="menu-card">
-                <img src="image_845cc6.jpg" class="feature-img" alt="Icon">
-                <h3 class="card-title">Daftar Produk</h3>
-            </a>
+    <script>
+        // Mengambil data lama dari memory browser agar data tidak hilang saat web ditutup
+        let dataStore = JSON.parse(localStorage.getItem('kalunaDataStore')) || {
+            produk: [],
+            stok: {},
+            kas: [],
+            penjualan: []
+        };
 
-            <!-- MENU 2 (Gambar ke-5) -->
-            <a href="#fitur2" class="menu-card">
-                <img src="image_845d00.jpg" class="feature-img" alt="Icon">
-                <h3 class="card-title">Stok Produk</h3>
-            </a>
+        function saveData() {
+            localStorage.setItem('kalunaDataStore', JSON.stringify(dataStore));
+            renderAll();
+        }
 
-            <!-- MENU 3 (Gambar ke-8) -->
-            <a href="#fitur3" class="menu-card">
-                <img src="image_845c4b.jpg" class="feature-img" alt="Icon">
-                <h3 class="card-title">Tracking Arus Kas</h3>
-            </a>
+        function navigateTo(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0,0);
+        }
 
-            <!-- MENU 4 (Gambar ke-9) -->
-            <a href="#fitur4" class="menu-card">
-                <img src="image_845c08.jpg" class="feature-img" alt="Icon">
-                <h3 class="card-title">Tracking Penjualan</h3>
-            </a>
+        function tambahProduk() {
+            let nama = document.getElementById('p_nama').value.trim();
+            let modal = parseFloat(document.getElementById('p_modal').value) || 0;
+            let jual = parseFloat(document.getElementById('p_jual').value) || 0;
+            if(!nama) return alert('Nama produk wajib diisi!');
+            
+            dataStore.produk.push({nama, modal, jual});
+            if(dataStore.stok[nama] === undefined) dataStore.stok[nama] = 0;
+            
+            document.getElementById('p_nama').value = '';
+            document.getElementById('p_modal').value = '';
+            document.getElementById('p_jual').value = '';
+            saveData();
+        }
 
-            <!-- MENU 5 (Gambar ke-7) -->
-            <a href="#fitur5" class="menu-card">
-                <img src="image_845c89.jpg" class="feature-img" alt="Icon">
-                <h3 class="card-title">Laporan Keuangan</h3>
-            </a>
-        </main>
-    </div>
+        function tambahStok() {
+            let prod = document.getElementById('s_produk').value;
+            let qty = parseInt(document.getElementById('s_jumlah').value) || 0;
+            if(!prod) return alert('Pilih produk terlebih dahulu!');
+            dataStore.stok[prod] = (dataStore.stok[prod] || 0) + qty;
+            document.getElementById('s_jumlah').value = '';
+            saveData();
+        }
 
-    <!-- ================= SUB-HALAMAN KETIKA MENU DIKLIK ================= -->
-    <div id="fitur1" class="page">
-        <div class="sub-container">
-            <h2>Halaman Daftar Produk</h2>
-            <a href="#beranda" class="btn-back">Kembali ke Beranda</a>
-        </div>
-    </div>
+        function tambahKas() {
+            let jenis = document.getElementById('k_jenis').value;
+            let ket = document.getElementById('k_ket').value.trim();
+            let nominal = parseFloat(document.getElementById('k_nominal').value) || 0;
+            if(!ket) return alert('Keterangan kas wajib diisi!');
+            dataStore.kas.push({jenis, ket, nominal});
+            document.getElementById('k_ket').value = '';
+            document.getElementById('k_nominal').value = '';
+            saveData();
+        }
 
-    <div id="fitur2" class="page">
-        <div class="sub-container">
-            <h2>Halaman Stok Produk</h2>
-            <a href="#beranda" class="btn-back">Kembali ke Beranda</a>
-        </div>
-    </div>
+        function tambahPenjualan() {
+            let prod = document.getElementById('j_produk').value;
+            let qty = parseInt(document.getElementById('j_qty').value) || 0;
+            if(!prod) return alert('Pilih produk!');
+            if((dataStore.stok[prod] || 0) < qty) return alert('Stok fisik di mading toko tidak mencukupi!');
+            
+            dataStore.stok[prod] -= qty;
+            dataStore.penjualan.push({produk: prod, qty: qty});
+            document.getElementById('j_qty').value = '';
+            saveData();
+        }
 
-    <div id="fitur3" class="page">
-        <div class="sub-container">
-            <h2>Halaman Tracking Arus Kas</h2>
-            <a href="#beranda" class="btn-back">Kembali ke Beranda</a>
-        </div>
-    </div>
+        function renderAll() {
+            // Render Tabel Daftar Produk
+            document.getElementById('tabel_produk').innerHTML = dataStore.produk.map(p => 
+                `<tr><td>${p.nama}</td><td>Rp ${p.modal.toLocaleString()}</td><td>Rp ${p.jual.toLocaleString()}</td></tr>`
+            ).join('');
+            
+            // Render Tabel Stok Fisik
+            document.getElementById('tabel_stok').innerHTML = Object.keys(dataStore.stok).map(k => 
+                `<tr><td>${k}</td><td><strong>${dataStore.stok[k]}</strong> pcs</td></tr>`
+            ).join('');
+            
+            // Render Tabel Log Arus Kas
+            document.getElementById('tabel_kas').innerHTML = dataStore.kas.map(k => 
+                `<tr><td>${k.jenis}</td><td>${k.ket}</td><td>Rp ${k.nominal.toLocaleString()}</td></tr>`
+            ).join('');
+            
+            // Mengisi Pilihan Produk di dalam Dropdown Pilihan Fitur
+            let optionsHTML = dataStore.produk.map(p => `<option value="${p.nama}">${p.nama}</option>`).join('');
+            document.getElementById('s_produk').innerHTML = optionsHTML;
+            document.getElementById('j_produk').innerHTML = optionsHTML;
+            
+            // Render Tabel Penjualan & Kalkulasi Keuntungan
+            let total_omset = 0;
+            let total_modal = 0;
+            document.getElementById('tabel_penjualan').innerHTML = dataStore.penjualan.map(j => {
+                let p_info = dataStore.produk.find(p => p.nama === j.produk) || {modal:0, jual:0};
+                let omset = p_info.jual * j.qty;
+                total_omset += omset;
+                total_modal += (p_info.modal * j.qty);
+                return `<tr><td>${j.produk}</td><td>${j.qty} pcs</td><td>Rp ${omset.toLocaleString()}</td></tr>`;
+            }).join('');
+            
+            // Menghitung Neraca Akhir Laporan Keuangan
+            let kas_in = dataStore.kas.filter(k => k.jenis === 'Pemasukan').reduce((sum, k) => sum + k.nominal, 0);
+            let kas_out = dataStore.kas.filter(k => k.jenis === 'Pengeluaran').reduce((sum, k) => sum + k.nominal, 0);
+            let laba_bersih = (total_omset + kas_in) - (total_modal + kas_out);
+            
+            document.getElementById('rep_omset').innerText = 'Rp ' + total_omset.toLocaleString();
+            document.getElementById('rep_modal').innerText = 'Rp ' + total_modal.toLocaleString();
+            document.getElementById('rep_kas_in').innerText = 'Rp ' + kas_in.toLocaleString();
+            document.getElementById('rep_kas_out').innerText = 'Rp ' + kas_out.toLocaleString();
+            document.getElementById('rep_netto').innerText = 'Rp ' + laba_bersih.toLocaleString();
+            document.getElementById('rep_netto').style.color = laba_bersih >= 0 ? '#10b981' : '#ef4444';
+        }
 
-    <div id="fitur4" class="page">
-        <div class="sub-container">
-            <h2>Halaman Tracking Penjualan</h2>
-            <a href="#beranda" class="btn-back">Kembali ke Beranda</a>
-        </div>
-    </div>
-
-    <div id="fitur5" class="page">
-        <div class="sub-container">
-            <h2>Halaman Laporan Keuangan</h2>
-            <a href="#beranda" class="btn-back">Kembali ke Beranda</a>
-        </div>
-    </div>
-
+        // Jalankan render otomatis saat aplikasi mading web dibuka
+        window.onload = renderAll;
+    </script>
 </body>
 </html>
