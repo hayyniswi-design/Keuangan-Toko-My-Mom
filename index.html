@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Keuangan Toko</title>
-    <!-- Google Fonts Premium: Playfair Display (Elegan) & Plus Jakarta Sans (Bersih) -->
+    <!-- Google Fonts Premium: Playfair Display & Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght=0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght=300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         /* --- GLOBAL STYLES & RESET --- */
@@ -17,28 +17,25 @@
             padding: 0;
         }
 
-        /* 1. BACKGROUND CELANA BIRU DENIM DENGAN TEKSTUR SERAT KAIN */
+        /* BACKGROUND CELANA BIRU DENIM DENGAN TEKSTUR SERAT KAIN */
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #2b4461; /* Warna Dasar Denim */
+            background-color: #2b4461;
             background-image: 
                 linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                radial-gradient(circle at 50% 50%, #405e85 0%, #1e324a 100%); /* Efek Pudar Denim Celana */
+                radial-gradient(circle at 50% 50%, #405e85 0%, #1e324a 100%);
             background-size: 4px 4px, 4px 4px, 100% 100%;
             color: #2c3e50;
             min-height: 100vh;
             padding-bottom: 80px;
             position: relative;
+            overflow-x: hidden;
         }
 
-        /* --- FONTS CLASS --- */
         .font-elegant { font-family: 'Playfair Display', serif; }
-        .font-sans-premium { font-family: 'Plus Jakarta Sans', sans-serif; }
-
-        /* --- REKAYASA ELEMENT HIASAN PREMIUM (SCRAPBOOK & RETRO) --- */
         
-        /* Ornamen Mesin Ketik Retro & Bunga Marun Tua di Pojok Atas */
+        /* Ornamen Mesin Ketik & Bunga Marun */
         body::before {
             content: "⌨️ 🌸";
             position: absolute;
@@ -46,45 +43,117 @@
             left: 30px;
             font-size: 32px;
             opacity: 0.25;
-            filter: grayscale(20%);
         }
 
-        /* --- TOP NAVIGATION BAR --- */
-        .top-navbar {
+        /* --- LOGIKA SELEKTOR HALAMAN (UTAMA) --- */
+        .page {
+            display: none; /* Menyembunyikan halaman secara bawaan */
+        }
+        .page.active {
+            display: block; /* Hanya memunculkan halaman yang aktif */
+        }
+
+        /* --- STYLE HALAMAN 1: LOGIN & REGISTER AUTHENTICATION --- */
+        .auth-container {
+            max-width: 420px;
+            margin: 80px auto;
+            padding: 40px 30px;
+            background-color: #fffdf9; /* Kertas Kuno */
+            border-radius: 16px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            border: 2px solid #eaddca;
+            text-align: center;
+            position: relative;
+        }
+        /* Klip Binder Emas di Atas Kotak Login */
+        .auth-container::before {
+            content: "";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 28px;
+            background: linear-gradient(135deg, #d4af37 0%, #f9e8a2 50%, #aa7c11 100%);
+            border-radius: 4px 4px 0 0;
+            border: 1px solid #8a640f;
+        }
+        .auth-title {
+            font-size: 28px;
+            font-weight: 900;
+            color: #1e293b;
+            margin-bottom: 5px;
+        }
+        .auth-subtitle {
+            font-size: 13px;
+            color: #ff477e;
+            font-weight: 700;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+        .form-group {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: #64748b;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+        .form-group input {
             width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 24px 20px 0 20px;
-            display: flex;
-            justify-content: flex-end;
-            gap: 16px;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: inherit;
             font-size: 14px;
+            background-color: #fafafa;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #ff477e;
+        }
+        .btn-auth {
+            width: 100%;
+            padding: 14px;
+            background-color: #2b4461;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 10px;
+        }
+        .btn-auth:hover {
+            background-color: #ff477e;
+        }
+        .auth-toggle {
+            font-size: 13px;
+            margin-top: 20px;
+            color: #64748b;
+        }
+        .auth-toggle span {
+            color: #ff477e;
+            cursor: pointer;
             font-weight: 700;
         }
-        .top-navbar a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .top-navbar a:hover { color: #ffb3c1; }
-        .top-navbar span { color: rgba(255, 255, 255, 0.3); }
 
-        /* --- HERO SECTION --- */
+        /* --- STYLE HALAMAN 2: BERANDA DASHBOARD --- */
         .hero-section {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 40px 20px 20px 20px;
             text-align: center;
-        }
-        
-        /* Request 5: Desain Ucapan untuk Ibu (Lebih menonjol) */
-        .mom-dedication {
-            display: inline-block;
-            margin-bottom: 16px;
         }
         .mom-dedication h2 {
             font-size: 28px;
-            color: #ffb3c1; /* Pink Lembut Kontras dengan Denim */
+            color: #ffb3c1;
             font-weight: 800;
             font-style: italic;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
@@ -97,14 +166,12 @@
             letter-spacing: 2px;
             margin-top: 4px;
         }
-
-        /* Request 1: Judul Sistem Keuangan Toko */
         .main-headline {
             font-size: 48px;
             font-weight: 900;
             color: #ffffff;
-            letter-spacing: -1px;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            margin-top: 10px;
         }
         .divider-line {
             width: 80px;
@@ -113,8 +180,6 @@
             margin: 16px auto 0 auto;
             border-radius: 2px;
         }
-
-        /* --- GRID CONTAINER KARTU MENU --- */
         .grid-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -122,12 +187,9 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 40px;
-            justify-content: center;
         }
-
-        /* --- KARTU KERTAS BERGERIGI DENGAN BINDER CLIP (PREMIUM ASSET) --- */
         .scrapbook-card {
-            background-color: #fffdf9; /* Kertas Vintage */
+            background-color: #fffdf9;
             border-radius: 12px;
             padding: 40px 30px 30px 30px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
@@ -135,12 +197,9 @@
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
             cursor: pointer;
             border: 1px solid #eaddca;
-            /* Efek Pinggiran Bergerigi Prangko bawah (Scallop) terinspirasi image_797039.jpg */
             background-image: radial-gradient(circle at bottom, transparent 8px, #fffdf9 8px);
             background-size: 20px 100%;
         }
-
-        /* Hiasan Klip Binder Logam Emas di atas Folder (Terinspirasi image_797b20.jpg) */
         .scrapbook-card::before {
             content: "";
             position: absolute;
@@ -149,18 +208,14 @@
             transform: translateX(-50%);
             width: 45px;
             height: 24px;
-            background: linear-gradient(135deg, #d4af37 0%, #f9e8a2 50%, #aa7c11 100%); /* Gold Chrome */
+            background: linear-gradient(135deg, #d4af37 0%, #f9e8a2 50%, #aa7c11 100%);
             border-radius: 4px 4px 0 0;
             border: 1px solid #8a640f;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
         }
-
         .scrapbook-card:hover {
             transform: translateY(-8px) rotate(1deg);
             box-shadow: 0 30px 50px rgba(0,0,0,0.4);
         }
-
-        /* Label Tab Folder Kasual (Terinspirasi image_79e478.jpg) */
         .folder-tab {
             position: absolute;
             top: 15px;
@@ -171,7 +226,6 @@
             padding: 3px 10px;
             border-radius: 4px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
         .tab-teal { background-color: #14b8a6; }
         .tab-amber { background-color: #f59e0b; }
@@ -179,7 +233,6 @@
         .tab-indigo { background-color: #6366f1; }
         .tab-rose { background-color: #f43f5e; }
 
-        /* Icon Wrapper (Gaya Infografis Bersih Terinspirasi image_79ef27.png) */
         .icon-box {
             width: 56px;
             height: 56px;
@@ -194,50 +247,24 @@
         .ib-emerald { background-color: #ecfdf5; color: #059669; }
         .ib-indigo { background-color: #e0e7ff; color: #4f46e5; }
         .ib-rose { background-color: #fff1f2; color: #e11d48; }
+        .icon-box svg { width: 28px; height: 28px; }
 
-        .icon-box svg {
-            width: 28px;
-            height: 28px;
-        }
-
-        /* Typography Card */
-        .card-title {
-            font-size: 22px;
-            font-weight: 800;
-            color: #1e293b;
-            margin-bottom: 8px;
-        }
-        .card-desc {
-            font-size: 14px;
-            color: #64748b;
-            line-height: 1.6;
-        }
-
-        .card-action {
-            margin-top: 24px;
-            font-size: 14px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            transition: transform 0.2s;
-        }
+        .card-title { font-size: 22px; font-weight: 800; color: #1e293b; margin-bottom: 8px; }
+        .card-desc { font-size: 14px; color: #64748b; line-height: 1.6; }
+        .card-action { margin-top: 24px; font-size: 14px; font-weight: 700; display: flex; align-items: center; }
         .ca-teal { color: #0d9488; }
         .ca-amber { color: #d97706; }
         .ca-emerald { color: #059669; }
         .ca-indigo { color: #4f46e5; }
         .ca-rose { color: #e11d48; }
 
-        .scrapbook-card:hover .card-action {
-            transform: translateX(6px);
-        }
-
-        /* --- FOOTER: AKSEN PITA MERAH MUDA (Terinspirasi image_797f43.png) --- */
+        /* --- FOOTER PITA MERAH MUDA --- */
         .ribbon-footer {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: #ffe5ec; /* Soft Pink Ribbon */
+            background-color: #ffe5ec;
             border-top: 3px solid #ffb3c1;
             padding: 14px 0;
             text-align: center;
@@ -248,109 +275,117 @@
             gap: 10px;
             z-index: 100;
         }
-        .ribbon-dot {
-            width: 6px;
-            height: 6px;
-            background-color: #ff477e;
-            border-radius: 50%;
-        }
-        .ribbon-text {
-            font-size: 12px;
-            font-weight: 800;
-            color: #ff477e;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
+        .ribbon-dot { width: 6px; height: 6px; background-color: #ff477e; border-radius: 50%; }
+        .ribbon-text { font-size: 12px; font-weight: 800; color: #ff477e; text-transform: uppercase; letter-spacing: 1.5px; }
     </style>
 </head>
 <body>
 
-    <!-- NAV BAR: Akses Masuk Sistem -->
-    <nav class="top-navbar">
-        <a href="#login">Login</a>
-        <span>|</span>
-        <a href="#register">Register</a>
-    </nav>
-
-    <!-- HEADER: Judul Web & Dedikasi Ibu -->
-    <header class="hero-section">
-        <div class="mom-dedication">
-            <h2 class="font-elegant">Special For My Mom!</h2>
-            <p>— Spesial untuk My Mamah ku! —</p>
-        </div>
-        <h1 class="font-elegant main-headline">Sistem Keuangan Toko</h1>
-        <div class="divider-line"></div>
-    </header>
-
-    <!-- MAIN DASHBOARD HUB: 5 Fitur Lengkap -->
-    <main class="grid-container">
-
-        <!-- CARD 1: DAFTAR PRODUK -->
-        <div class="scrapbook-card">
-            <div class="folder-tab tab-teal">Folder 01</div>
-            <div class="icon-box ib-teal">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
-                </svg>
+    <!-- ================= HALAMAN 1: LOGIN & REGISTER (ACTIVE AWAL) ================= -->
+    <div id="authPage" class="page active">
+        <div class="auth-container">
+            <h2 class="font-elegant auth-title" id="formTitle">Selamat Datang</h2>
+            <p class="auth-subtitle">— Masuk ke Sistem Toko —</p>
+            
+            <form id="mainForm" onsubmit="handleAuth(event)">
+                <div class="form-group">
+                    <label for="username">Nama Pengguna (Username)</label>
+                    <input type="text" id="username" placeholder="Masukkan username..." required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Kata Sandi (Password)</label>
+                    <input type="password" id="password" placeholder="Masukkan password..." required>
+                </div>
+                <button type="submit" class="btn-auth" id="submitBtn">Masuk Sistem &rarr;</button>
+            </form>
+            
+            <div class="auth-toggle" id="authToggleText">
+                Belum punya akun? <span onclick="toggleAuthMode()">Daftar Sekarang</span>
             </div>
-            <h3 class="font-elegant card-title">Daftar Produk</h3>
-            <p class="card-desc">Kelola seluruh basis komoditas barang dagangan, regulasi harga beli modal, serta patokan margin keuntungan jual toko.</p>
-            <div class="card-action ca-teal">Buka Folder &rarr;</div>
         </div>
+    </div>
 
-        <!-- CARD 2: STOK PRODUK -->
-        <div class="scrapbook-card">
-            <div class="folder-tab tab-amber">Folder 02</div>
-            <div class="icon-box ib-amber">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
-                </svg>
+
+    <!-- ================= HALAMAN 2: BERANDA FITUR (AKAN MUNCUL SETELAH LOGIN) ================= -->
+    <div id="dashboardPage" class="page">
+        <!-- HEADER: Judul & Dedikasi Ibu -->
+        <header class="hero-section">
+            <div class="mom-dedication">
+                <h2 class="font-elegant">Special For My Mom!</h2>
+                <p>— Spesial untuk My Mamah ku! —</p>
             </div>
-            <h3 class="font-elegant card-title">Stok Produk</h3>
-            <p class="card-desc">Monitor kalkulasi volume ketersediaan stok fisik secara instan untuk mengantisipasi keterlambatan restock pengadaan vendor.</p>
-            <div class="card-action ca-amber">Lihat Stok &rarr;</div>
-        </div>
+            <h1 class="font-elegant main-headline">Sistem Keuangan Toko</h1>
+            <div class="divider-line"></div>
+        </header>
 
-        <!-- CARD 3: TRACKING PEMASUKAN & PENGELUARAN -->
-        <div class="scrapbook-card">
-            <div class="folder-tab tab-emerald">Folder 03</div>
-            <div class="icon-box ib-emerald">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
+        <!-- DASHBOARD GRID HUB -->
+        <main class="grid-container">
+            <!-- CARD 1: DAFTAR PRODUK -->
+            <div class="scrapbook-card" onclick="openFeature('Daftar Produk')">
+                <div class="folder-tab tab-teal">Folder 01</div>
+                <div class="icon-box ib-teal">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                    </svg>
+                </div>
+                <h3 class="font-elegant card-title">Daftar Produk</h3>
+                <p class="card-desc">Kelola seluruh basis komoditas barang dagangan, regulasi harga beli modal, serta patokan margin keuntungan jual toko.</p>
+                <div class="card-action ca-teal">Buka Folder &rarr;</div>
             </div>
-            <h3 class="font-elegant card-title">Tracking Arus Kas</h3>
-            <p class="card-desc">Audit pencatatan sistematis untuk melacak sirkulasi finansial operasional, pengeluaran tak terduga, dan penerimaan modal.</p>
-            <div class="card-action ca-emerald">Catat Kas &rarr;</div>
-        </div>
 
-        <!-- CARD 4: TRACKING PENJUALAN -->
-        <div class="scrapbook-card">
-            <div class="folder-tab tab-indigo">Folder 04</div>
-            <div class="icon-box ib-indigo">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-                </svg>
+            <!-- CARD 2: STOK PRODUK -->
+            <div class="scrapbook-card" onclick="openFeature('Stok Produk')">
+                <div class="folder-tab tab-amber">Folder 02</div>
+                <div class="icon-box ib-amber">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                    </svg>
+                </div>
+                <h3 class="font-elegant card-title">Stok Produk</h3>
+                <p class="card-desc">Monitor kalkulasi volume ketersediaan stok fisik secara instan untuk mengantisipasi keterlambatan restock pengadaan vendor.</p>
+                <div class="card-action ca-amber">Lihat Stok &rarr;</div>
             </div>
-            <h3 class="font-elegant card-title">Tracking Penjualan</h3>
-            <p class="card-desc">Pantau pembukuan riwayat nota penjualan komparatif konsumen dan identifikasi grafik performa produk paling laris.</p>
-            <div class="card-action ca-indigo">Cek Transaksi &rarr;</div>
-        </div>
 
-        <!-- CARD 5: LAPORAN KEUANGAN -->
-        <div class="scrapbook-card">
-            <div class="folder-tab tab-rose">Folder 05</div>
-            <div class="icon-box ib-rose">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 114 0v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                </svg>
+            <!-- CARD 3: TRACKING ARUS KAS -->
+            <div class="scrapbook-card" onclick="openFeature('Tracking Arus Kas (Pemasukan/Pengeluaran)')">
+                <div class="folder-tab tab-emerald">Folder 03</div>
+                <div class="icon-box ib-emerald">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="font-elegant card-title">Tracking Arus Kas</h3>
+                <p class="card-desc">Audit pencatatan sistematis untuk melacak sirkulasi finansial operasional, pengeluaran tak terduga, dan penerimaan modal.</p>
+                <div class="card-action ca-emerald">Catat Kas &rarr;</div>
             </div>
-            <h3 class="font-elegant card-title">Laporan Keuangan</h3>
-            <p class="card-desc">Rangkuman komprehensif penghitungan sisa margin bersih dan neraca laba-rugi otomatis sebagai instrumen evaluasi usaha.</p>
-            <div class="card-action ca-rose">Analisis Data &rarr;</div>
-        </div>
 
-    </main>
+            <!-- CARD 4: TRACKING PENJUALAN -->
+            <div class="scrapbook-card" onclick="openFeature('Tracking Penjualan')">
+                <div class="folder-tab tab-indigo">Folder 04</div>
+                <div class="icon-box ib-indigo">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                    </svg>
+                </div>
+                <h3 class="font-elegant card-title">Tracking Penjualan</h3>
+                <p class="card-desc">Pantau pembukuan riwayat nota penjualan komparatif konsumen dan identifikasi grafik performa produk paling laris.</p>
+                <div class="card-action ca-indigo">Cek Transaksi &rarr;</div>
+            </div>
+
+            <!-- CARD 5: LAPORAN KEUANGAN -->
+            <div class="scrapbook-card" onclick="openFeature('Laporan Keuangan')">
+                <div class="folder-tab tab-rose">Folder 05</div>
+                <div class="icon-box ib-rose">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 114 0v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    </svg>
+                </div>
+                <h3 class="font-elegant card-title">Laporan Keuangan</h3>
+                <p class="card-desc">Rangkuman komprehensif penghitungan sisa margin bersih dan neraca laba-rugi otomatis sebagai instrumen evaluasi usaha.</p>
+                <div class="card-action ca-rose">Analisis Data &rarr;</div>
+            </div>
+        </main>
+    </div>
 
     <!-- FOOTER PITA MERAH MUDA -->
     <footer class="ribbon-footer">
@@ -359,5 +394,43 @@
         <div class="ribbon-dot"></div>
     </footer>
 
+    <!-- LOGIKA JAVASCRIPT UNTUK MENANGGULANGI HALAMAN & KLIK -->
+    <script>
+        let isLoginMode = true;
+
+        // Fungsi Menukar Tampilan Mode Form (Login ke Register / Sebaliknya)
+        function toggleAuthMode() {
+            isLoginMode = !isLoginMode;
+            const formTitle = document.getElementById('formTitle');
+            const submitBtn = document.getElementById('submitBtn');
+            const authToggleText = document.getElementById('authToggleText');
+            
+            if (!isLoginMode) {
+                formTitle.innerText = "Daftar Akun Baru";
+                submitBtn.innerText = "Daftar Sekarang &rarr;";
+                authToggleText.innerHTML = "Sudah punya akun? <span onclick='toggleAuthMode()'>Login Saja</span>";
+            } else {
+                formTitle.innerText = "Selamat Datang";
+                submitBtn.innerText = "Masuk Sistem &rarr;";
+                authToggleText.innerHTML = "Belum punya akun? <span onclick='toggleAuthMode()'>Daftar Sekarang</span>";
+            }
+        }
+
+        // Fungsi Memproses Form Login/Register (Berpindah ke Halaman Utama)
+        function handleAuth(event) {
+            event.preventDefault(); // Mencegah reload halaman kosong
+            
+            // Sembunyikan Halaman Login, Tampilkan Beranda Utama
+            document.getElementById('authPage').classList.remove('active');
+            document.getElementById('dashboardPage').classList.add('active');
+            
+            alert("Akses Berhasil! Selamat Datang di Beranda Sistem Keuangan Toko.");
+        }
+
+        // Fungsi Merespons Klik Pada Setiap Folder Fitur
+        function openFeature(featureName) {
+            alert("Membuka Folder Fitur: " + featureName + ". (Modul halaman dalam sedang diproses)");
+        }
+    </script>
 </body>
 </html>
