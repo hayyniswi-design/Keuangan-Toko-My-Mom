@@ -16,44 +16,42 @@
             padding: 0;
         }
 
-        /* BACKGROUND UTAMA: CELANA BIRU DENIM DENGAN TEKSTUR SERAT KAIN */
+        /* BACKGROUND UTAMA: CELANA BIRU DENIM DENGAN TEKSTUR KAIN */
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #2b4461;
             background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                radial-gradient(circle at 50% 50%, #405e85 0%, #1e324a 100%);
+                linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                radial-gradient(circle at 50% 50%, #3b597d 0%, #172638 100%);
             background-size: 4px 4px, 4px 4px, 100% 100%;
             color: #2c3e50;
             min-height: 100vh;
-            padding-bottom: 80px;
+            padding-bottom: 90px;
             position: relative;
             overflow-x: hidden;
         }
 
         .font-elegant { font-family: 'Playfair Display', serif; }
-        
+
         /* LOGIKA SELEKTOR HALAMAN */
-        .page {
-            display: none;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .page.active {
-            display: block;
-        }
+        .page { display: none; max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .page.active { display: block; }
+
+        /* ORNAMEN HIASAN BACKGROUND (Gambar ke-2, 3, 4) */
+        .deco-bg-1 { position: absolute; top: 40px; left: -20px; width: 140px; opacity: 0.25; transform: rotate(-15deg); pointer-events: none; }
+        .deco-bg-2 { position: absolute; bottom: 120px; right: 10px; width: 160px; opacity: 0.2; transform: rotate(12deg); pointer-events: none; }
+        .deco-bg-3 { position: absolute; top: 50%; left: 20px; width: 120px; opacity: 0.15; transform: rotate(45deg); pointer-events: none; }
 
         /* --- STYLE HALAMAN 1: LOGIN & REGISTER --- */
         .auth-container {
-            max-width: 420px;
-            margin: 80px auto;
+            max-width: 400px;
+            margin: 100px auto;
             padding: 40px 30px;
             background-color: #fffdf9;
             border-radius: 16px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-            border: 2px solid #eaddca;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            border: 1px solid #eaddca;
             text-align: center;
             position: relative;
         }
@@ -70,38 +68,58 @@
             background-size: contain;
             background-repeat: no-repeat;
         }
-        .auth-title { font-size: 28px; font-weight: 900; color: #1e293b; margin-bottom: 5px; }
-        .auth-subtitle { font-size: 13px; color: #ff477e; font-weight: 700; margin-bottom: 30px; letter-spacing: 1px; }
-        .form-group { text-align: left; margin-bottom: 20px; }
-        .form-group label { display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 6px; text-transform: uppercase; }
-        .form-group input, .form-group select { width: 100%; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px; background-color: #fafafa; font-family: inherit; }
+        .auth-title { font-size: 26px; font-weight: 900; color: #1e293b; margin-bottom: 6px; }
+        .auth-subtitle { font-size: 13px; color: #ff477e; font-weight: 700; margin-bottom: 24px; letter-spacing: 1px; }
+        .form-group { text-align: left; margin-bottom: 18px; position: relative; }
+        .form-group label { display: block; font-size: 11px; font-weight: 700; color: #64748b; margin-bottom: 6px; text-transform: uppercase; }
+        .form-group input, .form-group select { width: 100%; padding: 12px 14px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px; background-color: #fafafa; font-family: inherit; }
         .form-group input:focus, .form-group select:focus { outline: none; border-color: #ff477e; }
-        .btn-auth { width: 100%; padding: 14px; background-color: #2b4461; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 15px; cursor: pointer; }
+        
+        /* Fitur Password Intuitif (Mata Intip) */
+        .password-wrapper { position: relative; }
+        .toggle-password {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 16px;
+            user-select: none;
+            color: #64748b;
+        }
+
+        .btn-auth { width: 100%; padding: 14px; background-color: #2b4461; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer; margin-top: 10px; }
         .btn-auth:hover { background-color: #ff477e; }
 
         /* --- STYLE HALAMAN 2: BERANDA --- */
-        .hero-section { text-align: center; padding: 40px 20px 20px 20px; }
-        .mom-dedication h2 { font-size: 28px; color: #ffb3c1; font-weight: 800; font-style: italic; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-        .mom-dedication p { font-size: 13px; font-weight: 600; color: #ffe5ec; text-transform: uppercase; letter-spacing: 2px; margin-top: 4px; }
-        .main-headline { font-size: 48px; font-weight: 900; color: #ffffff; text-shadow: 3px 3px 6px rgba(0,0,0,0.4); margin-top: 10px; }
-        .divider-line { width: 80px; height: 4px; background-color: #ffb3c1; margin: 16px auto 0 auto; border-radius: 2px; }
+        .hero-section { text-align: center; padding: 40px 20px 10px 20px; position: relative; }
         
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; padding: 20px 0; }
-        
-        /* CARD MENU SCRAPBOOK DENGAN PIN ASLI */
+        /* Logo Beranda menggunakan Gambar ke-10 */
+        .brand-logo { width: 90px; height: 90px; object-fit: cover; border-radius: 50%; border: 3px solid #ffb3c1; margin-bottom: 16px; box-shadow: 0 8px 16px rgba(0,0,0,0.3); }
+
+        .mom-dedication h2 { font-size: 26px; color: #ffb3c1; font-weight: 800; font-style: italic; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .mom-dedication p { font-size: 12px; font-weight: 600; color: #ffe5ec; text-transform: uppercase; letter-spacing: 2px; margin-top: 2px; }
+        .main-headline { font-size: 44px; font-weight: 900; color: #ffffff; text-shadow: 3px 3px 6px rgba(0,0,0,0.4); margin-top: 8px; }
+        .divider-line { width: 70px; height: 4px; background-color: #ffb3c1; margin: 14px auto 0 auto; border-radius: 2px; }
+
+        /* DASHBOARD CARDS GRID */
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 35px; padding: 30px 20px; }
+
         .scrapbook-card {
             background-color: #fffdf9;
-            border-radius: 12px;
-            padding: 40px 30px 30px 30px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-radius: 14px;
+            padding: 35px 20px 25px 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.35);
             position: relative;
+            transition: transform 0.2s;
             cursor: pointer;
             border: 1px solid #eaddca;
             background-image: radial-gradient(circle at bottom, transparent 8px, #fffdf9 8px);
             background-size: 20px 100%;
-            transition: transform 0.2s;
+            text-align: center;
         }
-        /* Penempatan Pin di Atas Setiap Folder */
+
+        /* Ganti Kotak Emas dengan Aset Gambar ke-1 (Pin Papan Mading Kalcer) */
         .scrapbook-card::before {
             content: "";
             position: absolute;
@@ -115,40 +133,46 @@
             background-repeat: no-repeat;
             z-index: 10;
         }
-        .scrapbook-card:hover { transform: translateY(-5px); }
-        .card-title { font-size: 24px; font-weight: 800; color: #1e293b; text-align: center; padding: 10px 0; }
 
-        /* --- SUB-LAYOUT DALAM FITUR FORMULIR --- */
+        .scrapbook-card:hover { transform: translateY(-5px); }
+
+        /* LOGO TIAP FITUR BERDASARKAN GAMBAR PILIHAN KALUNA */
+        .feature-img { width: 70px; height: 70px; object-fit: cover; border-radius: 50%; margin: 0 auto 12px auto; display: block; box-shadow: 0 6px 12px rgba(0,0,0,0.15); border: 2px solid #ffb3c1; }
+        .card-title { font-size: 20px; font-weight: 800; color: #1e293b; }
+
+        /* --- STYLING HALAMAN PANEL FITUR INTERNAL --- */
         .btn-back { display: inline-block; padding: 10px 20px; background-color: #2b4461; color: white; border: none; border-radius: 8px; font-weight: 700; margin-bottom: 20px; cursor: pointer; }
         .btn-back:hover { background-color: #ff477e; }
         .sub-layout { background-color: #fffdf9; border-radius: 16px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); color: #1e293b; border: 2px solid #eaddca; }
         .sub-title { font-size: 28px; font-weight: 900; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
         
-        /* DATA ENTRY FORM DAN TABEL */
-        .form-inline { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) auto; gap: 15px; margin-bottom: 20px; background: #f8fafc; padding: 20px; border-radius: 10px; border: 1px solid #e2e8f0; }
+        .form-inline { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) auto; gap: 15px; margin-bottom: 20px; background: #f8fafc; padding: 20px; border-radius: 10px; border: 1px solid #e2e8f0; }
         .btn-add { padding: 12px 24px; background-color: #10b981; color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; align-self: end; }
         .btn-add:hover { background-color: #059669; }
         
         table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; border-radius: 8px; overflow: hidden; }
-        th, td { padding: 12px 15px; border: 1px solid #e2e8f0; text-align: left; font-size: 14px; }
+        th, td { padding: 12px 15px; border: 1px solid #e2e8f0; text-align: left; }
         th { background-color: #f1f5f9; color: #1e293b; font-weight: 700; }
 
-        /* BLOK RINGKASAN LAPORAN */
         .report-box { background: #faf8f5; padding: 25px; border-radius: 12px; margin-top: 20px; border: 2px dashed #2b4461; line-height: 2; }
-        .report-box strong { font-size: 16px; }
 
-        /* --- FOOTER RIBBON --- */
-        .ribbon-footer { position: fixed; bottom: 0; left: 0; width: 100%; background-color: #ffe5ec; border-top: 3px solid #ffb3c1; padding: 14px 0; text-align: center; box-shadow: 0 -4px 15px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; gap: 10px; z-index: 100; }
-        .ribbon-dot { width: 6px; height: 6px; background-color: #ff477e; border-radius: 50%; }
-        .ribbon-text { font-size: 12px; font-weight: 800; color: #ff477e; text-transform: uppercase; letter-spacing: 1.5px; }
+        /* --- FOOTER PITA RIBBON --- */
+        .ribbon-footer { position: fixed; bottom: 0; left: 0; width: 100%; background-color: #ffe5ec; border-top: 3px solid #ffb3c1; padding: 12px 0; text-align: center; box-shadow: 0 -4px 12px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; gap: 8px; z-index: 100; }
+        .ribbon-dot { width: 5px; height: 5px; background-color: #ff477e; border-radius: 50%; }
+        .ribbon-text { font-size: 11px; font-weight: 800; color: #ff477e; text-transform: uppercase; letter-spacing: 1px; }
     </style>
 </head>
 <body>
+
+    <img src="image_936884.png" class="deco-bg-1" alt="Hiasan">
+    <img src="image_936868.png" class="deco-bg-2" alt="Hiasan">
+    <img src="image_84bea3.jpg" class="deco-bg-3" alt="Hiasan">
 
     <div id="authPage" class="page active">
         <div class="auth-container">
             <h2 class="font-elegant auth-title">Selamat Datang</h2>
             <p class="auth-subtitle">— Masuk ke Sistem Toko —</p>
+            
             <form onsubmit="navigateTo('dashboardPage'); return false;">
                 <div class="form-group">
                     <label>Username</label>
@@ -156,7 +180,10 @@
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" placeholder="Masukkan password..." required value="admin">
+                    <div class="password-wrapper">
+                        <input type="password" id="loginPassword" placeholder="Masukkan password..." required value="admin123">
+                        <span class="toggle-password" onclick="togglePasswordVisibility()">👁️</span>
+                    </div>
                 </div>
                 <button type="submit" class="btn-auth">Masuk Sistem &rarr;</button>
             </form>
@@ -165,6 +192,7 @@
 
     <div id="dashboardPage" class="page">
         <header class="hero-section">
+            <img src="image_8458ea.jpg" class="brand-logo" alt="Logo Beranda">
             <div class="mom-dedication">
                 <h2 class="font-elegant">Special For My Mom!</h2>
                 <p>— Spesial untuk My Mamah ku! —</p>
@@ -175,31 +203,40 @@
 
         <main class="grid-container">
             <div class="scrapbook-card" onclick="navigateTo('produkPage')">
+                <img src="image_845cc6.jpg" class="feature-img" alt="Logo">
                 <h3 class="font-elegant card-title">Daftar Produk</h3>
             </div>
+
             <div class="scrapbook-card" onclick="navigateTo('stokPage')">
+                <img src="image_845d00.jpg" class="feature-img" alt="Logo">
                 <h3 class="font-elegant card-title">Stok Produk</h3>
             </div>
+
             <div class="scrapbook-card" onclick="navigateTo('arusKasPage')">
+                <img src="image_845c4b.jpg" class="feature-img" alt="Logo">
                 <h3 class="font-elegant card-title">Tracking Arus Kas</h3>
             </div>
+
             <div class="scrapbook-card" onclick="navigateTo('penjualanPage')">
+                <img src="image_845c08.jpg" class="feature-img" alt="Logo">
                 <h3 class="font-elegant card-title">Tracking Penjualan</h3>
             </div>
+
             <div class="scrapbook-card" onclick="navigateTo('laporanPage')">
+                <img src="image_845c89.jpg" class="feature-img" alt="Logo">
                 <h3 class="font-elegant card-title">Laporan Keuangan</h3>
             </div>
         </main>
     </div>
 
     <div id="produkPage" class="page">
-        <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali ke Beranda</button>
+        <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali</button>
         <div class="sub-layout">
             <h2 class="font-elegant sub-title">Daftar Produk</h2>
             <div class="form-inline">
                 <div class="form-group">
                     <label>Nama Produk</label>
-                    <input type="text" id="p_nama" placeholder="Nama barang...">
+                    <input type="text" id="p_nama" placeholder="Contoh: Wardah Cream">
                 </div>
                 <div class="form-group">
                     <label>Harga Modal (Rp)</label>
@@ -221,7 +258,7 @@
     </div>
 
     <div id="stokPage" class="page">
-        <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali ke Beranda</button>
+        <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali</button>
         <div class="sub-layout">
             <h2 class="font-elegant sub-title">Stok Produk</h2>
             <div class="form-inline">
@@ -230,10 +267,10 @@
                     <select id="s_produk"></select>
                 </div>
                 <div class="form-group">
-                    <label>Jumlah Stok Masuk</label>
+                    <label>Jumlah Kuantitas Masuk</label>
                     <input type="number" id="s_jumlah" placeholder="0">
                 </div>
-                <button class="btn-add" onclick="tambahStok()">Update</button>
+                <button class="btn-add" onclick="tambahStok()">Update Stok</button>
             </div>
             <table>
                 <thead>
@@ -245,12 +282,12 @@
     </div>
 
     <div id="arusKasPage" class="page">
-        <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali ke Beranda</button>
+        <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali</button>
         <div class="sub-layout">
             <h2 class="font-elegant sub-title">Tracking Arus Kas</h2>
             <div class="form-inline">
                 <div class="form-group">
-                    <label>Jenis Arus</label>
+                    <label>Jenis Arus Finansial</label>
                     <select id="k_jenis">
                         <option value="Pemasukan">Pemasukan Lain-lain</option>
                         <option value="Pengeluaran">Pengeluaran Operasional</option>
@@ -258,13 +295,13 @@
                 </div>
                 <div class="form-group">
                     <label>Keterangan</label>
-                    <input type="text" id="k_ket" placeholder="Contoh: Bayar Listrik">
+                    <input type="text" id="k_ket" placeholder="Contoh: Bayar Listrik Toko">
                 </div>
                 <div class="form-group">
                     <label>Nominal (Rp)</label>
                     <input type="number" id="k_nominal" placeholder="0">
                 </div>
-                <button class="btn-add" onclick="tambahKas()">Catat</button>
+                <button class="btn-add" onclick="tambahKas()">Catat Kas</button>
             </div>
             <table>
                 <thead>
@@ -276,19 +313,19 @@
     </div>
 
     <div id="penjualanPage" class="page">
-        <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali ke Beranda</button>
+        <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali</button>
         <div class="sub-layout">
             <h2 class="font-elegant sub-title">Tracking Penjualan</h2>
             <div class="form-inline">
                 <div class="form-group">
-                    <label>Produk Terjual</label>
+                    <label>Pilih Komoditas Terjual</label>
                     <select id="j_produk"></select>
                 </div>
                 <div class="form-group">
-                    <label>Jumlah Kuantitas (Qty)</label>
+                    <label>Kuantitas Penjualan (Qty)</label>
                     <input type="number" id="j_qty" placeholder="0">
                 </div>
-                <button class="btn-add" onclick="tambahPenjualan()">Catat Nota</button>
+                <button class="btn-add" onclick="tambahPenjualan()">Catat Nota Jual</button>
             </div>
             <table>
                 <thead>
@@ -300,7 +337,7 @@
     </div>
 
     <div id="laporanPage" class="page">
-        <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali ke Beranda</button>
+        <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali</button>
         <div class="sub-layout">
             <h2 class="font-elegant sub-title">Laporan Keuangan Otomatis</h2>
             <div class="report-box">
@@ -309,7 +346,7 @@
                 <p>Total Pemasukan Kas Lain: <strong id="rep_kas_in">Rp 0</strong></p>
                 <p>Total Pengeluaran Kas Operasional: <strong id="rep_kas_out">Rp 0</strong></p>
                 <hr style="margin: 15px 0; border: 0; border-top: 1px solid #e2e8f0;">
-                <h3 style="font-size: 20px;">Keuntungan Bersih (Laba Toko): <span id="rep_netto" style="font-weight: 900;">Rp 0</span></h3>
+                <h3 style="font-size: 20px;">Keuntungan Bersih (Laba Bersih Toko): <span id="rep_netto" style="font-weight:900;">Rp 0</span></h3>
             </div>
         </div>
     </div>
@@ -321,7 +358,6 @@
     </footer>
 
     <script>
-        // Mengambil data lama dari memory browser agar data tidak hilang saat web ditutup
         let dataStore = JSON.parse(localStorage.getItem('kalunaDataStore')) || {
             produk: [],
             stok: {},
@@ -338,6 +374,15 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             window.scrollTo(0,0);
+        }
+
+        function togglePasswordVisibility() {
+            const pwdInput = document.getElementById('loginPassword');
+            if (pwdInput.type === 'password') {
+                pwdInput.type = 'text';
+            } else {
+                pwdInput.type = 'password';
+            }
         }
 
         function tambahProduk() {
@@ -358,7 +403,7 @@
         function tambahStok() {
             let prod = document.getElementById('s_produk').value;
             let qty = parseInt(document.getElementById('s_jumlah').value) || 0;
-            if(!prod) return alert('Pilih produk terlebih dahulu!');
+            if(!prod) return alert('Pilih produk dulu!');
             dataStore.stok[prod] = (dataStore.stok[prod] || 0) + qty;
             document.getElementById('s_jumlah').value = '';
             saveData();
@@ -379,7 +424,7 @@
             let prod = document.getElementById('j_produk').value;
             let qty = parseInt(document.getElementById('j_qty').value) || 0;
             if(!prod) return alert('Pilih produk!');
-            if((dataStore.stok[prod] || 0) < qty) return alert('Stok fisik di mading toko tidak mencukupi!');
+            if((dataStore.stok[prod] || 0) < qty) return alert('Stok fisik produk di toko tidak mencukupi!');
             
             dataStore.stok[prod] -= qty;
             dataStore.penjualan.push({produk: prod, qty: qty});
@@ -388,27 +433,22 @@
         }
 
         function renderAll() {
-            // Render Tabel Daftar Produk
             document.getElementById('tabel_produk').innerHTML = dataStore.produk.map(p => 
                 `<tr><td>${p.nama}</td><td>Rp ${p.modal.toLocaleString()}</td><td>Rp ${p.jual.toLocaleString()}</td></tr>`
             ).join('');
             
-            // Render Tabel Stok Fisik
             document.getElementById('tabel_stok').innerHTML = Object.keys(dataStore.stok).map(k => 
                 `<tr><td>${k}</td><td><strong>${dataStore.stok[k]}</strong> pcs</td></tr>`
             ).join('');
             
-            // Render Tabel Log Arus Kas
             document.getElementById('tabel_kas').innerHTML = dataStore.kas.map(k => 
                 `<tr><td>${k.jenis}</td><td>${k.ket}</td><td>Rp ${k.nominal.toLocaleString()}</td></tr>`
             ).join('');
             
-            // Mengisi Pilihan Produk di dalam Dropdown Pilihan Fitur
             let optionsHTML = dataStore.produk.map(p => `<option value="${p.nama}">${p.nama}</option>`).join('');
             document.getElementById('s_produk').innerHTML = optionsHTML;
             document.getElementById('j_produk').innerHTML = optionsHTML;
             
-            // Render Tabel Penjualan & Kalkulasi Keuntungan
             let total_omset = 0;
             let total_modal = 0;
             document.getElementById('tabel_penjualan').innerHTML = dataStore.penjualan.map(j => {
@@ -419,7 +459,6 @@
                 return `<tr><td>${j.produk}</td><td>${j.qty} pcs</td><td>Rp ${omset.toLocaleString()}</td></tr>`;
             }).join('');
             
-            // Menghitung Neraca Akhir Laporan Keuangan
             let kas_in = dataStore.kas.filter(k => k.jenis === 'Pemasukan').reduce((sum, k) => sum + k.nominal, 0);
             let kas_out = dataStore.kas.filter(k => k.jenis === 'Pengeluaran').reduce((sum, k) => sum + k.nominal, 0);
             let laba_bersih = (total_omset + kas_in) - (total_modal + kas_out);
@@ -432,7 +471,6 @@
             document.getElementById('rep_netto').style.color = laba_bersih >= 0 ? '#10b981' : '#ef4444';
         }
 
-        // Jalankan render otomatis saat aplikasi mading web dibuka
         window.onload = renderAll;
     </script>
 </body>
