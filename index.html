@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Keuangan Toko - Kaluna Edition</title>
+    <!-- Google Fonts Premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         /* --- GLOBAL STYLES & RESET --- */
@@ -27,7 +28,7 @@
             background-size: 4px 4px, 4px 4px, 100% 100%;
             color: #2c3e50;
             min-height: 100vh;
-            padding-bottom: 90px;
+            padding-bottom: 70px;
             position: relative;
             overflow-x: hidden;
         }
@@ -38,28 +39,28 @@
         .page { display: none; max-width: 1200px; margin: 0 auto; padding: 20px; }
         .page.active { display: block; }
 
-        /* ORNAMEN HIASAN BACKGROUND (Gambar ke-2, 3, 4) */
+        /* ORNAMEN HIASAN BACKGROUND */
         .deco-bg-1 { position: absolute; top: 40px; left: -20px; width: 140px; opacity: 0.25; transform: rotate(-15deg); pointer-events: none; }
         .deco-bg-2 { position: absolute; bottom: 120px; right: 10px; width: 160px; opacity: 0.2; transform: rotate(12deg); pointer-events: none; }
         .deco-bg-3 { position: absolute; top: 50%; left: 20px; width: 120px; opacity: 0.15; transform: rotate(45deg); pointer-events: none; }
 
-        /* --- STYLE HALAMAN 1: LOGIN & REGISTER --- */
+        /* --- STYLE HALAMAN 1: LOGIN (DI-UPGRADE LEBIH BAGUS & AESTHETIC) --- */
         .auth-container {
-            max-width: 400px;
-            margin: 100px auto;
-            padding: 40px 30px;
+            max-width: 420px;
+            margin: 120px auto;
+            padding: 45px 35px;
             background-color: #fffdf9;
-            border-radius: 16px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
             border: 1px solid #eaddca;
             text-align: center;
             position: relative;
         }
-        /* Menggunakan Gambar ke-1 (Pin) sebagai penusuk kertas login */
+        /* Menggunakan Pin Papan Mading di Atas Kertas Login */
         .auth-container::before {
             content: "";
             position: absolute;
-            top: -22px;
+            top: -20px;
             left: 50%;
             transform: translateX(-50%);
             width: 40px;
@@ -68,58 +69,66 @@
             background-size: contain;
             background-repeat: no-repeat;
         }
-        .auth-title { font-size: 26px; font-weight: 900; color: #1e293b; margin-bottom: 6px; }
-        .auth-subtitle { font-size: 13px; color: #ff477e; font-weight: 700; margin-bottom: 24px; letter-spacing: 1px; }
-        .form-group { text-align: left; margin-bottom: 18px; position: relative; }
-        .form-group label { display: block; font-size: 11px; font-weight: 700; color: #64748b; margin-bottom: 6px; text-transform: uppercase; }
-        .form-group input, .form-group select { width: 100%; padding: 12px 14px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px; background-color: #fafafa; font-family: inherit; }
-        .form-group input:focus, .form-group select:focus { outline: none; border-color: #ff477e; }
+        .auth-title { font-size: 32px; font-weight: 800; color: #1e293b; margin-bottom: 4px; font-style: italic; }
+        .auth-subtitle { font-size: 11px; color: #ff477e; font-weight: 800; margin-bottom: 30px; letter-spacing: 2px; text-transform: uppercase; }
         
-        /* Fitur Password Intuitif (Mata Intip) */
+        .form-group { text-align: left; margin-bottom: 22px; position: relative; }
+        .form-group label { display: block; font-size: 11px; font-weight: 800; color: #64748b; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .form-group input, .form-group select { 
+            width: 100%; 
+            padding: 14px 16px; 
+            border: 2px solid #e2e8f0; 
+            border-radius: 10px; 
+            font-size: 14px; 
+            background-color: #fafafa; 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #334155;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: #ff477e; background-color: #ffffff; box-shadow: 0 0 0 3px rgba(255, 71, 126, 0.1); }
+        
+        /* Fitur Intip Kode Sandi */
         .password-wrapper { position: relative; }
         .toggle-password {
             position: absolute;
-            right: 14px;
+            right: 16px;
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
             user-select: none;
-            color: #64748b;
+            color: #94a3b8;
+            transition: color 0.2s;
         }
+        .toggle-password:hover { color: #ff477e; }
 
-        .btn-auth { width: 100%; padding: 14px; background-color: #2b4461; color: white; border: none; border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer; margin-top: 10px; }
-        .btn-auth:hover { background-color: #ff477e; }
+        .btn-auth { width: 100%; padding: 15px; background-color: #2b4461; color: white; border: none; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; margin-top: 10px; font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.5px; box-shadow: 0 4px 12px rgba(43, 68, 97, 0.2); }
+        .btn-auth:hover { background-color: #ff477e; box-shadow: 0 4px 12px rgba(255, 71, 126, 0.3); }
 
         /* --- STYLE HALAMAN 2: BERANDA --- */
-        .hero-section { text-align: center; padding: 40px 20px 10px 20px; position: relative; }
-        
-        /* Logo Beranda menggunakan Gambar ke-10 */
-        .brand-logo { width: 90px; height: 90px; object-fit: cover; border-radius: 50%; border: 3px solid #ffb3c1; margin-bottom: 16px; box-shadow: 0 8px 16px rgba(0,0,0,0.3); }
-
+        .hero-section { text-align: center; padding: 50px 20px 20px 20px; position: relative; }
         .mom-dedication h2 { font-size: 26px; color: #ffb3c1; font-weight: 800; font-style: italic; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
         .mom-dedication p { font-size: 12px; font-weight: 600; color: #ffe5ec; text-transform: uppercase; letter-spacing: 2px; margin-top: 2px; }
-        .main-headline { font-size: 44px; font-weight: 900; color: #ffffff; text-shadow: 3px 3px 6px rgba(0,0,0,0.4); margin-top: 8px; }
+        .main-headline { font-size: 46px; font-weight: 900; color: #ffffff; text-shadow: 3px 3px 6px rgba(0,0,0,0.4); margin-top: 8px; }
         .divider-line { width: 70px; height: 4px; background-color: #ffb3c1; margin: 14px auto 0 auto; border-radius: 2px; }
 
-        /* DASHBOARD CARDS GRID */
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 35px; padding: 30px 20px; }
+        /* BERANDA DASHBOARD CARDS GRID (TANPA LOGO GAMBAR - BERSIH & AESTHETIC) */
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 30px; padding: 40px 20px; }
 
         .scrapbook-card {
             background-color: #fffdf9;
             border-radius: 14px;
-            padding: 35px 20px 25px 20px;
+            padding: 40px 25px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.35);
             position: relative;
-            transition: transform 0.2s;
+            transition: all 0.2s ease-in-out;
             cursor: pointer;
             border: 1px solid #eaddca;
-            background-image: radial-gradient(circle at bottom, transparent 8px, #fffdf9 8px);
-            background-size: 20px 100%;
             text-align: center;
         }
 
-        /* Ganti Kotak Emas dengan Aset Gambar ke-1 (Pin Papan Mading Kalcer) */
+        /* Pin Mading Kalcer Terpasang di Setiap Judul Pilihan Fitur */
         .scrapbook-card::before {
             content: "";
             position: absolute;
@@ -134,20 +143,17 @@
             z-index: 10;
         }
 
-        .scrapbook-card:hover { transform: translateY(-5px); }
+        .scrapbook-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.45); border-color: #ffb3c1; }
+        .card-title { font-size: 24px; font-weight: 800; color: #1e293b; font-style: italic; }
 
-        /* LOGO TIAP FITUR BERDASARKAN GAMBAR PILIHAN KALUNA */
-        .feature-img { width: 70px; height: 70px; object-fit: cover; border-radius: 50%; margin: 0 auto 12px auto; display: block; box-shadow: 0 6px 12px rgba(0,0,0,0.15); border: 2px solid #ffb3c1; }
-        .card-title { font-size: 20px; font-weight: 800; color: #1e293b; }
-
-        /* --- STYLING HALAMAN PANEL FITUR INTERNAL --- */
-        .btn-back { display: inline-block; padding: 10px 20px; background-color: #2b4461; color: white; border: none; border-radius: 8px; font-weight: 700; margin-bottom: 20px; cursor: pointer; }
+        /* --- STYLING MODUL HALAMAN PANEL INTERNAL --- */
+        .btn-back { display: inline-block; padding: 10px 20px; background-color: #2b4461; color: white; border: none; border-radius: 8px; font-weight: 700; margin-bottom: 20px; cursor: pointer; font-family: inherit; }
         .btn-back:hover { background-color: #ff477e; }
         .sub-layout { background-color: #fffdf9; border-radius: 16px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); color: #1e293b; border: 2px solid #eaddca; }
-        .sub-title { font-size: 28px; font-weight: 900; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
+        .sub-title { font-size: 30px; font-weight: 900; margin-bottom: 25px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; font-style: italic; }
         
         .form-inline { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) auto; gap: 15px; margin-bottom: 20px; background: #f8fafc; padding: 20px; border-radius: 10px; border: 1px solid #e2e8f0; }
-        .btn-add { padding: 12px 24px; background-color: #10b981; color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; align-self: end; }
+        .btn-add { padding: 12px 24px; background-color: #10b981; color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; align-self: end; font-family: inherit; }
         .btn-add:hover { background-color: #059669; }
         
         table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; border-radius: 8px; overflow: hidden; }
@@ -156,18 +162,19 @@
 
         .report-box { background: #faf8f5; padding: 25px; border-radius: 12px; margin-top: 20px; border: 2px dashed #2b4461; line-height: 2; }
 
-        /* --- FOOTER PITA RIBBON --- */
-        .ribbon-footer { position: fixed; bottom: 0; left: 0; width: 100%; background-color: #ffe5ec; border-top: 3px solid #ffb3c1; padding: 12px 0; text-align: center; box-shadow: 0 -4px 12px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; gap: 8px; z-index: 100; }
-        .ribbon-dot { width: 5px; height: 5px; background-color: #ff477e; border-radius: 50%; }
-        .ribbon-text { font-size: 11px; font-weight: 800; color: #ff477e; text-transform: uppercase; letter-spacing: 1px; }
+        /* --- FOOTER PITA RIBBON MINIMALIS (TANPA TEKS) --- */
+        .ribbon-footer { position: fixed; bottom: 0; left: 0; width: 100%; background-color: #ffe5ec; border-top: 3px solid #ffb3c1; padding: 10px 0; text-align: center; box-shadow: 0 -4px 12px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; gap: 8px; z-index: 100; height: 24px; }
+        .ribbon-dot { width: 6px; height: 6px; background-color: #ff477e; border-radius: 50%; opacity: 0.6; }
     </style>
 </head>
 <body>
 
+    <!-- ASET GAMBAR HIASAN BACKGROUND (Mading Scrapbook) -->
     <img src="image_936884.png" class="deco-bg-1" alt="Hiasan">
     <img src="image_936868.png" class="deco-bg-2" alt="Hiasan">
     <img src="image_84bea3.jpg" class="deco-bg-3" alt="Hiasan">
 
+    <!-- ================= HALAMAN 1: GERBANG LOGIN ================= -->
     <div id="authPage" class="page active">
         <div class="auth-container">
             <h2 class="font-elegant auth-title">Selamat Datang</h2>
@@ -190,9 +197,9 @@
         </div>
     </div>
 
+    <!-- ================= HALAMAN 2: BERANDA UTAMA ================= -->
     <div id="dashboardPage" class="page">
         <header class="hero-section">
-            <img src="image_8458ea.jpg" class="brand-logo" alt="Logo Beranda">
             <div class="mom-dedication">
                 <h2 class="font-elegant">Special For My Mom!</h2>
                 <p>— Spesial untuk My Mamah ku! —</p>
@@ -202,33 +209,34 @@
         </header>
 
         <main class="grid-container">
+            <!-- CARD 1: DAFTAR PRODUK -->
             <div class="scrapbook-card" onclick="navigateTo('produkPage')">
-                <img src="image_845cc6.jpg" class="feature-img" alt="Logo">
                 <h3 class="font-elegant card-title">Daftar Produk</h3>
             </div>
 
+            <!-- CARD 2: STOK PRODUK -->
             <div class="scrapbook-card" onclick="navigateTo('stokPage')">
-                <img src="image_845d00.jpg" class="feature-img" alt="Logo">
                 <h3 class="font-elegant card-title">Stok Produk</h3>
             </div>
 
+            <!-- CARD 3: TRACKING ARUS KAS -->
             <div class="scrapbook-card" onclick="navigateTo('arusKasPage')">
-                <img src="image_845c4b.jpg" class="feature-img" alt="Logo">
                 <h3 class="font-elegant card-title">Tracking Arus Kas</h3>
             </div>
 
+            <!-- CARD 4: TRACKING PENJUALAN -->
             <div class="scrapbook-card" onclick="navigateTo('penjualanPage')">
-                <img src="image_845c08.jpg" class="feature-img" alt="Logo">
                 <h3 class="font-elegant card-title">Tracking Penjualan</h3>
             </div>
 
+            <!-- CARD 5: LAPORAN KEUANGAN -->
             <div class="scrapbook-card" onclick="navigateTo('laporanPage')">
-                <img src="image_845c89.jpg" class="feature-img" alt="Logo">
                 <h3 class="font-elegant card-title">Laporan Keuangan</h3>
             </div>
         </main>
     </div>
 
+    <!-- ================= MODUL INTERNAL ALUR FITUR 1: DAFTAR PRODUK ================= -->
     <div id="produkPage" class="page">
         <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali</button>
         <div class="sub-layout">
@@ -257,6 +265,7 @@
         </div>
     </div>
 
+    <!-- ================= MODUL INTERNAL ALUR FITUR 2: STOK PRODUK ================= -->
     <div id="stokPage" class="page">
         <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali</button>
         <div class="sub-layout">
@@ -281,6 +290,7 @@
         </div>
     </div>
 
+    <!-- ================= MODUL INTERNAL ALUR FITUR 3: TRACKING ARUS KAS ================= -->
     <div id="arusKasPage" class="page">
         <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali</button>
         <div class="sub-layout">
@@ -312,6 +322,7 @@
         </div>
     </div>
 
+    <!-- ================= MODUL INTERNAL ALUR FITUR 4: TRACKING PENJUALAN ================= -->
     <div id="penjualanPage" class="page">
         <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali</button>
         <div class="sub-layout">
@@ -336,6 +347,7 @@
         </div>
     </div>
 
+    <!-- ================= MODUL INTERNAL ALUR FITUR 5: LAPORAN KEUANGAN ================= -->
     <div id="laporanPage" class="page">
         <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali</button>
         <div class="sub-layout">
@@ -351,12 +363,14 @@
         </div>
     </div>
 
+    <!-- FOOTER PITA RIBBON MINIMALIS (TANPA TEKS) -->
     <footer class="ribbon-footer">
         <div class="ribbon-dot"></div>
-        <p class="ribbon-text">Sistem Keuangan Toko Premium — Scrapbook Edition</p>
+        <div class="ribbon-dot"></div>
         <div class="ribbon-dot"></div>
     </footer>
 
+    <!-- SCRIPT LOGIKA CORE & MEMORI LOKAL BROWSER -->
     <script>
         let dataStore = JSON.parse(localStorage.getItem('kalunaDataStore')) || {
             produk: [],
