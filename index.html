@@ -648,8 +648,8 @@
                 currentUser = user;
                 localStorage.setItem('kalunaLoggedUser_v1', currentUser);
                 loadUserStoreData();
-                renderAll(); // Memuat data tabel & grafik secara instan saat login berhasil
-                navigateTo('dashboardPage');
+                navigateTo('dashboardPage'); // Pindah halaman dulu agar elemen HTML siap
+                setTimeout(renderAll, 50);   // Memuat data tabel setelah halaman aktif
             } else {
                 alert('Username atau Password toko salah!');
             }
@@ -751,52 +751,61 @@
         function renderAll() {
             if(!currentUser) return;
             
-            document.getElementById('s_produk').innerHTML = dataStore.produk.map(p => `<option value="${p.nama}">${p.nama}</option>`).join('');
+            let selectSProduk = document.getElementById('s_produk');
+            if(selectSProduk) {
+                selectSProduk.innerHTML = dataStore.produk.map(p => `<option value="${p.nama}">${p.nama}</option>`).join('');
+            }
 
             // 1. Render Tabel Daftar Produk
-            document.getElementById('tabel_produk').innerHTML = dataStore.produk.map((p, idx) => {
-                let labaPcs = p.jualPcs - p.modalPcs;
-                let labaPack = p.jualPack - p.modalPack;
-                
-                return `<tr>
-                    <td>${p.tanggal}</td>
-                    <td><strong>${p.nama}</strong></td>
-                    <td class="stacked-cell">
-                        <div>Pcs/Kg: ${p.originalQtyPcs}</div>
-                        <div>Pack/Sak: ${p.originalQtyPack}</div>
-                    </td>
-                    <td class="stacked-cell">
-                        <div>Pcs: Rp ${p.modalPcs.toLocaleString()}</div>
-                        <div>Pack: Rp ${p.modalPack.toLocaleString()}</div>
-                    </td>
-                    <td class="stacked-cell">
-                        <div>Pcs: Rp ${p.jualPcs.toLocaleString()}</div>
-                        <div>Pack: Rp ${p.jualPack.toLocaleString()}</div>
-                    </td>
-                    <td class="stacked-cell">
-                        <div>Pcs: <span style="color:${labaPcs>=0?'#2e7d32':'#c62828'}; font-weight:700;">Rp ${labaPcs.toLocaleString()}</span></div>
-                        <div>Pack: <span style="color:${labaPack>=0?'#2e7d32':'#c62828'}; font-weight:700;">Rp ${labaPack.toLocaleString()}</span></div>
-                    </td>
-                    <td><button class="btn-delete" onclick="hapusProduk(${idx})">Hapus</button></td>
-                </tr>`;
-            }).join('');
+            let tabelProduk = document.getElementById('tabel_produk');
+            if(tabelProduk) {
+                tabelProduk.innerHTML = dataStore.produk.map((p, idx) => {
+                    let labaPcs = p.jualPcs - p.modalPcs;
+                    let labaPack = p.jualPack - p.modalPack;
+                    
+                    return `<tr>
+                        <td>${p.tanggal}</td>
+                        <td><strong>${p.nama}</strong></td>
+                        <td class="stacked-cell">
+                            <div>Pcs/Kg: ${p.originalQtyPcs}</div>
+                            <div>Pack/Sak: ${p.originalQtyPack}</div>
+                        </td>
+                        <td class="stacked-cell">
+                            <div>Pcs: Rp ${p.modalPcs.toLocaleString()}</div>
+                            <div>Pack: Rp ${p.modalPack.toLocaleString()}</div>
+                        </td>
+                        <td class="stacked-cell">
+                            <div>Pcs: Rp ${p.jualPcs.toLocaleString()}</div>
+                            <div>Pack: Rp ${p.jualPack.toLocaleString()}</div>
+                        </td>
+                        <td class="stacked-cell">
+                            <div>Pcs: <span style="color:${labaPcs>=0?'#2e7d32':'#c62828'}; font-weight:700;">Rp ${labaPcs.toLocaleString()}</span></div>
+                            <div>Pack: <span style="color:${labaPack>=0?'#2e7d32':'#c62828'}; font-weight:700;">Rp ${labaPack.toLocaleString()}</span></div>
+                        </td>
+                        <td><button class="btn-delete" onclick="hapusProduk(${idx})">Hapus</button></td>
+                    </tr>`;
+                }).join('');
+            }
 
             // 2. Render Tabel Stok
-            document.getElementById('tabel_stok').innerHTML = dataStore.produk.map(p => {
-                let statusKeterangan = "Stok Aman";
-                let badgeClass = "badge-success";
-                if(p.qtyPcs === 0 && p.qtyPack === 0) { badgeClass = "badge-danger"; statusKeterangan = "Habis total!"; }
-                else if(p.qtyPcs <= 3 || p.qtyPack <= 1) { badgeClass = "badge-warning"; statusKeterangan = "Menipis!"; }
+            let tabelStok = document.getElementById('tabel_stok');
+            if(tabelStok) {
+                tabelStok.innerHTML = dataStore.produk.map(p => {
+                    let statusKeterangan = "Stok Aman";
+                    let badgeClass = "badge-success";
+                    if(p.qtyPcs === 0 && p.qtyPack === 0) { badgeClass = "badge-danger"; statusKeterangan = "Habis total!"; }
+                    else if(p.qtyPcs <= 3 || p.qtyPack <= 1) { badgeClass = "badge-warning"; statusKeterangan = "Menipis!"; }
 
-                return `<tr>
-                    <td><strong>${p.nama}</strong></td>
-                    <td class="stacked-cell">
-                        <div>Pcs/Kg: <strong>${p.qtyPcs}</strong> sisa</div>
-                        <div>Pack/Sak: <strong>${p.qtyPack}</strong> sisa</div>
-                    </td>
-                    <td><span class="badge ${badgeClass}">${statusKeterangan}</span></td>
-                </tr>`;
-            }).join('');
+                    return `<tr>
+                        <td><strong>${p.nama}</strong></td>
+                        <td class="stacked-cell">
+                            <div>Pcs/Kg: <strong>${p.qtyPcs}</strong> sisa</div>
+                            <div>Pack/Sak: <strong>${p.qtyPack}</strong> sisa</div>
+                        </td>
+                        <td><span class="badge ${badgeClass}">${statusKeterangan}</span></td>
+                    </tr>`;
+                }).join('');
+            }
 
             // 3. Rekap Laporan Alur Kas Bulanan
             let blnLaporan = document.getElementById('filter_bulan_laporan').value;
@@ -821,57 +830,71 @@
             bundelKas.sort((a, b) => new Date(a.tanggal) - new Date(b.tanggal));
 
             let saldoBerjalan = 0; let totalMasuk = 0; let totalKeluar = 0;
-            document.getElementById('tabel_buku_kas').innerHTML = bundelKas.map((item, index) => {
-                saldoBerjalan += (item.masuk - item.keluar);
-                totalMasuk += item.masuk; totalKeluar += item.keluar;
+            
+            let tabelBukuKas = document.getElementById('tabel_buku_kas');
+            if(tabelBukuKas) {
+                tabelBukuKas.innerHTML = bundelKas.map((item, index) => {
+                    saldoBerjalan += (item.masuk - item.keluar);
+                    totalMasuk += item.masuk; totalKeluar += item.keluar;
 
-                return `<tr>
-                    <td>${index + 1}</td>
-                    <td>${item.tanggal}</td>
-                    <td><strong>${item.keterangan}</strong></td>
-                    <td style="color:#c62828;">${item.keluar > 0 ? 'Rp ' + item.keluar.toLocaleString() : '-'}</td>
-                    <td style="color:#2e7d32;">${item.masuk > 0 ? 'Rp ' + item.masuk.toLocaleString() : '-'}</td>
-                    <td><strong>Rp ${saldoBerjalan.toLocaleString()}</strong></td>
-                </tr>`;
-            }).join('');
+                    return `<tr>
+                        <td>${index + 1}</td>
+                        <td>${item.tanggal}</td>
+                        <td><strong>${item.keterangan}</strong></td>
+                        <td style="color:#c62828;">${item.keluar > 0 ? 'Rp ' + item.keluar.toLocaleString() : '-'}</td>
+                        <td style="color:#2e7d32;">${item.masuk > 0 ? 'Rp ' + item.masuk.toLocaleString() : '-'}</td>
+                        <td><strong>Rp ${saldoBerjalan.toLocaleString()}</strong></td>
+                    </tr>`;
+                }).join('');
+            } else {
+                bundelKas.forEach(item => {
+                    saldoBerjalan += (item.masuk - item.keluar);
+                    totalMasuk += item.masuk; totalKeluar += item.keluar;
+                });
+            }
 
-            document.getElementById('rep_total_masuk').innerText = 'Rp ' + totalMasuk.toLocaleString();
-            document.getElementById('rep_total_keluar').innerText = 'Rp ' + totalKeluar.toLocaleString();
-            document.getElementById('rep_netto').innerText = 'Rp ' + saldoBerjalan.toLocaleString();
-            document.getElementById('rep_netto').style.color = saldoBerjalan >= 0 ? '#2e7d32' : '#c62828';
+            if(document.getElementById('rep_total_masuk')) document.getElementById('rep_total_masuk').innerText = 'Rp ' + totalMasuk.toLocaleString();
+            if(document.getElementById('rep_total_keluar')) document.getElementById('rep_total_keluar').innerText = 'Rp ' + totalKeluar.toLocaleString();
+            if(document.getElementById('rep_netto')) {
+                document.getElementById('rep_netto').innerText = 'Rp ' + saldoBerjalan.toLocaleString();
+                document.getElementById('rep_netto').style.color = saldoBerjalan >= 0 ? '#2e7d32' : '#c62828';
+            }
 
             // 4. Analisis Perputaran Barang
-            document.getElementById('tabel_analisis').innerHTML = dataStore.produk.map(p => {
-                let listT = dataStore.transaksiKeluar.filter(t => t.nama === p.nama);
-                let totalSold = listT.reduce((sum, t) => sum + t.qty, 0);
-                
-                let kesimpulan = "Data Transaksi Kurang";
-                let badgeColor = "badge-warning";
+            let tabelAnalisis = document.getElementById('tabel_analisis');
+            if(tabelAnalisis) {
+                tabelAnalisis.innerHTML = dataStore.produk.map(p => {
+                    let listT = dataStore.transaksiKeluar.filter(t => t.nama === p.nama);
+                    let totalSold = listT.reduce((sum, t) => sum + t.qty, 0);
+                    
+                    let kesimpulan = "Data Transaksi Kurang";
+                    let badgeColor = "badge-warning";
 
-                if(totalSold > 0) {
-                    let d1 = new Date(p.tanggal);
-                    let d2 = new Date(listT[listT.length - 1].tanggal);
-                    let selisihHari = Math.ceil(Math.abs(d2 - d1) / (1000 * 60 * 60 * 24)) || 1;
-                    let speedRatio = totalSold / selisihHari;
+                    if(totalSold > 0) {
+                        let d1 = new Date(p.tanggal);
+                        let d2 = new Date(listT[listT.length - 1].tanggal);
+                        let selisihHari = Math.ceil(Math.abs(d2 - d1) / (1000 * 60 * 60 * 24)) || 1;
+                        let speedRatio = totalSold / selisihHari;
 
-                    if(speedRatio >= 1.2 || (p.qtyPcs === 0 && p.qtyPack === 0 && selisihHari <= 15)) {
-                        kesimpulan = "Sangat Layak Direpurchase (Sangat Cepat Habis)";
-                        badgeColor = "badge-success";
-                    } else if (speedRatio >= 0.3 || selisihHari <= 31) {
-                        kesimpulan = "Layak Direpurchase (Perputaran Stabil)";
-                        badgeColor = "badge-success";
-                    } else {
-                        kesimpulan = "Kurang Layak (Perputaran Lambat)";
-                        badgeColor = "badge-danger";
+                        if(speedRatio >= 1.2 || (p.qtyPcs === 0 && p.qtyPack === 0 && selisihHari <= 15)) {
+                            kesimpulan = "Sangat Layak Direpurchase (Sangat Cepat Habis)";
+                            badgeColor = "badge-success";
+                        } else if (speedRatio >= 0.3 || selisihHari <= 31) {
+                            kesimpulan = "Layak Direpurchase (Perputaran Stabil)";
+                            badgeColor = "badge-success";
+                        } else {
+                            kesimpulan = "Kurang Layak (Perputaran Lambat)";
+                            badgeColor = "badge-danger";
+                        }
                     }
-                }
 
-                return `<tr>
-                    <td><strong>${p.nama}</strong></td>
-                    <td><strong>${totalSold}</strong> Transaksi Terjual</td>
-                    <td><span class="badge ${badgeColor}">${kesimpulan}</span></td>
-                </tr>`;
-            }).join('');
+                    return `<tr>
+                        <td><strong>${p.nama}</strong></td>
+                        <td><strong>${totalSold}</strong> Transaksi Terjual</td>
+                        <td><span class="badge ${badgeColor}">${kesimpulan}</span></td>
+                    </tr>`;
+                }).join('');
+            }
         }
 
         // 5. Render Diagram Batang Keuangan Bulanan & Tahunan
@@ -905,16 +928,16 @@
             });
 
             let maxBulan = Math.max(masukBulan, keluarBulan, 1000);
-            document.getElementById('bar_omset_bulan').style.height = `${(masukBulan / maxBulan) * 100}%`;
-            document.getElementById('bar_modal_bulan').style.height = `${(keluarBulan / maxBulan) * 100}%`;
-            document.getElementById('val_omset_bulan').innerText = "Rp " + masukBulan.toLocaleString();
-            document.getElementById('val_modal_bulan').innerText = "Rp " + keluarBulan.toLocaleString();
+            if(document.getElementById('bar_omset_bulan')) document.getElementById('bar_omset_bulan').style.height = `${(masukBulan / maxBulan) * 100}%`;
+            if(document.getElementById('bar_modal_bulan')) document.getElementById('bar_modal_bulan').style.height = `${(keluarBulan / maxBulan) * 100}%`;
+            if(document.getElementById('val_omset_bulan')) document.getElementById('val_omset_bulan').innerText = "Rp " + masukBulan.toLocaleString();
+            if(document.getElementById('val_modal_bulan')) document.getElementById('val_modal_bulan').innerText = "Rp " + keluarBulan.toLocaleString();
 
             let maxTahun = Math.max(masukTahun, keluarTahun, 1000);
-            document.getElementById('bar_omset_tahun').style.height = `${(masukTahun / maxTahun) * 100}%`;
-            document.getElementById('bar_modal_tahun').style.height = `${(keluarTahun / maxTahun) * 100}%`;
-            document.getElementById('val_omset_tahun').innerText = "Rp " + masukTahun.toLocaleString();
-            document.getElementById('val_modal_tahun').innerText = "Rp " + keluarTahun.toLocaleString();
+            if(document.getElementById('bar_omset_tahun')) document.getElementById('bar_omset_tahun').style.height = `${(masukTahun / maxTahun) * 100}%`;
+            if(document.getElementById('bar_modal_tahun')) document.getElementById('bar_modal_tahun').style.height = `${(keluarTahun / maxTahun) * 100}%`;
+            if(document.getElementById('val_omset_tahun')) document.getElementById('val_omset_tahun').innerText = "Rp " + masukTahun.toLocaleString();
+            if(document.getElementById('val_modal_tahun')) document.getElementById('val_modal_tahun').innerText = "Rp " + keluarTahun.toLocaleString();
         }
 
         // 6. Tracking Qty Terjual Per Produk (Batang + Line Chart)
@@ -924,8 +947,8 @@
 
             let blnTarget = parseInt(document.getElementById('filter_bulan_penjualan').value);
             
-            document.getElementById('judul_grafik_batang_produk').innerText = `1. Tracking Bulanan "${prodName}" - Bulan Ke-${blnTarget} (Diagram Batang Qty)`;
-            document.getElementById('judul_grafik_garis_produk').innerText = `2. Tracking Tahunan "${prodName}" (Diagram Garis Tren Penjualan)`;
+            if(document.getElementById('judul_grafik_batang_produk')) document.getElementById('judul_grafik_batang_produk').innerText = `1. Tracking Bulanan "${prodName}" - Bulan Ke-${blnTarget} (Diagram Batang Qty)`;
+            if(document.getElementById('judul_grafik_garis_produk')) document.getElementById('judul_grafik_garis_produk').innerText = `2. Tracking Tahunan "${prodName}" (Diagram Garis Tren Penjualan)`;
 
             let qtyM1 = 0, qtyM2 = 0, qtyM3 = 0, qtyM4 = 0;
 
@@ -945,18 +968,20 @@
             });
 
             let maxMinggu = Math.max(qtyM1, qtyM2, qtyM3, qtyM4, 1);
-            document.getElementById('bar_m1').style.height = `${(qtyM1 / maxMinggu) * 100}%`;
-            document.getElementById('bar_m2').style.height = `${(qtyM2 / maxMinggu) * 100}%`;
-            document.getElementById('bar_m3').style.height = `${(qtyM3 / maxMinggu) * 100}%`;
-            document.getElementById('bar_m4').style.height = `${(qtyM4 / maxMinggu) * 100}%`;
+            if(document.getElementById('bar_m1')) document.getElementById('bar_m1').style.height = `${(qtyM1 / maxMinggu) * 100}%`;
+            if(document.getElementById('bar_m2')) document.getElementById('bar_m2').style.height = `${(qtyM2 / maxMinggu) * 100}%`;
+            if(document.getElementById('bar_m3')) document.getElementById('bar_m3').style.height = `${(qtyM3 / maxMinggu) * 100}%`;
+            if(document.getElementById('bar_m4')) document.getElementById('bar_m4').style.height = `${(qtyM4 / maxMinggu) * 100}%`;
 
-            document.getElementById('val_m1').innerText = `${qtyM1} Qty`;
-            document.getElementById('val_m2').innerText = `${qtyM2} Qty`;
-            document.getElementById('val_m3').innerText = `${qtyM3} Qty`;
-            document.getElementById('val_m4').innerText = `${qtyM4} Qty`;
+            if(document.getElementById('val_m1')) document.getElementById('val_m1').innerText = `${qtyM1} Qty`;
+            if(document.getElementById('val_m2')) document.getElementById('val_m2').innerText = `${qtyM2} Qty`;
+            if(document.getElementById('val_m3')) document.getElementById('val_m3').innerText = `${qtyM3} Qty`;
+            if(document.getElementById('val_m4')) document.getElementById('val_m4').innerText = `${qtyM4} Qty`;
 
             // Line Chart SVG
             let svgContainer = document.getElementById('svg_line_chart');
+            if(!svgContainer) return;
+
             let pathLine = document.getElementById('chart_line_path');
             let pointsGroup = document.getElementById('svg_points_group');
             pointsGroup.innerHTML = '';
