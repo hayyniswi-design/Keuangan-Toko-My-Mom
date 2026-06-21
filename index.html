@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Keuangan Toko - Kaluna Edition Final</title>
+    <title>Sistem Keuangan Toko Multi-Akun - Kaluna Edition Final</title>
     <!-- Google Fonts Premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,10 +37,10 @@
         .page { display: none; max-width: 1200px; margin: 0 auto; padding: 30px 20px; }
         .page.active { display: block; }
 
-        /* --- STYLE HALAMAN 1: GERBANG LOGIN --- */
+        /* --- STYLE HALAMAN AUTH (LOGIN & REGISTER) --- */
         .auth-wrapper {
             max-width: 420px;
-            margin: 100px auto;
+            margin: 80px auto;
             text-align: center;
         }
         .auth-container {
@@ -51,9 +51,8 @@
             border: 1px solid #eaddca;
             margin-bottom: 25px;
         }
-        .auth-title { font-size: 36px; font-weight: 800; color: #1e293b; margin-bottom: 25px; font-style: italic; }
+        .auth-title { font-size: 34px; font-weight: 800; color: #1e293b; margin-bottom: 25px; font-style: italic; }
         
-        /* Poin 3: Teks Hope you like it di bawah kotak, warna Sunstruck (#e09f3e), Font Estetik Pinyon Script */
         .auth-footer-text { 
             font-family: 'Pinyon Script', cursive; 
             font-size: 42px; 
@@ -91,15 +90,18 @@
             color: #94a3b8;
         }
 
-        /* Poin 2: Efek Tekan Berubah Jadi Sunstruck */
         .btn-auth { width: 100%; padding: 16px; background-color: #2b4461; color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; margin-top: 10px; font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s; }
         .btn-auth:hover, .btn-auth:active { background-color: #e09f3e; color: #172638; box-shadow: 0 6px 20px rgba(224, 159, 62, 0.4); }
 
-        /* --- STYLE HALAMAN 2: BERANDA --- */
+        .auth-switch-link { margin-top: 20px; font-size: 14px; color: #64748b; font-weight: 500; }
+        .auth-switch-link span { color: #e09f3e; cursor: pointer; font-weight: 700; text-decoration: underline; }
+
+        /* --- STYLE HALAMAN BERANDA --- */
         .hero-section { text-align: center; padding: 40px 20px; }
         .mom-dedication h2 { font-size: 28px; color: #ffb3c1; font-weight: 800; font-style: italic; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
         .mom-dedication p { font-size: 12px; font-weight: 600; color: #ffe5ec; text-transform: uppercase; letter-spacing: 2px; margin-top: 2px; }
-        .main-headline { font-size: 48px; font-weight: 900; color: #ffffff; text-shadow: 3px 3px 6px rgba(0,0,0,0.4); margin-top: 8px; }
+        .main-headline { font-size: 44px; font-weight: 900; color: #ffffff; text-shadow: 3px 3px 6px rgba(0,0,0,0.4); margin-top: 8px; }
+        .store-indicator { display: inline-block; background-color: #e09f3e; color: #172638; padding: 6px 18px; border-radius: 20px; font-size: 14px; font-weight: 800; margin-top: 10px; text-transform: uppercase; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
         .divider-line { width: 80px; height: 4px; background-color: #ffb3c1; margin: 16px auto 0 auto; border-radius: 2px; }
 
         .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; padding: 30px 20px; }
@@ -121,17 +123,13 @@
         .btn-back:hover { background-color: #ffb3c1; border-color: #ffb3c1; color: #172638; }
         
         .sub-layout { background-color: #fffdf9; border-radius: 24px; padding: 35px; box-shadow: 0 25px 50px rgba(0,0,0,0.35); color: #1e293b; border: 1px solid #eaddca; }
-        
-        /* Poin 5: Judul Fitur Menggunakan Font Elegant Playfair */
         .sub-title { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; margin-bottom: 25px; border-bottom: 2px solid #f1f5f9; padding-bottom: 12px; font-style: italic; color: #1e293b; }
         
         .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin-bottom: 30px; background: #f8fafc; padding: 25px; border-radius: 16px; border: 1px solid #e2e8f0; }
         
-        /* Poin 4: Tombol Warna Green Jacket (#1e555c / variasi hijau seragam cerah berwibawa #2a6f97 -> #1A754E) */
         .btn-add { padding: 15px 30px; background-color: #1A754E; color: white; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; align-self: end; font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.2s; }
         .btn-add:hover { background-color: #219663; transform: translateY(-2px); }
         
-        /* TABEL MODERN (Poin 1 & 5: Dibuat sangat rapi & font kontras) */
         .table-responsive { overflow-x: auto; margin-top: 15px; border-radius: 14px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
         table { width: 100%; border-collapse: collapse; background: white; min-width: 950px; font-family: 'Plus Jakarta Sans', sans-serif; }
         th, td { padding: 14px 18px; text-align: left; font-size: 13px; border-bottom: 1px solid #f1f5f9; }
@@ -152,7 +150,6 @@
 
         .report-total-box { background: #faf8f5; padding: 30px; border-radius: 16px; border: 2px dashed #2b4461; text-align: center; margin-top: 10px; }
 
-        /* VISUALISASI DIAGRAM GRAFIK CSS BULANAN */
         .chart-container { background: white; padding: 30px; border-radius: 16px; border: 1px solid #e2e8f0; margin-top: 20px; }
         .chart-flex { display: flex; align-items: flex-end; justify-content: space-around; height: 260px; padding-top: 30px; border-bottom: 2px solid #e2e8f0; }
         .chart-bar-wrapper { display: flex; flex-direction: column; align-items: center; width: 100px; }
@@ -169,28 +166,56 @@
 </head>
 <body>
 
-    <!-- ================= HALAMAN 1: GERBANG LOGIN ================= -->
+    <!-- ================= HALAMAN 1A: GERBANG LOGIN ================= -->
     <div id="authPage" class="page active">
         <div class="auth-wrapper">
             <div class="auth-container">
                 <h2 class="font-title auth-title">Welcome My Mom!</h2>
-                
-                <form onsubmit="navigateTo('dashboardPage'); return false;">
+                <form onsubmit="prosesLogin(); return false;">
                     <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" placeholder="Masukkan username..." required id="loginUser">
+                        <label>Username Toko</label>
+                        <input type="text" placeholder="Masukkan username toko..." required id="loginUser">
                     </div>
                     <div class="form-group">
                         <label>Password</label>
                         <div class="password-wrapper">
                             <input type="password" id="loginPassword" placeholder="Masukkan password..." required>
-                            <span class="toggle-password" onclick="togglePasswordVisibility()">👁️</span>
+                            <span class="toggle-password" onclick="togglePasswordVisibility('loginPassword')">👁️</span>
                         </div>
                     </div>
                     <button type="submit" class="btn-auth">Login</button>
                 </form>
+                <div class="auth-switch-link">
+                    Belum punya jenis toko baru? <span onclick="navigateToAuth('registerPage')">Daftar Akun Toko Baru</span>
+                </div>
             </div>
-            <!-- Poin 3: Hope you like it di bawah kotak dengan warna Sunstruck & Font Estetik Kursif -->
+            <span class="auth-footer-text">Hope you like it</span>
+        </div>
+    </div>
+
+    <!-- ================= HALAMAN 1B: REGISTER AKUN BARU ================= -->
+    <div id="registerPage" class="page">
+        <div class="auth-wrapper">
+            <div class="auth-container">
+                <h2 class="font-title auth-title" style="font-size: 30px;">Daftar Toko Baru</h2>
+                <form onsubmit="prosesRegister(); return false;">
+                    <div class="form-group">
+                        <label>Username / Nama Toko Baru</label>
+                        <input type="text" placeholder="Contoh: sembako / obat_pertanian" required id="regUser">
+                    </div>
+                    <div class="form-group">
+                        <label>Password Keamanan</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="regPassword" placeholder="Buat password baru..." required>
+                            <span class="toggle-password" onclick="togglePasswordVisibility('regPassword')">👁️</span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-auth" style="background-color: #1A754E;">Daftarkan Toko</button>
+                </form>
+                <div class="auth-switch-link">
+                    Sudah terdaftar? <span onclick="navigateToAuth('authPage')">Kembali ke Halaman Login</span>
+                </div>
+            </div>
             <span class="auth-footer-text">Hope you like it</span>
         </div>
     </div>
@@ -203,6 +228,8 @@
                 <p>— Spesial untuk My Mamah ku! —</p>
             </div>
             <h1 class="font-title main-headline">Sistem Keuangan Toko</h1>
+            <!-- Penunjuk Akun Toko Aktif -->
+            <div class="store-indicator font-body" id="nama_toko_aktif">Toko: Umum</div>
             <div class="divider-line"></div>
         </header>
 
@@ -225,10 +252,14 @@
             <div class="scrapbook-card" onclick="navigateTo('penjualanPage')">
                 <h3 class="font-title card-title">Tracking Penjualan</h3>
             </div>
+            <!-- Tombol Logout Kembali ke Pembagian Akun -->
+            <div class="scrapbook-card" onclick="prosesLogout()" style="background-color: #fee2e2; border-color: #fca5a5;">
+                <h3 class="font-title card-title" style="color: #991b1b;">Keluar Akun Toko</h3>
+            </div>
         </main>
     </div>
 
-    <!-- ================= ALUR FITUR 1: DAFTAR PRODUK (Poin 1: RAPI) ================= -->
+    <!-- ================= ALUR FITUR 1: DAFTAR PRODUK ================= -->
     <div id="produkPage" class="page">
         <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali ke Beranda</button>
         <div class="sub-layout">
@@ -240,7 +271,7 @@
                 </div>
                 <div class="form-group">
                     <label>Nama Produk</label>
-                    <input type="text" id="p_nama" placeholder="Contoh: Facetology Sunscreen">
+                    <input type="text" id="p_nama" placeholder="Contoh: Beras Ramos / Pupuk Urea">
                 </div>
                 <div class="form-group">
                     <label>Kuantitas Global (Qty Masuk)</label>
@@ -262,7 +293,6 @@
                     <label>Harga Jual / Pack (Rp)</label>
                     <input type="number" id="p_jual_pack" placeholder="0">
                 </div>
-                <!-- Poin 4: Tombol Green Jacket -->
                 <button class="btn-add" onclick="tambahProduk()">Tambah Produk</button>
             </div>
             
@@ -324,7 +354,7 @@
         </div>
     </div>
 
-    <!-- ================= ALUR FITUR 3: LAPORAN KEUANGAN TERPADU (Poin 2) ================= -->
+    <!-- ================= ALUR FITUR 3: LAPORAN KEUANGAN TERPADU ================= -->
     <div id="laporanPage" class="page">
         <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali ke Beranda</button>
         <div class="sub-layout">
@@ -342,7 +372,6 @@
                 </select>
             </div>
 
-            <!-- Formulir Kas Manual Tambahan -->
             <div style="background-color: #f8fafc; padding: 20px; border-radius: 16px; margin-bottom: 25px; border: 1px solid #e2e8f0;" class="font-body">
                 <h4 style="margin-bottom: 15px; font-size: 15px; font-weight: 700;">+ Input Kas Manual (Biaya Operasional, Listrik, Air, dll)</h4>
                 <div style="display: flex; flex-wrap: wrap; gap: 15px;">
@@ -350,7 +379,6 @@
                     <input type="text" id="m_keterangan" placeholder="Keterangan (cth: Bayar Listrik Toko)" style="flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; min-width: 200px;">
                     <input type="number" id="m_masuk" placeholder="Uang Masuk (Rp)" style="padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; width: 140px;">
                     <input type="number" id="m_keluar" placeholder="Uang Keluar (Rp)" style="padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; width: 140px;">
-                    <!-- Poin 4: Tombol Green Jacket -->
                     <button class="btn-add" onclick="tambahKasManual()" style="padding: 10px 20px;">Simpan Transaksi</button>
                 </div>
             </div>
@@ -373,7 +401,6 @@
                 </h3>
             </div>
 
-            <!-- Poin 2: Tabel Buku Kas Utama Terintegrasi -->
             <h3 class="font-title" style="margin-top: 35px; font-size: 22px; margin-bottom: 15px; font-style: italic;">Riwayat Rekap Mutasi Kas Lengkap</h3>
             <div class="table-responsive">
                 <table>
@@ -438,7 +465,6 @@
                         <div class="chart-label font-body">Total Keluar</div>
                     </div>
                     <div class="chart-bar-wrapper">
-                        <!-- Poin 4: Bar warna Green Jacket -->
                         <div class="chart-bar" id="bar_omset" style="background: #1A754E;"><span class="chart-val" id="val_omset">0</span></div>
                         <div class="chart-label font-body">Total Masuk</div>
                     </div>
@@ -472,7 +498,7 @@
 
     <div class="ribbon-footer"></div>
 
-    <!-- SCRIPT DATA CORE LOGIC (FINAL STABLE EDITION) -->
+    <!-- SCRIPT DATA CORE LOGIC MULTI-AKUN (FINAL AMAN) -->
     <script>
         const hariIni = new Date().toISOString().split('T')[0];
         document.getElementById('p_tanggal').value = hariIni;
@@ -484,18 +510,42 @@
         document.getElementById('filter_bulan_kas').value = bulanSekarang;
         document.getElementById('filter_bulan_penjualan').value = bulanSekarang;
 
-        let dataStore = JSON.parse(localStorage.getItem('kalunaDataStore_v4')) || {
-            produk: [],
-            transaksiKeluar: [],
-            kasManual: [] // Menyimpan objek {tanggal, keterangan, masuk, keluar}
+        // DB Induk Akun Toko & Data Terpisah
+        let akunDatabase = JSON.parse(localStorage.getItem('kalunaUsersDB_v1')) || {
+            "sembako": "mamah123" // Default bawaan satu akun
         };
+        
+        letcurrentUser = localStorage.getItem('kalunaLoggedUser_v1') || "";
+        let dataStore = { produk: [], transaksiKeluar: [], kasManual: [] };
 
-        function saveData() {
-            localStorage.setItem('kalunaDataStore_v4', JSON.stringify(dataStore));
+        // Muat data spesifik akun yang sedang aktif login
+        function loadUserStoreData() {
+            if(!currentUser) return;
+            let storedData = JSON.parse(localStorage.getItem('kalunaStoreData_' + currentUser));
+            if(storedData) {
+                dataStore = storedData;
+            } else {
+                dataStore = { produk: [], transaksiKeluar: [], kasManual: [] };
+            }
+            document.getElementById('nama_toko_aktif').innerText = "Toko: " + currentUser.toUpperCase();
+        }
+
+        function saveUserData() {
+            if(!currentUser) return;
+            localStorage.setItem('kalunaStoreData_' + currentUser, JSON.stringify(dataStore));
             renderAll();
         }
 
+        function navigateToAuth(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+
         function navigateTo(pageId) {
+            if(!currentUser) {
+                navigateToAuth('authPage');
+                return;
+            }
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             window.scrollTo(0,0);
@@ -504,11 +554,52 @@
             }
         }
 
-        function togglePasswordVisibility() {
-            const pwdInput = document.getElementById('loginPassword');
+        function togglePasswordVisibility(id) {
+            const pwdInput = document.getElementById(id);
             pwdInput.type = pwdInput.type === 'password' ? 'text' : 'password';
         }
 
+        // FUNGSI AUTHENTICATION (REGISTER & LOGIN)
+        function prosesRegister() {
+            let user = document.getElementById('regUser').value.trim().toLowerCase();
+            let pass = document.getElementById('regPassword').value;
+
+            if(!user || !pass) return alert('Username dan Password wajib ditentukan!');
+            if(akunDatabase[user]) return alert('Nama akun toko tersebut sudah terdaftar! Gunakan nama lain.');
+
+            akunDatabase[user] = pass;
+            localStorage.setItem('kalunaUsersDB_v1', JSON.stringify(akunDatabase));
+            
+            alert('Toko baru "' + user.toUpperCase() + '" berhasil didaftarkan! Silakan login.');
+            document.getElementById('regUser').value = '';
+            document.getElementById('regPassword').value = '';
+            navigateToAuth('authPage');
+        }
+
+        function prosesLogin() {
+            let user = document.getElementById('loginUser').value.trim().toLowerCase();
+            let pass = document.getElementById('loginPassword').value;
+
+            if(akunDatabase[user] && akunDatabase[user] === pass) {
+                currentUser = user;
+                localStorage.setItem('kalunaLoggedUser_v1', currentUser);
+                loadUserStoreData();
+                
+                document.getElementById('loginUser').value = '';
+                document.getElementById('loginPassword').value = '';
+                navigateTo('dashboardPage');
+            } else {
+                alert('Username toko atau Password yang dimasukkan salah. Silakan periksa kembali!');
+            }
+        }
+
+        function prosesLogout() {
+            currentUser = "";
+            localStorage.removeItem('kalunaLoggedUser_v1');
+            navigateToAuth('authPage');
+        }
+
+        // OPERASIONAL KAS & DATA PRODUK
         function tambahProduk() {
             let tgl = document.getElementById('p_tanggal').value;
             let nama = document.getElementById('p_nama').value.trim();
@@ -528,7 +619,7 @@
             document.getElementById('p_modal_pack').value = '';
             document.getElementById('p_jual_pcs').value = '';
             document.getElementById('p_jual_pack').value = '';
-            saveData();
+            saveUserData();
         }
 
         function kurangiStok() {
@@ -552,10 +643,9 @@
             });
             
             document.getElementById('s_jumlah').value = '';
-            saveData();
+            saveUserData();
         }
 
-        // Poin 2: Fungsi simpan entri kas manual
         function tambahKasManual() {
             let tgl = document.getElementById('m_tanggal').value;
             let ket = document.getElementById('m_keterangan').value.trim();
@@ -570,7 +660,7 @@
             document.getElementById('m_keterangan').value = '';
             document.getElementById('m_masuk').value = '';
             document.getElementById('m_keluar').value = '';
-            saveData();
+            saveUserData();
         }
 
         function hapusProduk(index) {
@@ -578,11 +668,13 @@
             if(p) {
                 dataStore.transaksiKeluar = dataStore.transaksiKeluar.filter(t => t.nama !== p.nama);
                 dataStore.produk.splice(index, 1);
-                saveData();
+                saveUserData();
             }
         }
 
         function renderAll() {
+            if(!currentUser) return;
+            
             let optionsHTML = dataStore.produk.map(p => `<option value="${p.nama}">${p.nama}</option>`).join('');
             document.getElementById('s_produk').innerHTML = optionsHTML;
 
@@ -622,11 +714,10 @@
                 </tr>`;
             }).join('');
 
-            // 3. Poin 2: Rekapitulasi Buku Kas Terintegrasi (Otomatis + Manual) Bulanan
+            // 3. Rekapitulasi Buku Kas Terintegrasi (Otomatis + Manual) Bulanan
             let blnLaporan = document.getElementById('filter_bulan_laporan').value;
             let bundelBukuKas = [];
 
-            // Memasukkan data transaksi otomatis penjualan produk ke Buku Kas
             dataStore.transaksiKeluar.forEach(t => {
                 let m = new Date(t.tanggal).getMonth() + 1;
                 if(m == blnLaporan) {
@@ -639,7 +730,6 @@
                 }
             });
 
-            // Memasukkan data kas inputan manual Mamah ke Buku Kas
             dataStore.kasManual.forEach(k => {
                 let m = new Date(k.tanggal).getMonth() + 1;
                 if(m == blnLaporan) {
@@ -652,10 +742,8 @@
                 }
             });
 
-            // Urutkan Buku Kas Berdasarkan Tanggal Kronologis
             bundelBukuKas.sort((a, b) => new Date(a.tanggal) - new Date(b.tanggal));
 
-            // Render isi Tabel Riwayat Kas Berurutan dengan Nomor Akurat
             let akumulasiSaldo = 0;
             let rekapMasuk = 0;
             let rekapKeluar = 0;
@@ -675,7 +763,6 @@
                 </tr>`;
             }).join('');
 
-            // Update statistik box atas
             document.getElementById('rep_total_masuk').innerText = 'Rp ' + rekapMasuk.toLocaleString();
             document.getElementById('rep_total_keluar').innerText = 'Rp ' + rekapKeluar.toLocaleString();
             document.getElementById('rep_netto').innerText = 'Rp ' + akumulasiSaldo.toLocaleString();
@@ -710,7 +797,9 @@
         }
 
         function renderDiagrams() {
-            // Diagram Arus Kas Bulanan Terintegrasi
+            if(!currentUser) return;
+
+            // Diagram Arus Kas Bulanan
             let blnKas = document.getElementById('filter_bulan_kas').value;
             let masukKas = 0, keluarKas = 0;
             
@@ -755,7 +844,11 @@
             }).join('');
         }
 
-        window.onload = renderAll;
+        // Cek Sesi Saat Website Dibuka
+        if(currentUser) {
+            loadUserStoreData();
+            navigateTo('dashboardPage');
+        }
     </script>
 </body>
 </html>
