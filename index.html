@@ -655,7 +655,7 @@
                 currentUser = user;
                 localStorage.setItem('kalunaLoggedUser_v1', currentUser);
                 loadUserStoreData();
-                renderAll();
+                renderAll(); // <--- Bagian ini diperbaiki agar data langsung dimuat ke layar saat klik login!
                 navigateTo('dashboardPage');
             } else {
                 alert('Username atau Password toko salah!');
