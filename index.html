@@ -2,16 +2,18 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Sistem Toko Simple</title>
+<title>Sistem Toko Final</title>
 <style>
-body{font-family:Arial;background:#3b5975;color:#fff;margin:0}
+body{margin:0;font-family:Arial;background:#3b5975;color:#fff}
 .page{display:none;padding:20px}
 .active{display:block}
-.card{background:#fff;color:#000;padding:15px;border-radius:10px;margin:10px 0}
+.card{background:#fff;color:#000;padding:15px;border-radius:12px;margin:10px 0}
 input,select,button{padding:8px;margin:5px;width:100%}
 button{cursor:pointer;background:#ffd6e2;border:none}
-table{width:100%;background:#fff;color:#000;margin-top:10px}
-th,td{padding:8px;border-bottom:1px solid #ccc}
+table{width:100%;background:#fff;color:#000;margin-top:10px;border-collapse:collapse}
+th,td{padding:8px;border-bottom:1px solid #ddd}
+.small{font-size:12px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 </style>
 </head>
 <body>
@@ -19,8 +21,8 @@ th,td{padding:8px;border-bottom:1px solid #ccc}
 <!-- LOGIN -->
 <div id="login" class="page active">
 <h2>Login Toko</h2>
-<input id="user">
-<input id="pass" type="password">
+<input id="user" placeholder="username">
+<input id="pass" type="password" placeholder="password">
 <button onclick="login()">Login</button>
 <button onclick="register()">Register</button>
 </div>
@@ -31,12 +33,19 @@ th,td{padding:8px;border-bottom:1px solid #ccc}
 <button onclick="logout()">Logout</button>
 
 <div class="card">
+<h3>Ringkasan</h3>
+<p id="summary"></p>
+</div>
+
+<div class="card">
 <h3>Tambah Produk</h3>
 <input id="pname" placeholder="nama">
-<input id="pqty" type="number" placeholder="qty awal">
-<input id="pbeli" type="number" placeholder="harga beli">
-<input id="pjual" type="number" placeholder="harga jual">
-<button onclick="addProduct()">Simpan</button>
+<div class="row">
+<input id="pqty" type="number" placeholder="qty">
+<input id="pbuy" type="number" placeholder="harga beli">
+</div>
+<input id="psell" type="number" placeholder="harga jual">
+<button onclick="addProduct()">Tambah</button>
 </div>
 
 <div class="card">
@@ -49,9 +58,19 @@ th,td{padding:8px;border-bottom:1px solid #ccc}
 
 <div class="card">
 <h3>Penjualan</h3>
-<select id="sellList"></select>
-<input id="sellQty" type="number" placeholder="qty jual">
+<select id="sellSelect"></select>
+<input id="sellQty" type="number" placeholder="qty">
 <button onclick="sell()">Jual</button>
+</div>
+
+<div class="card">
+<h3>Kas Manual</h3>
+<input id="kdesc" placeholder="keterangan">
+<div class="row">
+<input id="kin" type="number" placeholder="masuk">
+<input id="kout" type="number" placeholder="keluar">
+</div>
+<button onclick="addCash()">Simpan Kas</button>
 </div>
 
 <div class="card">
@@ -63,17 +82,29 @@ th,td{padding:8px;border-bottom:1px solid #ccc}
 </div>
 
 <div class="card">
-<h3>Summary</h3>
-<p id="sum"></p>
+<h3>Analisis Produk</h3>
+<table>
+<thead><tr><th>Produk</th><th>Terjual</th><th>Status</th></tr></thead>
+<tbody id="alist"></tbody>
+</table>
 </div>
+
+<button onclick="exportCSV()">Export CSV</button>
 
 </div>
 
 <script>
-let db = JSON.parse(localStorage.getItem("db")) || {users:{},products:[],trx:[]}
-let cur = localStorage.getItem("cur") || ""
+let db = JSON.parse(localStorage.getItem("db_toko")) || {
+users:{},
+products:[],
+trx:[],
+cash:[]
+}
+let cur = localStorage.getItem("cur_toko") || ""
 
-function save(){localStorage.setItem("db",JSON.stringify(db))}
+function save(){
+localStorage.setItem("db_toko",JSON.stringify(db))
+}
 
 function show(id){
 document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"))
@@ -81,24 +112,23 @@ document.getElementById(id).classList.add("active")
 }
 
 function login(){
-let u=user.value,p=pass.value
-if(db.users[u]&&db.users[u]===p){
-cur=u
-localStorage.setItem("cur",u)
+if(db.users[user.value]==pass.value){
+cur=user.value
+localStorage.setItem("cur_toko",cur)
 show("dash")
 render()
-}else alert("salah")
+}else alert("login gagal")
 }
 
 function register(){
 db.users[user.value]=pass.value
 save()
-alert("daftar oke")
+alert("registered")
 }
 
 function logout(){
 cur=""
-localStorage.removeItem("cur")
+localStorage.removeItem("cur_toko")
 show("login")
 }
 
@@ -106,15 +136,14 @@ function addProduct(){
 db.products.push({
 name:pname.value,
 qty:+pqty.value,
-buy:+pbeli.value,
-sell:+pjual.value
+buy:+pbuy.value,
+sell:+psell.value
 })
-save()
-render()
+save();render()
 }
 
 function sell(){
-let p=db.products.find(x=>x.name==sellList.value)
+let p=db.products.find(x=>x.name==sellSelect.value)
 let q=+sellQty.value
 if(!p||p.qty<q)return alert("stok kurang")
 p.qty-=q
@@ -123,8 +152,16 @@ name:p.name,
 qty:q,
 profit:(p.sell-p.buy)*q
 })
-save()
-render()
+save();render()
+}
+
+function addCash(){
+db.cash.push({
+desc:kdesc.value,
+in:+kin.value||0,
+out:+kout.value||0
+})
+save();render()
 }
 
 function render(){
@@ -132,17 +169,48 @@ plist.innerHTML=db.products.map((p,i)=>
 `<tr>
 <td>${p.name}</td>
 <td>${p.qty}</td>
-<td><button onclick="db.products.splice(${i},1);save();render()">hapus</button></td>
+<td><button onclick="db.products.splice(${i},1);save();render()">X</button></td>
 </tr>`).join("")
 
-sellList.innerHTML=db.products.map(p=>
+sellSelect.innerHTML=db.products.map(p=>
 `<option>${p.name}</option>`).join("")
 
 tlist.innerHTML=db.trx.map(t=>
 `<tr><td>${t.name}</td><td>${t.qty}</td><td>${t.profit}</td></tr>`).join("")
 
-let total=db.trx.reduce((a,b)=>a+b.profit,0)
-sum.innerText="Total Profit: "+total
+let profit=db.trx.reduce((a,b)=>a+b.profit,0)
+let cashIn=db.cash.reduce((a,b)=>a+b.in,0)
+let cashOut=db.cash.reduce((a,b)=>a+b.out,0)
+
+summary.innerHTML=`
+Profit: ${profit}<br>
+Kas Masuk: ${cashIn}<br>
+Kas Keluar: ${cashOut}<br>
+Saldo: ${profit+cashIn-cashOut}
+`
+
+// ANALISIS
+let map={}
+db.trx.forEach(t=>{
+map[t.name]=(map[t.name]||0)+t.qty
+})
+
+alist.innerHTML=db.products.map(p=>{
+let s=map[p.name]||0
+let status=s>10?"Laris":"Normal"
+return `<tr><td>${p.name}</td><td>${s}</td><td>${status}</td></tr>`
+}).join("")
+}
+
+function exportCSV(){
+let csv="produk,qty,profit\n"
+db.trx.forEach(t=>{
+csv+=`${t.name},${t.qty},${t.profit}\n`
+})
+let a=document.createElement("a")
+a.href=URL.createObjectURL(new Blob([csv]))
+a.download="laporan.csv"
+a.click()
 }
 
 if(cur) show("dash")
