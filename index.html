@@ -12,7 +12,6 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Fredoka', sans-serif;
-            /* EFEK SERAT DENIM / TEXTURED JEANS CLOTH */
             background-color: #2b445a; 
             background-image: 
                 linear-gradient(rgba(0, 0, 0, 0.2) 50%, transparent 50%),
@@ -68,7 +67,7 @@
         .scrapbook-card:hover { transform: translateY(-5px); background-color: rgba(255, 255, 255, 0.22); }
         .card-title { font-size: 22px; font-weight: 700; color: #ffffff; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); }
 
-        /* SUB LAYOUT INTERIOR */
+        /* INTERIOR LAYOUT */
         .btn-back { display: inline-block; padding: 11px 22px; background-color: #ffffff; color: #2b445a; border: 2px solid #4a3b32; border-radius: 10px; font-weight: 600; margin-bottom: 25px; cursor: pointer; font-family: inherit; }
         .btn-back:hover { background-color: #ffd6e2; color: #4a3b32; }
         .sub-layout { background-color: #fefcf3; border-radius: 24px; padding: 35px; box-shadow: 0 15px 40px rgba(0,0,0,0.3); color: #4a3b32; border: 3px solid #ffd6e2; }
@@ -124,8 +123,8 @@
 </head>
 <body>
 
-    <!-- AUTH: LOGIN (KEMBALI DISEDIAKAN) -->
-    <div id="authPage" class="page active">
+    <!-- HALAMAN LOGIN -->
+    <div id="authPage" class="page">
         <div class="auth-wrapper">
             <div class="auth-container">
                 <h2 class="font-title auth-title">Welcome My Mom!</h2>
@@ -144,14 +143,14 @@
                     <button type="submit" class="btn-auth">Masuk Sistem</button>
                 </form>
                 <div class="auth-switch-link">
-                    Mau tambah cabang/jenis toko baru? <span onclick="navigateToAuth('registerPage')">Daftar Akun Baru</span>
+                    Mau tambah cabang/jenis toko baru? <span onclick="gantiHalamanAuth('registerPage')">Daftar Akun Baru</span>
                 </div>
             </div>
             <span class="auth-footer-text">Hope you like it</span>
         </div>
     </div>
 
-    <!-- AUTH: REGISTER -->
+    <!-- HALAMAN REGISTER -->
     <div id="registerPage" class="page">
         <div class="auth-wrapper">
             <div class="auth-container">
@@ -171,7 +170,7 @@
                     <button type="submit" class="btn-auth">Daftarkan Toko</button>
                 </form>
                 <div class="auth-switch-link">
-                    Sudah punya akun? <span onclick="navigateToAuth('authPage')">Kembali ke Login</span>
+                    Sudah punya akun? <span onclick="gantiHalamanAuth('authPage')">Kembali ke Login</span>
                 </div>
             </div>
             <span class="auth-footer-text">Hope you like it</span>
@@ -201,7 +200,7 @@
         </main>
     </div>
 
-    <!-- FITUR 1: DAFTAR PRODUK -->
+    <!-- DAFTAR PRODUK -->
     <div id="produkPage" class="page">
         <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali</button>
         <div class="sub-layout">
@@ -241,7 +240,7 @@
         </div>
     </div>
 
-    <!-- FITUR 2: STOK PRODUK -->
+    <!-- STOK PRODUK -->
     <div id="stokPage" class="page">
         <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali</button>
         <div class="sub-layout">
@@ -268,7 +267,7 @@
         </div>
     </div>
 
-    <!-- FITUR 3: LAPORAN KEUANGAN -->
+    <!-- LAPORAN KEUANGAN -->
     <div id="laporanPage" class="page">
         <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali</button>
         <div class="sub-layout">
@@ -313,7 +312,7 @@
         </div>
     </div>
 
-    <!-- FITUR 4: ANALISIS PRODUK REPURCHASE -->
+    <!-- ANALISIS PRODUK -->
     <div id="analisisPage" class="page">
         <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali</button>
         <div class="sub-layout">
@@ -333,7 +332,7 @@
         </div>
     </div>
 
-    <!-- FITUR 5: TRACKING KEUANGAN VISUAL -->
+    <!-- TRACKING KEUANGAN -->
     <div id="arusKasPage" class="page">
         <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali</button>
         <div class="sub-layout">
@@ -361,7 +360,7 @@
         </div>
     </div>
 
-    <!-- FITUR 6: TRACKING PENJUALAN PER PRODUK SELEKTIF -->
+    <!-- TRACKING PENJUALAN PER PRODUK -->
     <div id="penjualanPage" class="page">
         <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali</button>
         <div class="sub-layout">
@@ -415,7 +414,7 @@
         document.getElementById('filter_bulan_kas').value = blnSekarang;
         document.getElementById('filter_bulan_penjualan').value = blnSekarang;
 
-        // FITUR DATA UTAMA & ENGINE AKUN TOKO
+        // DATA UTAMA & SYSTEM AKUN TOKO
         let databaseAkun = JSON.parse(localStorage.getItem('kalunaUsersDB_v2')) || { "sembako": "mamah123" };
         let currentUser = localStorage.getItem('kalunaLoggedUser_v2') || "";
         let dataStore = { produk: [], transaksiKeluar: [], kasManual: [] };
@@ -434,18 +433,18 @@
 
         function saveUserData() {
             if(!currentUser) return;
-            // PERBAIKAN: Mengikat penyimpanan data toko secara langsung ke memori local browser
             localStorage.setItem('kalunaStoreData_v2_' + currentUser, JSON.stringify(dataStore));
             renderAll(); 
         }
 
-        function navigateToAuth(pageId) {
+        // PERBAIKAN FUNGSIONAL: Fungsi khusus perpindahan antar layar Login & Register secara instan
+        function gantiHalamanAuth(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
         }
 
         function navigateTo(pageId) {
-            if(!currentUser) { navigateToAuth('authPage'); return; }
+            if(!currentUser) { gantiHalamanAuth('authPage'); return; }
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             window.scrollTo(0,0);
@@ -472,7 +471,12 @@
             databaseAkun[user] = pass;
             localStorage.setItem('kalunaUsersDB_v2', JSON.stringify(databaseAkun));
             alert('Toko Baru Sukses Terdaftar!');
-            navigateToAuth('authPage');
+            
+            // RESET INPUT REGISTER
+            document.getElementById('regUser').value = '';
+            document.getElementById('regPassword').value = '';
+            
+            gantiHalamanAuth('authPage');
         }
 
         function prosesLogin() {
@@ -482,6 +486,11 @@
                 currentUser = user;
                 localStorage.setItem('kalunaLoggedUser_v2', currentUser);
                 loadUserStoreData();
+                
+                // RESET INPUT LOGIN
+                document.getElementById('loginUser').value = '';
+                document.getElementById('loginPassword').value = '';
+                
                 navigateTo('dashboardPage');
             } else {
                 alert('Kombinasi Akun/Password Salah!');
@@ -491,7 +500,7 @@
         function prosesLogout() {
             currentUser = "";
             localStorage.removeItem('kalunaLoggedUser_v2');
-            navigateToAuth('authPage');
+            gantiHalamanAuth('authPage');
         }
 
         function tambahProdukGanda() {
@@ -664,7 +673,7 @@
                 document.getElementById('rep_netto').style.color = saldoBerjalan >= 0 ? '#2e7d32' : '#b71c1c';
             }
 
-            // RENDERING ANALISIS REPURCHASE KULAKAN
+            // RENDERING ANALISIS REPURCHASE
             let tabelAnalisis = document.getElementById('tabel_analisis');
             if(tabelAnalisis) {
                 tabelAnalisis.innerHTML = dataStore.produk.map(p => {
@@ -779,9 +788,9 @@
             pathLine.setAttribute('d', 'M ' + koordinatPoin.join(' L '));
         }
 
-        // KICKSTART ENGINE SISTEM KEUANGAN
+        // ENGINE KICKSTART INTERIOR
         if(currentUser) { loadUserStoreData(); navigateTo('dashboardPage'); } 
-        else { navigateToAuth('authPage'); }
+        else { gantiHalamanAuth('authPage'); }
     </script>
 </body>
 </html>
