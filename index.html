@@ -4,180 +4,220 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Keuangan Toko Premium - Kaluna Denim Edition</title>
+    <!-- Google Fonts: Playfair Display & Fredoka -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Pinyon+Script&display=swap" rel="stylesheet">
     
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        /* --- PREMIUM PALETTE: Denim Blue (Dominan), Silver Glam & Soft Pink (Aksen) --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Fredoka', sans-serif;
-            background-color: #2b445a; 
+            /* Warna Dominan: Soft Denim Blue yang Kaluna mau */
+            background-color: #3b5975; 
+            /* Sorotan lampu tipis dari Silver Glam dan Soft Pink agar estetis tanpa merusak denim */
             background-image: 
-                linear-gradient(rgba(0, 0, 0, 0.2) 50%, transparent 50%),
-                linear-gradient(90%, rgba(255, 255, 255, 0.04) 50%, transparent 50%),
-                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px),
-                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px);
-            background-size: 100% 4px, 4px 100%, 4px 4px, 4px 4px;
-            color: #ffffff; min-height: 100vh; padding-bottom: 60px;
+                radial-gradient(circle at 15% 20%, rgba(245, 245, 247, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 85% 80%, rgba(255, 214, 226, 0.2) 0%, transparent 60%);
+            color: #ffffff; /* Teks utama putih agar kontras di atas denim */
+            min-height: 100vh;
+            padding-bottom: 60px;
         }
+
         .font-title { font-family: 'Playfair Display', serif; }
+
         .page { display: none; max-width: 1200px; margin: 0 auto; padding: 30px 20px; }
         .page.active { display: block; }
 
-        /* AUTH CONTAINER */
+        /* --- GERBANG LOGIN VINTAGE DENIM --- */
         .auth-wrapper { max-width: 420px; margin: 80px auto; text-align: center; }
         .auth-container {
-            background-color: #fefcf3; padding: 45px 35px; border-radius: 24px;
-            box-shadow: 0 20px 45px rgba(0,0,0,0.5); border: 4px solid #ffd6e2;
-            margin-bottom: 25px; color: #4a3b32;
+            background-color: rgba(255, 255, 255, 0.95); /* Putih bersih agak transparan */
+            padding: 45px 35px;
+            border-radius: 24px;
+            box-shadow: 0 20px 45px rgba(0,0,0,0.3);
+            border: 3px solid #ffd6e2; /* Aksen Soft Pink */
+            margin-bottom: 25px;
+            color: #2c3e50; /* Teks form denim gelap */
         }
-        .auth-title { font-size: 32px; font-weight: 800; color: #2b445a; margin-bottom: 25px; font-style: italic; }
-        .auth-footer-text { font-family: 'Pinyon Script', cursive; font-size: 42px; color: #ffd6e2; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin-top: 15px; display: block; }
+        .auth-title { font-size: 32px; font-weight: 800; color: #3b5975; margin-bottom: 25px; font-style: italic; }
+        .auth-footer-text { font-family: 'Pinyon Script', cursive; font-size: 42px; color: #ffd6e2; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); margin-top: 15px; display: block; }
         
         .form-group { text-align: left; margin-bottom: 18px; }
-        .form-group label { display: block; font-size: 14px; font-weight: 600; color: #4a3b32; margin-bottom: 6px; }
+        .form-group label { display: block; font-size: 14px; font-weight: 600; color: #4a5568; margin-bottom: 6px; }
         .form-group input, .form-group select { 
-            width: 100%; padding: 11px 14px; border: 2px solid #4a3b32; border-radius: 12px; 
-            font-size: 14px; background-color: #ffffff; font-family: 'Fredoka', sans-serif;
-            color: #2b445a; font-weight: 500; transition: all 0.25s ease;
+            width: 100%; 
+            padding: 11px 14px; 
+            border: 2px solid #cbd5e1; 
+            border-radius: 12px; 
+            font-size: 14px; 
+            background-color: #ffffff; 
+            font-family: 'Fredoka', sans-serif;
+            color: #2c3e50;
+            font-weight: 500;
+            transition: all 0.25s ease;
         }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: #3b5975; box-shadow: 0 0 0 4px rgba(59, 89, 117, 0.2); }
+        
         .password-wrapper { position: relative; }
-        .toggle-password { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #4a3b32; }
+        .toggle-password { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #718096; }
 
-        .btn-auth { width: 100%; padding: 14px; background-color: #2b445a; color: #ffffff; border: none; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; margin-top: 10px; font-family: 'Fredoka', sans-serif; text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s; }
-        .btn-auth:hover { background-color: #ffd6e2; color: #4a3b32; }
-        .auth-switch-link { margin-top: 20px; font-size: 13px; color: #4a3b32; font-weight: 500; }
-        .auth-switch-link span { color: #2b445a; cursor: pointer; font-weight: 700; text-decoration: underline; }
+        .btn-auth { width: 100%; padding: 14px; background-color: #3b5975; color: #ffffff; border: none; border-radius: 12px; font-weight: 700; font-size: 15px; cursor: pointer; margin-top: 10px; font-family: 'Fredoka', sans-serif; text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s; }
+        .btn-auth:hover { background-color: #ffd6e2; color: #3b5975; box-shadow: 0 5px 15px rgba(255, 214, 226, 0.4); }
 
-        /* DASHBOARD */
+        .auth-switch-link { margin-top: 20px; font-size: 13px; color: #4a5568; font-weight: 500; }
+        .auth-switch-link span { color: #3b5975; cursor: pointer; font-weight: 700; text-decoration: underline; }
+
+        /* --- DASHBOARD UTAMA --- */
         .hero-section { text-align: center; padding: 40px 20px; }
-        .mom-dedication h2 { font-size: 28px; color: #ffd6e2; font-weight: 700; font-style: italic; text-shadow: 1px 1px 3px rgba(0,0,0,0.4); }
+        .mom-dedication h2 { font-size: 28px; color: #ffd6e2; font-weight: 700; font-style: italic; text-shadow: 1px 1px 2px rgba(0,0,0,0.2); }
         .mom-dedication p { font-size: 12px; font-weight: 600; color: #e2e8f0; text-transform: uppercase; letter-spacing: 2px; }
-        .main-headline { font-size: 42px; font-weight: 900; color: #ffffff; margin-top: 8px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-        .store-indicator { display: inline-block; background-color: #ffd6e2; color: #4a3b32; padding: 6px 18px; border-radius: 20px; font-size: 14px; font-weight: 700; margin-top: 10px; text-transform: uppercase; border: 2px solid #4a3b32; }
+        .main-headline { font-size: 42px; font-weight: 900; color: #ffffff; margin-top: 8px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        .store-indicator { display: inline-block; background-color: #ffd6e2; color: #3b5975; padding: 6px 18px; border-radius: 20px; font-size: 14px; font-weight: 700; margin-top: 10px; text-transform: uppercase; border: 2px solid #ffffff; }
         .divider-line { width: 80px; height: 4px; background-color: #ffd6e2; margin: 16px auto 0 auto; border-radius: 2px; }
 
         .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; padding: 30px 20px; }
         .scrapbook-card {
-            background-color: rgba(255, 255, 255, 0.12); border-radius: 20px; padding: 40px 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2); transition: all 0.25s ease; cursor: pointer;
-            border: 2px solid #ffd6e2; text-align: center; backdrop-filter: blur(4px);
+            background-color: rgba(255, 255, 255, 0.15); /* Transparan mewah di atas denim */
+            border-radius: 20px;
+            padding: 40px 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: all 0.25s ease;
+            cursor: pointer;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
         }
-        .scrapbook-card:hover { transform: translateY(-5px); background-color: rgba(255, 255, 255, 0.22); }
-        .card-title { font-size: 22px; font-weight: 700; color: #ffffff; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); }
+        .scrapbook-card:hover { transform: translateY(-5px); box-shadow: 0 18px 35px rgba(255, 214, 226, 0.2); background-color: rgba(255, 255, 255, 0.25); border-color: #ffd6e2; }
+        .card-title { font-size: 22px; font-weight: 700; color: #ffffff; }
 
-        /* INTERIOR LAYOUT */
-        .btn-back { display: inline-block; padding: 11px 22px; background-color: #ffffff; color: #2b445a; border: 2px solid #4a3b32; border-radius: 10px; font-weight: 600; margin-bottom: 25px; cursor: pointer; font-family: inherit; }
-        .btn-back:hover { background-color: #ffd6e2; color: #4a3b32; }
-        .sub-layout { background-color: #fefcf3; border-radius: 24px; padding: 35px; box-shadow: 0 15px 40px rgba(0,0,0,0.3); color: #4a3b32; border: 3px solid #ffd6e2; }
-        .sub-title { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; margin-bottom: 25px; border-bottom: 2px solid #4a3b32; padding-bottom: 12px; font-style: italic; color: #2b445a; text-transform: capitalize; }
+        /* --- PANEL SUB HALAMAN --- */
+        .btn-back { display: inline-block; padding: 11px 22px; background-color: #ffffff; color: #3b5975; border: none; border-radius: 10px; font-weight: 600; margin-bottom: 25px; cursor: pointer; font-family: inherit; transition: all 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .btn-back:hover { background-color: #ffd6e2; color: #3b5975; }
         
-        .form-grid-double { display: flex; flex-direction: column; gap: 20px; margin-bottom: 30px; background: #ffffff; padding: 25px; border-radius: 18px; border: 2px solid #ffd6e2; }
-        .row-inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-        .btn-add { padding: 12px 24px; background-color: #2e7d32; color: #ffffff; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; font-family: 'Fredoka', sans-serif; text-transform: uppercase; width: 100%; margin-top: 10px; }
-        .btn-add:hover { background-color: #ffd6e2; color: #4a3b32; }
+        .sub-layout { background-color: #ffffff; border-radius: 24px; padding: 35px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); color: #2c3e50; border: 2px solid #ffd6e2; }
+        .sub-title { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; margin-bottom: 25px; border-bottom: 2px solid #f1f5f9; padding-bottom: 12px; font-style: italic; color: #3b5975; }
         
-        /* TABLE */
-        .table-responsive { overflow-x: auto; margin-top: 15px; border-radius: 14px; border: 2px solid #4a3b32; }
-        table { width: 100%; border-collapse: collapse; background: white; min-width: 900px; }
-        th, td { padding: 14px 16px; text-align: left; font-size: 14px; border-bottom: 1px solid #f1f5f9; color: #4a3b32; font-weight: 500; }
-        th { background-color: #ffd6e2; color: #4a3b32; font-weight: 700; text-transform: uppercase; font-size: 13px; border-bottom: 2px solid #4a3b32; }
+        /* Ganda Input Form */
+        .form-grid-double { display: flex; flex-direction: column; gap: 20px; margin-bottom: 30px; background: #f8fafc; padding: 25px; border-radius: 18px; border: 1px solid #e2e8f0; }
+        .row-inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
+        .box-sub-input { background: #ffffff; padding: 15px; border-radius: 12px; border: 1px dashed #cbd5e1; }
+        .box-sub-input h4 { font-size: 13px; color: #3b5975; text-transform: uppercase; margin-bottom: 10px; font-weight: 700; border-left: 3px solid #ffd6e2; padding-left: 6px; }
+
+        .btn-add { padding: 12px 24px; background-color: #3b5975; color: #ffffff; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; font-family: 'Fredoka', sans-serif; transition: all 0.2s; text-transform: uppercase; width: 100%; margin-top: 10px; }
+        .btn-add:hover { background-color: #ffd6e2; color: #3b5975; }
+        
+        /* TABEL KEUANGAN */
+        .table-responsive { overflow-x: auto; margin-top: 15px; border-radius: 14px; border: 1px solid #e2e8f0; }
+        table { width: 100%; border-collapse: collapse; background: white; min-width: 950px; }
+        th, td { padding: 14px 16px; text-align: left; font-size: 14px; border-bottom: 1px solid #f1f5f9; color: #2c3e50; }
+        th { background-color: #f1f5f9; color: #3b5975; font-weight: 700; text-transform: uppercase; font-size: 12px; border-bottom: 2px solid #e2e8f0; }
         
         .stacked-cell { line-height: 1.6; font-size: 13px; }
-        .stacked-cell div { border-bottom: 1px dashed #cbd5e1; padding: 3px 0; }
+        .stacked-cell div { border-bottom: 1px dashed #f1f5f9; padding: 3px 0; }
         .stacked-cell div:last-child { border-bottom: none; }
+
         .badge { padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; display: inline-block; }
-        .badge-success { background-color: #2e7d32; color: #ffffff; }
-        .badge-warning { background-color: #fefcf3; color: #4a3b32; border: 1px solid #4a3b32; } 
-        .badge-danger { background-color: #b71c1c; color: #ffffff; }
+        .badge-success { background-color: #e2f5e9; color: #1b5e20; } 
+        .badge-warning { background-color: #fff3e0; color: #e65100; }
+        .badge-danger { background-color: #ffebee; color: #b71c1c; }
+
         .btn-delete { background: #ffebee; color: #b71c1c; border: none; padding: 6px 12px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 12px; }
         .btn-delete:hover { background: #b71c1c; color: white; }
 
         .report-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 25px; }
-        .report-card { background: #ffffff; padding: 20px; border-radius: 16px; border: 2px solid #4a3b32; }
-        .report-card h4 { font-size: 13px; color: #4a3b32; text-transform: uppercase; margin-bottom: 6px; }
-        .report-card p { font-size: 22px; font-weight: 800; }
-        .report-total-box { background: #ffffff; padding: 25px; border-radius: 16px; border: 2px dashed #4a3b32; text-align: center; margin-top: 10px; color: #4a3b32; }
+        .report-card { background: #f8fafc; padding: 20px; border-radius: 16px; border: 1px solid #e2e8f0; }
+        .report-card h4 { font-size: 13px; color: #64748b; text-transform: uppercase; margin-bottom: 6px; }
+        .report-card p { font-size: 22px; font-weight: 800; color: #2c3e50; }
+        .report-total-box { background: #f1f5f9; padding: 25px; border-radius: 16px; border: 2px dashed #3b5975; text-align: center; margin-top: 10px; }
 
-        .tracking-section-title { font-size: 18px; font-weight: 700; color: #2b445a; margin: 25px 0 15px 0; padding-left: 10px; border-left: 4px solid #ffd6e2; }
-        .chart-container { background: white; padding: 25px; border-radius: 16px; border: 2px solid #4a3b32; margin-bottom: 30px; }
-        .chart-flex { display: flex; align-items: flex-end; justify-content: space-around; height: 260px; padding-top: 30px; border-bottom: 2px solid #4a3b32; }
+        /* --- DIAGRAM VISUAL --- */
+        .tracking-section-title { font-size: 18px; font-weight: 700; color: #3b5975; margin: 25px 0 15px 0; padding-left: 10px; border-left: 4px solid #ffd6e2; }
+        .chart-container { background: white; padding: 25px; border-radius: 16px; border: 1px solid #e2e8f0; margin-bottom: 30px; }
+        .chart-flex { display: flex; align-items: flex-end; justify-content: space-around; height: 260px; padding-top: 30px; border-bottom: 2px solid #cbd5e1; }
         .chart-bar-wrapper { display: flex; flex-direction: column; align-items: center; flex: 1; max-width: 110px; height: 100%; justify-content: flex-end; }
-        .chart-bar { width: 65%; background: #2b445a; border-radius: 6px 6px 0 0; transition: height 0.4s ease; position: relative; min-height: 4px; }
-        .chart-val { position: absolute; top: -25px; font-size: 11px; font-weight: 700; color: #4a3b32; width: 100%; text-align: center; white-space: nowrap; }
-        .chart-label { font-size: 12px; font-weight: 600; color: #4a3b32; margin-top: 10px; text-align: center; }
+        .chart-bar { width: 65%; background: #3b5975; border-radius: 6px 6px 0 0; transition: height 0.4s ease; position: relative; min-height: 4px; }
+        .chart-val { position: absolute; top: -25px; font-size: 11px; font-weight: 700; color: #2c3e50; width: 100%; text-align: center; white-space: nowrap; }
+        .chart-label { font-size: 12px; font-weight: 600; color: #475569; margin-top: 10px; text-align: center; }
 
+        /* LINE CHART SVG */
         .svg-chart-container { width: 100%; height: 280px; position: relative; }
-        .svg-graph { width: 100%; height: 230px; border-bottom: 2px solid #4a3b32; border-left: 2px solid #4a3b32; overflow: visible; }
-        .svg-line { fill: none; stroke: #2b445a; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
-        .svg-point { fill: #fefcf3; stroke: #ffd6e2; stroke-width: 3; cursor: pointer; }
-        .svg-point:hover { r: 8; fill: #4a3b32; }
+        .svg-graph { width: 100%; height: 230px; border-bottom: 2px solid #cbd5e1; border-left: 2px solid #cbd5e1; overflow: visible; }
+        .svg-line { fill: none; stroke: #3b5975; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+        .svg-point { fill: #ffffff; stroke: #ffd6e2; stroke-width: 3; cursor: pointer; }
+        .svg-point:hover { r: 8; }
         .svg-labels-x { display: flex; justify-content: space-between; padding-left: 15px; margin-top: 10px; }
-        .svg-label-x-text { font-size: 11px; font-weight: 600; color: #4a3b32; text-align: center; width: 8.33%; }
-        .month-filter-box { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; background-color: #ffffff; padding: 15px 20px; border-radius: 12px; border: 2px solid #4a3b32; width: fit-content; color: #4a3b32; }
-        .month-select { padding: 8px 14px; border-radius: 8px; border: 1px solid #4a3b32; font-weight: 600; background-color: white; color: #2b445a; font-family: 'Fredoka', sans-serif; }
+        .svg-label-x-text { font-size: 11px; font-weight: 600; color: #475569; text-align: center; width: 8.33%; }
+        
+        .month-filter-box { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; background-color: #f8fafc; padding: 15px 20px; border-radius: 12px; border: 1px solid #e2e8f0; width: fit-content; }
+        .month-filter-box label { font-size: 14px; font-weight: 700; color: #3b5975; }
+        .month-select { padding: 8px 14px; border-radius: 8px; border: 1px solid #cbd5e1; font-weight: 600; background-color: white; font-family: 'Fredoka', sans-serif; color: #3b5975; }
 
-        .ribbon-footer { position: fixed; bottom: 0; left: 0; width: 100%; background-color: #ffd6e2; border-top: 1px solid #4a3b32; height: 12px; z-index: 100; }
+        .ribbon-footer { position: fixed; bottom: 0; left: 0; width: 100%; background-color: #ffd6e2; border-top: 1px solid #ffffff; height: 12px; z-index: 100; }
     </style>
 </head>
 <body>
 
-    <!-- HALAMAN LOGIN -->
-    <div id="authPage" class="page">
+    <!-- ================= LOG IN GATE ================= -->
+    <div id="authPage" class="page active">
         <div class="auth-wrapper">
             <div class="auth-container">
                 <h2 class="font-title auth-title">Welcome My Mom!</h2>
                 <form onsubmit="prosesLogin(); return false;">
                     <div class="form-group">
-                        <label>Username Akun Toko</label>
-                        <input type="text" placeholder="Masukkan nama toko..." required id="loginUser">
+                        <label>Username Toko</label>
+                        <input type="text" placeholder="Masukkan username toko..." required id="loginUser">
                     </div>
                     <div class="form-group">
-                        <label>Password Keamanan</label>
+                        <label>Password</label>
                         <div class="password-wrapper">
                             <input type="password" id="loginPassword" placeholder="Masukkan password..." required>
                             <span class="toggle-password" onclick="togglePasswordVisibility('loginPassword')">👁️</span>
                         </div>
                     </div>
-                    <button type="submit" class="btn-auth">Masuk Sistem</button>
+                    <button type="submit" class="btn-auth">Login</button>
                 </form>
                 <div class="auth-switch-link">
-                    Mau tambah cabang/jenis toko baru? <span onclick="gantiHalamanAuth('registerPage')">Daftar Akun Baru</span>
+                    Belum punya jenis toko baru? <span onclick="navigateToAuth('registerPage')">Daftar Akun Toko Baru</span>
                 </div>
             </div>
             <span class="auth-footer-text">Hope you like it</span>
         </div>
     </div>
 
-    <!-- HALAMAN REGISTER -->
+    <!-- ================= REGISTER GATE ================= -->
     <div id="registerPage" class="page">
         <div class="auth-wrapper">
             <div class="auth-container">
                 <h2 class="font-title auth-title" style="font-size: 30px;">Daftar Toko Baru</h2>
                 <form onsubmit="prosesRegister(); return false;">
                     <div class="form-group">
-                        <label>Username Toko Baru</label>
-                        <input type="text" placeholder="Contoh: baju / aksesoris" required id="regUser">
+                        <label>Username / Nama Toko Baru</label>
+                        <input type="text" placeholder="Contoh: sembako" required id="regUser">
                     </div>
                     <div class="form-group">
                         <label>Password Keamanan</label>
                         <div class="password-wrapper">
-                            <input type="password" id="regPassword" placeholder="Buat password..." required>
+                            <input type="password" id="regPassword" placeholder="Buat password baru..." required>
                             <span class="toggle-password" onclick="togglePasswordVisibility('regPassword')">👁️</span>
                         </div>
                     </div>
                     <button type="submit" class="btn-auth">Daftarkan Toko</button>
                 </form>
                 <div class="auth-switch-link">
-                    Sudah punya akun? <span onclick="gantiHalamanAuth('authPage')">Kembali ke Login</span>
+                    Sudah terdaftar? <span onclick="navigateToAuth('authPage')">Kembali ke Halaman Login</span>
                 </div>
             </div>
             <span class="auth-footer-text">Hope you like it</span>
         </div>
     </div>
 
-    <!-- BERANDA DASHBOARD -->
+    <!-- ================= MAIN DASHBOARD ================= -->
     <div id="dashboardPage" class="page">
         <header class="hero-section">
             <div class="mom-dedication">
@@ -185,53 +225,100 @@
                 <p>— Spesial untuk My Mamah ku! —</p>
             </div>
             <h1 class="font-title main-headline">Sistem Keuangan Toko</h1>
-            <div class="store-indicator" id="nama_toko_aktif">Toko: Belum Login</div>
+            <div class="store-indicator" id="nama_toko_aktif">Toko: Umum</div>
             <div class="divider-line"></div>
         </header>
 
         <main class="grid-container">
-            <div class="scrapbook-card" onclick="navigateTo('produkPage')"><h3 class="card-title">Daftar Produk</h3></div>
-            <div class="scrapbook-card" onclick="navigateTo('stokPage')"><h3 class="card-title">Stok Produk</h3></div>
-            <div class="scrapbook-card" onclick="navigateTo('laporanPage')"><h3 class="card-title">Laporan Keuangan</h3></div>
-            <div class="scrapbook-card" onclick="navigateTo('analisisPage')"><h3 class="card-title">Analisis Produk</h3></div>
-            <div class="scrapbook-card" onclick="navigateTo('arusKasPage')"><h3 class="card-title">Tracking Keuangan</h3></div>
-            <div class="scrapbook-card" onclick="navigateTo('penjualanPage')"><h3 class="card-title">Tracking Penjualan</h3></div>
-            <div class="scrapbook-card" onclick="prosesLogout()" style="background-color: #b71c1c; border-color: #4a3b32;"><h3 class="card-title" style="color: #ffffff;">Keluar Akun Toko</h3></div>
+            <div class="scrapbook-card" onclick="navigateTo('produkPage')">
+                <h3 class="card-title">Daftar Produk</h3>
+            </div>
+            <div class="scrapbook-card" onclick="navigateTo('stokPage')">
+                <h3 class="card-title">Stok Produk</h3>
+            </div>
+            <div class="scrapbook-card" onclick="navigateTo('laporanPage')">
+                <h3 class="card-title">Laporan Keuangan</h3>
+            </div>
+            <div class="scrapbook-card" onclick="navigateTo('analisisPage')">
+                <h3 class="card-title">Analisis Produk</h3>
+            </div>
+            <div class="scrapbook-card" onclick="navigateTo('arusKasPage')">
+                <h3 class="card-title">Tracking Keuangan</h3>
+            </div>
+            <div class="scrapbook-card" onclick="navigateTo('penjualanPage')">
+                <h3 class="card-title">Tracking Penjualan</h3>
+            </div>
+            <div class="scrapbook-card" onclick="prosesLogout()" style="background-color: rgba(183, 28, 28, 0.8); border-color: #ffd6e2;">
+                <h3 class="card-title" style="color: #ffffff;">Keluar Akun Toko</h3>
+            </div>
         </main>
     </div>
 
-    <!-- DAFTAR PRODUK -->
+    <!-- ================= FITUR 1: DAFTAR PRODUK ================= -->
     <div id="produkPage" class="page">
         <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali</button>
         <div class="sub-layout">
             <h2 class="sub-title">Daftar Produk</h2>
+            
             <div class="form-grid-double">
                 <div class="row-inputs">
-                    <div class="form-group"><label>Tanggal Input</label><input type="date" id="p_tanggal" required></div>
-                    <div class="form-group"><label>Nama Barang / Produk</label><input type="text" id="p_nama" placeholder="Contoh: Beras Ramos"></div>
-                    <div class="form-group"><label>Jumlah Kuantitas Masuk</label><input type="number" id="p_qty" placeholder="0"></div>
+                    <div class="form-group">
+                        <label>Tanggal</label>
+                        <input type="date" id="p_tanggal" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Produk</label>
+                        <input type="text" id="p_nama" placeholder="Contoh: Beras Ramos / Pupuk Urea">
+                    </div>
                 </div>
+
                 <div class="row-inputs">
-                    <div class="form-group"><label>Harga Beli / Pcs</label><input type="number" id="p_modal_pcs" placeholder="0"></div>
-                    <div class="form-group"><label>Harga Jual / Pcs</label><input type="number" id="p_jual_pcs" placeholder="0"></div>
-                </div>
-                <div class="row-inputs">
-                    <div class="form-group"><label>Harga Beli / Pack</label><input type="number" id="p_modal_pack" placeholder="0"></div>
-                    <div class="form-group"><label>Harga Jual / Pack</label><input type="number" id="p_jual_pack" placeholder="0"></div>
+                    <div class="box-sub-input">
+                        <h4>Ukuran Eceran (Pcs / Kg)</h4>
+                        <div class="form-group">
+                            <label>Qty Eceran Masuk</label>
+                            <input type="number" id="p_qty_pcs" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Harga Beli Eceran</label>
+                            <input type="number" id="p_modal_pcs" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Harga Jual Eceran</label>
+                            <input type="number" id="p_jual_pcs" placeholder="0">
+                        </div>
+                    </div>
+
+                    <div class="box-sub-input">
+                        <h4>Ukuran Grosir (Pack / Sak)</h4>
+                        <div class="form-group">
+                            <label>Qty Grosir Masuk</label>
+                            <input type="number" id="p_qty_pack" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Harga Beli Grosir</label>
+                            <input type="number" id="p_modal_pack" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Harga Jual Grosir</label>
+                            <input type="number" id="p_jual_pack" placeholder="0">
+                        </div>
+                    </div>
                 </div>
                 <button class="btn-add" onclick="tambahProdukGanda()">Simpan Pencatatan Produk</button>
             </div>
+            
             <div class="table-responsive">
                 <table>
                     <thead>
                         <tr>
-                            <th style="width: 110px;">Tanggal</th>
+                            <th style="width: 105px;">Tanggal</th>
                             <th>Nama Produk</th>
-                            <th>Stok Sisa / Awal</th>
+                            <th>Qty Awal</th>
                             <th>Harga Beli</th>
                             <th>Harga Jual</th>
-                            <th>Laba Estimasi / Pcs</th>
-                            <th style="width: 80px;">Aksi</th>
+                            <th>Estimasi Laba/Rugi</th>
+                            <th style="width: 75px;">Aksi</th>
                         </tr>
                     </thead>
                     <tbody id="tabel_produk"></tbody>
@@ -240,25 +327,43 @@
         </div>
     </div>
 
-    <!-- STOK PRODUK -->
+    <!-- ================= FITUR 2: STOK PRODUK ================= -->
     <div id="stokPage" class="page">
         <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali</button>
         <div class="sub-layout">
-            <h2 class="sub-title">Stok & Input Penjualan</h2>
+            <h2 class="sub-title">Stok Produk</h2>
             <div class="form-grid-double" style="flex-direction:row; flex-wrap:wrap; gap:15px;">
-                <div class="form-group" style="flex:1; min-width:130px;"><label>Tanggal Terjual</label><input type="date" id="s_tanggal" required></div>
-                <div class="form-group" style="flex:2; min-width:200px;"><label>Pilih Barang</label><select id="s_produk"></select></div>
-                <div class="form-group" style="flex:1; min-width:120px;"><label>Pilihan Satuan</label><select id="s_satuan_pilihan"><option value="Pcs">Pcs</option><option value="Pack">Pack</option></select></div>
-                <div class="form-group" style="flex:1; min-width:110px;"><label>Qty Terjual</label><input type="number" id="s_jumlah" placeholder="0"></div>
-                <div style="flex:1; min-width:130px; align-self:flex-end;"><button class="btn-add" onclick="kurangiStokGanda()" style="margin-top:0; height:44px;">Simpan Nota</button></div>
+                <div class="form-group" style="flex:1; min-width:130px;">
+                    <label>Tanggal</label>
+                    <input type="date" id="s_tanggal" required>
+                </div>
+                <div class="form-group" style="flex:2; min-width:200px;">
+                    <label>Pilih Produk</label>
+                    <select id="s_produk"></select>
+                </div>
+                <div class="form-group" style="flex:1; min-width:120px;">
+                    <label>Jenis Satuan</label>
+                    <select id="s_satuan_pilihan">
+                        <option value="Pcs">Pcs / Kg</option>
+                        <option value="Pack">Pack / Sak</option>
+                    </select>
+                </div>
+                <div class="form-group" style="flex:1; min-width:110px;">
+                    <label>Produk Terjual</label>
+                    <input type="number" id="s_jumlah" placeholder="0">
+                </div>
+                <div style="flex:1; min-width:130px; align-self:flex-end;">
+                    <button class="btn-add" onclick="kurangiStokGanda()" style="margin-top:0; height:44px;">Simpan</button>
+                </div>
             </div>
+            
             <div class="table-responsive">
                 <table>
                     <thead>
                         <tr>
                             <th>Nama Produk</th>
-                            <th>Sisa Stok Fisik</th>
-                            <th>Status Ketersediaan</th>
+                            <th>Sisa Stok</th>
+                            <th>Analisis Produk</th>
                         </tr>
                     </thead>
                     <tbody id="tabel_stok"></tbody>
@@ -267,43 +372,61 @@
         </div>
     </div>
 
-    <!-- LAPORAN KEUANGAN -->
+    <!-- ================= FITUR 3: LAPORAN KEUANGAN ================= -->
     <div id="laporanPage" class="page">
         <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali</button>
         <div class="sub-layout">
-            <h2 class="sub-title">Laporan Keuangan Mutasi Kas</h2>
+            <h2 class="sub-title">Laporan Keuangan</h2>
+            
             <div class="month-filter-box">
                 <label>Pilih Periode Bulan:</label>
                 <select id="filter_bulan_laporan" class="month-select" onchange="renderAll()">
-                    <option value="1">Januari</option><option value="2">Februari</option><option value="3">Maret</option><option value="4">April</option><option value="5">Mei</option><option value="6">Juni</option><option value="7">Juli</option><option value="8">Agustus</option><option value="9">September</option><option value="10">Oktober</option><option value="11">November</option><option value="12">Desember</option>
+                    <option value="1">Januari</option><option value="2">Februari</option>
+                    <option value="3">Maret</option><option value="4">April</option>
+                    <option value="5">Mei</option><option value="6">Juni</option>
+                    <option value="7">Juli</option><option value="8">Agustus</option>
+                    <option value="9">September</option><option value="10">Oktober</option>
+                    <option value="11">November</option><option value="12">Desember</option>
                 </select>
             </div>
-            <div style="background-color: #ffffff; padding: 22px; border-radius: 16px; margin-bottom: 25px; border: 2px solid #4a3b32;">
-                <h4 style="margin-bottom: 12px; font-size: 15px; color: #2b445a;">Pemasukkan & Pengeluaran Operasional Lainnya</h4>
+
+            <div style="background-color: #f8fafc; padding: 22px; border-radius: 16px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+                <h4 style="margin-bottom: 12px; font-size: 15px; font-weight: 700; color: #3b5975;">Pemasukkan & Pengeluaran lain-lain</h4>
                 <div style="display: flex; flex-wrap: wrap; gap: 12px;">
-                    <input type="date" id="m_tanggal">
-                    <input type="text" id="m_keterangan" placeholder="Contoh: Bayar Listrik Toko / Tambah Modal Awal" style="flex:1; min-width:200px;">
-                    <input type="number" id="m_masuk" placeholder="Kas Masuk (Rp)">
-                    <input type="number" id="m_keluar" placeholder="Kas Keluar (Rp)">
-                    <button class="btn-add" onclick="tambahKasManual()" style="width:auto; margin-top:0; padding:10px 20px; height:44px;">Tambah Biaya</button>
+                    <input type="date" id="m_tanggal" style="padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; font-family:inherit;">
+                    <input type="text" id="m_keterangan" placeholder="Keterangan alur kas..." style="flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; min-width: 200px; font-family:inherit;">
+                    <input type="number" id="m_masuk" placeholder="Masuk" style="padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; width: 120px; font-family:inherit;">
+                    <input type="number" id="m_keluar" placeholder="Keluar" style="padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; width: 120px; font-family:inherit;">
+                    <button class="btn-add" onclick="tambahKasManual()" style="padding: 10px 20px; height:40px; width:auto; margin-top:0;">Simpan</button>
                 </div>
             </div>
+
             <div class="report-grid">
-                <div class="report-card"><h4>Total Kas Masuk (Omset)</h4><p id="rep_total_masuk" style="color: #2e7d32;">Rp 0</p></div>
-                <div class="report-card"><h4>Total Kas Keluar (Biaya)</h4><p id="rep_total_keluar" style="color: #b71c1c;">Rp 0</p></div>
+                <div class="report-card">
+                    <h4>Total Uang Masuk (Bulan Ini)</h4>
+                    <p id="rep_total_masuk" style="color: #2e7d32;">Rp 0</p>
+                </div>
+                <div class="report-card">
+                    <h4>Total Uang Keluar (Bulan Ini)</h4>
+                    <p id="rep_total_keluar" style="color: #c62828;">Rp 0</p>
+                </div>
             </div>
-            <div class="report-total-box"><h3>Saldo Buku Kas Bersih: <span id="rep_netto" style="font-size: 32px; font-weight: 800; display: block; margin-top: 8px;">Rp 0</span></h3></div>
-            <h3 style="margin-top: 35px; font-size: 20px; margin-bottom: 12px; font-style: italic;" class="font-title">Riwayat Arus Kas Lengkap</h3>
+
+            <div class="report-total-box">
+                <h3>Saldo / Keuntungan Bersih: <span id="rep_netto" style="font-size: 32px; font-weight: 800; display: block; margin-top: 8px;">Rp 0</span></h3>
+            </div>
+
+            <h3 style="margin-top: 35px; font-size: 20px; margin-bottom: 12px; font-style: italic;" class="font-title">Riwayat Rekap Mutasi Kas Lengkap</h3>
             <div class="table-responsive">
                 <table>
                     <thead>
                         <tr>
                             <th style="width: 50px;">No</th>
                             <th style="width: 110px;">Tanggal</th>
-                            <th>Keterangan Alur Transaksi</th>
+                            <th>Keterangan Alur Kas</th>
                             <th>Keluar (Debet)</th>
                             <th>Masuk (Kredit)</th>
-                            <th>Saldo Kumulatif</th>
+                            <th>Saldo Bersih</th>
                         </tr>
                     </thead>
                     <tbody id="tabel_buku_kas"></tbody>
@@ -312,18 +435,18 @@
         </div>
     </div>
 
-    <!-- ANALISIS PRODUK -->
+    <!-- ================= FITUR 4: ANALISIS PRODUK ================= -->
     <div id="analisisPage" class="page">
         <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali</button>
         <div class="sub-layout">
-            <h2 class="sub-title">Analisis Kelayakan Repurchase Barang</h2>
+            <h2 class="sub-title">Analisis Produk</h2>
             <div class="table-responsive">
                 <table>
                     <thead>
                         <tr>
                             <th>Nama Produk</th>
-                            <th>Total Kuantitas Terjual</th>
-                            <th>Rekomendasi Kulakan Ulang (Repurchase)</th>
+                            <th>Total Barang Terjual</th>
+                            <th>Analisis Produk</th>
                         </tr>
                     </thead>
                     <tbody id="tabel_analisis"></tbody>
@@ -332,57 +455,99 @@
         </div>
     </div>
 
-    <!-- TRACKING KEUANGAN -->
+    <!-- ================= FITUR 5: TRACKING KEUANGAN VISUAL ================= -->
     <div id="arusKasPage" class="page">
         <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali</button>
         <div class="sub-layout">
-            <h2 class="sub-title">Tracking Keuangan Visual</h2>
+            <h2 class="sub-title">Tracking Keuangan (Visual Grafik)</h2>
+            
             <div class="month-filter-box">
                 <label>Pilih Periode Bulan:</label>
                 <select id="filter_bulan_kas" class="month-select" onchange="renderDiagramKeuangan()">
-                    <option value="1">Januari</option><option value="2">Februari</option><option value="3">Maret</option><option value="4">April</option><option value="5">Mei</option><option value="6">Juni</option><option value="7">Juli</option><option value="8">Agustus</option><option value="9">September</option><option value="10">Oktober</option><option value="11">November</option><option value="12">Desember</option>
+                    <option value="1">Januari</option><option value="2">Februari</option>
+                    <option value="3">Maret</option><option value="4">April</option>
+                    <option value="5">Mei</option><option value="6">Juni</option>
+                    <option value="7">Juli</option><option value="8">Agustus</option>
+                    <option value="9">September</option><option value="10">Oktober</option>
+                    <option value="11">November</option><option value="12">Desember</option>
                 </select>
             </div>
-            <div class="tracking-section-title">1. Perbandingan Kas Bulanan (Bulan Dipilih)</div>
+
+            <div class="tracking-section-title">1. Tracking Bulanan (Bulan Berjalan)</div>
             <div class="chart-container">
-                <div class="chart-flex" style="max-width:550px; margin:0 auto;">
-                    <div class="chart-bar-wrapper"><div class="chart-bar" id="bar_omset_bulan" style="background: #2e7d32;"><span class="chart-val" id="val_omset_bulan">Rp 0</span></div><div class="chart-label">Total Masuk</div></div>
-                    <div class="chart-bar-wrapper"><div class="chart-bar" id="bar_modal_bulan" style="background: #b71c1c;"><span class="chart-val" id="val_modal_bulan">Rp 0</span></div><div class="chart-label">Total Keluar</div></div>
+                <div class="chart-flex" style="justify-content: space-around; max-width:550px; margin:0 auto;">
+                    <div class="chart-bar-wrapper">
+                        <div class="chart-bar" id="bar_omset_bulan" style="background: #2e7d32; width:75%;"><span class="chart-val" id="val_omset_bulan">Rp 0</span></div>
+                        <div class="chart-label">Pemasukkan Bulan Ini</div>
+                    </div>
+                    <div class="chart-bar-wrapper">
+                        <div class="chart-bar" id="bar_modal_bulan" style="background: #c62828; width:75%;"><span class="chart-val" id="val_modal_bulan">Rp 0</span></div>
+                        <div class="chart-label">Pengeluaran Bulan Ini</div>
+                    </div>
                 </div>
             </div>
-            <div class="tracking-section-title">2. Akumulasi Arus Kas Tahunan (Sepanjang Tahun 2026)</div>
+
+            <div class="tracking-section-title">2. Tracking Tahunan (Akumulasi Sepanjang Tahun)</div>
             <div class="chart-container">
-                <div class="chart-flex" style="max-width:550px; margin:0 auto;">
-                    <div class="chart-bar-wrapper"><div class="chart-bar" id="bar_omset_tahun" style="background: #2b445a;"><span class="chart-val" id="val_omset_tahun">Rp 0</span></div><div class="chart-label">Akumulasi Masuk</div></div>
-                    <div class="chart-bar-wrapper"><div class="chart-bar" id="bar_modal_tahun" style="background: #4a3b32;"><span class="chart-val" id="val_modal_tahun">Rp 0</span></div><div class="chart-label">Akumulasi Keluar</div></div>
+                <div class="chart-flex" style="justify-content: space-around; max-width:550px; margin:0 auto;">
+                    <div class="chart-bar-wrapper">
+                        <div class="chart-bar" id="bar_omset_tahun" style="background: #1565c0; width:75%;"><span class="chart-val" id="val_omset_tahun">Rp 0</span></div>
+                        <div class="chart-label">Total Pemasukkan Tahunan</div>
+                    </div>
+                    <div class="chart-bar-wrapper">
+                        <div class="chart-bar" id="bar_modal_tahun" style="background: #e65100; width:75%;"><span class="chart-val" id="val_modal_tahun">Rp 0</span></div>
+                        <div class="chart-label">Total Pengeluaran Tahunan</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- TRACKING PENJUALAN PER PRODUK -->
+    <!-- ================= FITUR 6: TRACKING PENJUALAN PER PRODUK ================= -->
     <div id="penjualanPage" class="page">
         <button class="btn-back" onclick="navigateTo('dashboardPage')">&larr; Kembali</button>
         <div class="sub-layout">
-            <h2 class="sub-title">Tracking Penjualan Per Produk</h2>
+            <h2 class="sub-title">Tracking Penjualan Komoditas</h2>
+            
             <div class="month-filter-box">
-                <label>Pilih Barang:</label>
-                <select id="filter_produk_penjualan" class="month-select" onchange="renderSemuaTrackingPenjualan()"></select>
+                <label>Pilih Barang / Produk:</label>
+                <select id="filter_produk_penjualan" class="month-select" onchange="renderSemuaTrackingPenjualan()">
+                </select>
+                
                 <label style="margin-left: 15px;">Pilih Bulan:</label>
                 <select id="filter_bulan_penjualan" class="month-select" onchange="renderSemuaTrackingPenjualan()">
-                    <option value="1">Januari</option><option value="2">Februari</option><option value="3">Maret</option><option value="4">April</option><option value="5">Mei</option><option value="6">Juni</option><option value="7">Juli</option><option value="8">Agustus</option><option value="9">September</option><option value="10">Oktober</option><option value="11">November</option><option value="12">Desember</option>
+                    <option value="1">Januari</option><option value="2">Februari</option>
+                    <option value="3">Maret</option><option value="4">April</option>
+                    <option value="5">Mei</option><option value="6">Juni</option>
+                    <option value="7">Juli</option><option value="8">Agustus</option>
+                    <option value="9">September</option><option value="10">Oktober</option>
+                    <option value="11">November</option><option value="12">Desember</option>
                 </select>
             </div>
-            <div class="tracking-section-title" id="judul_grafik_batang_produk">1. Grafik Mingguan Penjualan</div>
+
+            <div class="tracking-section-title" id="judul_grafik_batang_produk">1. Tracking Bulanan (Diagram Batang Qty Terjual)</div>
             <div class="chart-container">
-                <div class="chart-flex" style="max-width:700px; margin:0 auto;">
-                    <div class="chart-bar-wrapper"><div class="chart-bar" id="bar_m1"><span class="chart-val" id="val_m1">0</span></div><div class="chart-label">Minggu 1</div></div>
-                    <div class="chart-bar-wrapper"><div class="chart-bar" id="bar_m2"><span class="chart-val" id="val_m2">0</span></div><div class="chart-label">Minggu 2</div></div>
-                    <div class="chart-bar-wrapper"><div class="chart-bar" id="bar_m3"><span class="chart-val" id="val_m3">0</span></div><div class="chart-label">Minggu 3</div></div>
-                    <div class="chart-bar-wrapper"><div class="chart-bar" id="bar_m4"><span class="chart-val" id="val_m4">0</span></div><div class="chart-label">Minggu 4</div></div>
+                <div class="chart-flex" style="justify-content: space-around; max-width:700px; margin:0 auto;">
+                    <div class="chart-bar-wrapper">
+                        <div class="chart-bar" id="bar_m1" style="background: #3b5975;"><span class="chart-val" id="val_m1">0 Qty</span></div>
+                        <div class="chart-label">Minggu 1 (Tgl 1-7)</div>
+                    </div>
+                    <div class="chart-bar-wrapper">
+                        <div class="chart-bar" id="bar_m2" style="background: #3b5975;"><span class="chart-val" id="val_m2">0 Qty</span></div>
+                        <div class="chart-label">Minggu 2 (Tgl 8-14)</div>
+                    </div>
+                    <div class="chart-bar-wrapper">
+                        <div class="chart-bar" id="bar_m3" style="background: #3b5975;"><span class="chart-val" id="val_m3">0 Qty</span></div>
+                        <div class="chart-label">Minggu 3 (Tgl 15-21)</div>
+                    </div>
+                    <div class="chart-bar-wrapper">
+                        <div class="chart-bar" id="bar_m4" style="background: #3b5975;"><span class="chart-val" id="val_m4">0 Qty</span></div>
+                        <div class="chart-label">Minggu 4 (Tgl 22-Ahad)</div>
+                    </div>
                 </div>
             </div>
-            <div class="tracking-section-title" id="judul_grafik_garis_produk">2. Tren Distribusi Penjualan Tahunan (Line Chart SVG)</div>
+
+            <div class="tracking-section-title" id="judul_grafik_garis_produk">2. Tracking Tahunan (Diagram Garis Tren Qty Terjual)</div>
             <div class="chart-container">
                 <div class="svg-chart-container">
                     <svg class="svg-graph" id="svg_line_chart">
@@ -393,7 +558,12 @@
                         <g id="svg_points_group"></g>
                     </svg>
                     <div class="svg-labels-x">
-                        <div class="svg-label-x-text">Jan</div><div class="svg-label-x-text">Feb</div><div class="svg-label-x-text">Mar</div><div class="svg-label-x-text">Apr</div><div class="svg-label-x-text">Mei</div><div class="svg-label-x-text">Jun</div><div class="svg-label-x-text">Jul</div><div class="svg-label-x-text">Agu</div><div class="svg-label-x-text">Sep</div><div class="svg-label-x-text">Okt</div><div class="svg-label-x-text">Nov</div><div class="svg-label-x-text">Des</div>
+                        <div class="svg-label-x-text">Jan</div><div class="svg-label-x-text">Feb</div>
+                        <div class="svg-label-x-text">Mar</div><div class="svg-label-x-text">Apr</div>
+                        <div class="svg-label-x-text">Mei</div><div class="svg-label-x-text">Jun</div>
+                        <div class="svg-label-x-text">Jul</div><div class="svg-label-x-text">Agu</div>
+                        <div class="svg-label-x-text">Sep</div><div class="svg-label-x-text">Okt</div>
+                        <div class="svg-label-x-text">Nov</div><div class="svg-label-x-text">Des</div>
                     </div>
                 </div>
             </div>
@@ -402,8 +572,8 @@
 
     <div class="ribbon-footer"></div>
 
+    <!-- CODE LOGIC PROGRAM SYSTEM -->
     <script>
-        // ATUR TANGGAL BAWAAN OTOMATIS
         const hariIni = new Date().toISOString().split('T')[0];
         document.getElementById('p_tanggal').value = hariIni;
         document.getElementById('s_tanggal').value = hariIni;
@@ -414,46 +584,41 @@
         document.getElementById('filter_bulan_kas').value = blnSekarang;
         document.getElementById('filter_bulan_penjualan').value = blnSekarang;
 
-        // DATA UTAMA & SYSTEM AKUN TOKO
-        let databaseAkun = JSON.parse(localStorage.getItem('kalunaUsersDB_v2')) || { "sembako": "mamah123" };
-        let currentUser = localStorage.getItem('kalunaLoggedUser_v2') || "";
+        let databaseAkun = JSON.parse(localStorage.getItem('kalunaUsersDB_v1')) || { "sembako": "mamah123" };
+        let currentUser = localStorage.getItem('kalunaLoggedUser_v1') || "";
         let dataStore = { produk: [], transaksiKeluar: [], kasManual: [] };
 
         function loadUserStoreData() {
             if(!currentUser) return;
-            let storedData = JSON.parse(localStorage.getItem('kalunaStoreData_v2_' + currentUser));
+            let storedData = JSON.parse(localStorage.getItem('kalunaStoreData_' + currentUser));
             dataStore = storedData ? storedData : { produk: [], transaksiKeluar: [], kasManual: [] };
-            
-            if (!dataStore.produk) dataStore.produk = [];
-            if (!dataStore.transaksiKeluar) dataStore.transaksiKeluar = [];
-            if (!dataStore.kasManual) dataStore.kasManual = [];
-
             document.getElementById('nama_toko_aktif').innerText = "Toko: " + currentUser.toUpperCase();
         }
 
         function saveUserData() {
             if(!currentUser) return;
-            localStorage.setItem('kalunaStoreData_v2_' + currentUser, JSON.stringify(dataStore));
-            renderAll(); 
+            localStorage.setItem('kalunaStoreData_' + currentUser, JSON.stringify(dataStore));
+            renderAll();
         }
 
-        // PERBAIKAN FUNGSIONAL: Fungsi khusus perpindahan antar layar Login & Register secara instan
-        function gantiHalamanAuth(pageId) {
+        function navigateToAuth(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
         }
 
         function navigateTo(pageId) {
-            if(!currentUser) { gantiHalamanAuth('authPage'); return; }
+            if(!currentUser) { 
+                navigateToAuth('authPage'); 
+                return; 
+            }
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             window.scrollTo(0,0);
             
-            renderAll();
-            if(pageId === 'arusKasPage') { setTimeout(renderDiagramKeuangan, 50); }
+            if(pageId === 'arusKasPage') { setTimeout(renderDiagramKeuangan, 100); }
             if(pageId === 'penjualanPage') { 
                 buildProductDropdownForTracking(); 
-                setTimeout(renderSemuaTrackingPenjualan, 50); 
+                setTimeout(renderSemuaTrackingPenjualan, 100); 
             }
         }
 
@@ -465,18 +630,15 @@
         function prosesRegister() {
             let user = document.getElementById('regUser').value.trim().toLowerCase();
             let pass = document.getElementById('regPassword').value;
-            if(!user || !pass) return alert('Data pendaftaran tidak boleh kosong!');
-            if(databaseAkun[user]) return alert('Nama akun toko sudah terdaftar!');
+            if(!user || !pass) return alert('Data tidak boleh kosong!');
+            if(databaseAkun[user]) return alert('Nama akun toko sudah terpakai!');
             
             databaseAkun[user] = pass;
-            localStorage.setItem('kalunaUsersDB_v2', JSON.stringify(databaseAkun));
-            alert('Toko Baru Sukses Terdaftar!');
-            
-            // RESET INPUT REGISTER
+            localStorage.setItem('kalunaUsersDB_v1', JSON.stringify(databaseAkun));
+            alert('Toko "' + user.toUpperCase() + '" Sukses Didaftarkan!');
             document.getElementById('regUser').value = '';
             document.getElementById('regPassword').value = '';
-            
-            gantiHalamanAuth('authPage');
+            navigateToAuth('authPage');
         }
 
         function prosesLogin() {
@@ -484,48 +646,46 @@
             let pass = document.getElementById('loginPassword').value;
             if(databaseAkun[user] && databaseAkun[user] === pass) {
                 currentUser = user;
-                localStorage.setItem('kalunaLoggedUser_v2', currentUser);
+                localStorage.setItem('kalunaLoggedUser_v1', currentUser);
                 loadUserStoreData();
-                
-                // RESET INPUT LOGIN
-                document.getElementById('loginUser').value = '';
-                document.getElementById('loginPassword').value = '';
-                
-                navigateTo('dashboardPage');
+                navigateTo('dashboardPage'); // Pindah halaman dulu agar elemen HTML siap
+                setTimeout(renderAll, 50);   // Memuat data tabel setelah halaman aktif
             } else {
-                alert('Kombinasi Akun/Password Salah!');
+                alert('Username atau Password toko salah!');
             }
         }
 
         function prosesLogout() {
             currentUser = "";
-            localStorage.removeItem('kalunaLoggedUser_v2');
-            gantiHalamanAuth('authPage');
+            localStorage.removeItem('kalunaLoggedUser_v1');
+            navigateToAuth('authPage');
         }
 
         function tambahProdukGanda() {
             let tgl = document.getElementById('p_tanggal').value;
             let nama = document.getElementById('p_nama').value.trim();
-            let qty = parseInt(document.getElementById('p_qty').value) || 0;
+            
+            let qtyPcs = parseInt(document.getElementById('p_qty_pcs').value) || 0;
             let modalPcs = parseFloat(document.getElementById('p_modal_pcs').value) || 0;
             let jualPcs = parseFloat(document.getElementById('p_jual_pcs').value) || 0;
+
+            let qtyPack = parseInt(document.getElementById('p_qty_pack').value) || 0;
             let modalPack = parseFloat(document.getElementById('p_modal_pack').value) || 0;
             let jualPack = parseFloat(document.getElementById('p_jual_pack').value) || 0;
 
-            if(!nama || !tgl || qty <= 0) return alert('Lengkapi Nama Barang dan Kuantitas Masuk!');
+            if(!nama || !tgl) return alert('Isi tanggal dan nama produk terlebih dahulu!');
+            if(qtyPcs <= 0 && qtyPack <= 0) return alert('Isi kuantitas eceran atau grosir minimal salah satu!');
 
             dataStore.produk.push({
-                tanggal: tgl, nama: nama, qty: qty, originalQty: qty,
-                modalPcs: modalPcs, jualPcs: jualPcs, modalPack: modalPack, jualPack: jualPack
+                tanggal: tgl, nama: nama,
+                qtyPcs: qtyPcs, originalQtyPcs: qtyPcs, modalPcs: modalPcs, jualPcs: jualPcs,
+                qtyPack: qtyPack, originalQtyPack: qtyPack, modalPack: modalPack, jualPack: jualPack
             });
 
             document.getElementById('p_nama').value = '';
-            document.getElementById('p_qty').value = '';
-            document.getElementById('p_modal_pcs').value = ''; document.getElementById('p_jual_pcs').value = '';
-            document.getElementById('p_modal_pack').value = ''; document.getElementById('p_jual_pack').value = '';
-            
+            document.getElementById('p_qty_pcs').value = ''; document.getElementById('p_modal_pcs').value = ''; document.getElementById('p_jual_pcs').value = '';
+            document.getElementById('p_qty_pack').value = ''; document.getElementById('p_modal_pack').value = ''; document.getElementById('p_jual_pack').value = '';
             saveUserData();
-            alert('Produk Toko Berhasil Disimpan!');
         }
 
         function kurangiStokGanda() {
@@ -534,23 +694,26 @@
             let satuanPilihan = document.getElementById('s_satuan_pilihan').value;
             let qtyKeluar = parseInt(document.getElementById('s_jumlah').value) || 0;
 
-            if(!prodName || qtyKeluar <= 0) return alert('Jumlah unit terjual wajib diisi!');
+            if(!prodName || qtyKeluar <= 0) return alert('Tentukan produk dan jumlah terjual dengan benar!');
             let p = dataStore.produk.find(item => item.nama === prodName);
-            if(!p) return alert('Produk tidak ditemukan!');
+            if(!p) return;
 
-            if(p.qty < qtyKeluar) return alert('Sisa stok fisik di toko tidak mencukupi!');
-            p.qty -= qtyKeluar;
-            
-            let mVal = (satuanPilihan === 'Pcs') ? p.modalPcs : p.modalPack;
-            let jVal = (satuanPilihan === 'Pcs') ? p.jualPcs : p.jualPack;
-
-            dataStore.transaksiKeluar.push({
-                tanggal: tgl, nama: prodName, satuan: satuanPilihan, qty: qtyKeluar, modal: mVal, jual: jVal
-            });
+            if(satuanPilihan === 'Pcs') {
+                if(p.qtyPcs < qtyKeluar) return alert('Stok eceran (Pcs/Kg) tidak mencukupi!');
+                p.qtyPcs -= qtyKeluar;
+                dataStore.transaksiKeluar.push({
+                    tanggal: tgl, nama: prodName, satuan: 'Pcs', qty: qtyKeluar, modal: p.modalPcs, jual: p.jualPcs
+                });
+            } else {
+                if(p.qtyPack < qtyKeluar) return alert('Stok grosir (Pack/Sak) tidak mencukupi!');
+                p.qtyPack -= qtyKeluar;
+                dataStore.transaksiKeluar.push({
+                    tanggal: tgl, nama: prodName, satuan: 'Pack', qty: qtyKeluar, modal: p.modalPack, jual: p.jualPack
+                });
+            }
 
             document.getElementById('s_jumlah').value = '';
             saveUserData();
-            alert('Nota Penjualan Retail Berhasil Disimpan!');
         }
 
         function tambahKasManual() {
@@ -559,30 +722,25 @@
             let masuk = parseFloat(document.getElementById('m_masuk').value) || 0;
             let keluar = parseFloat(document.getElementById('m_keluar').value) || 0;
 
-            if(!tgl || !ket) return alert('Keterangan kas operasional wajib diisi!');
+            if(!tgl || !ket) return alert('Mohon isi tanggal dan keterangan!');
             dataStore.kasManual.push({ tanggal: tgl, keterangan: ket, masuk, keluar });
-            
             document.getElementById('m_keterangan').value = '';
             document.getElementById('m_masuk').value = '';
             document.getElementById('m_keluar').value = '';
             saveUserData();
-            alert('Catatan Biaya Operasional Berhasil Ditambahkan!');
         }
 
         function hapusProduk(index) {
             let p = dataStore.produk[index];
             if(p) {
-                if(confirm(`Hapus permanen produk "${p.nama}" beserta seluruh data stoknya?`)) {
-                    dataStore.transaksiKeluar = dataStore.transaksiKeluar.filter(t => t.nama !== p.nama);
-                    dataStore.produk.splice(index, 1);
-                    saveUserData(); 
-                }
+                dataStore.transaksiKeluar = dataStore.transaksiKeluar.filter(t => t.nama !== p.nama);
+                dataStore.produk.splice(index, 1);
+                saveUserData();
             }
         }
 
         function buildProductDropdownForTracking() {
             let dropdown = document.getElementById('filter_produk_penjualan');
-            if(!dropdown) return;
             if(dataStore.produk.length === 0) {
                 dropdown.innerHTML = '<option value="">(Belum Ada Produk)</option>';
                 return;
@@ -598,50 +756,73 @@
                 selectSProduk.innerHTML = dataStore.produk.map(p => `<option value="${p.nama}">${p.nama}</option>`).join('');
             }
 
-            // RENDERING DATA TABEL PRODUK
+            // 1. Render Tabel Daftar Produk
             let tabelProduk = document.getElementById('tabel_produk');
             if(tabelProduk) {
                 tabelProduk.innerHTML = dataStore.produk.map((p, idx) => {
-                    let untungPcs = p.jualPcs - p.modalPcs;
+                    let labaPcs = p.jualPcs - p.modalPcs;
+                    let labaPack = p.jualPack - p.modalPack;
+                    
                     return `<tr>
                         <td>${p.tanggal}</td>
                         <td><strong>${p.nama}</strong></td>
-                        <td><span style="color:#2b445a; font-weight:700;">${p.qty}</span> / ${p.originalQty}</td>
-                        <td class="stacked-cell"><div>Pcs: Rp ${p.modalPcs.toLocaleString()}</div><div>Pack: Rp ${p.modalPack.toLocaleString()}</div></td>
-                        <td class="stacked-cell"><div>Pcs: Rp ${p.jualPcs.toLocaleString()}</div><div>Pack: Rp ${p.jualPack.toLocaleString()}</div></td>
-                        <td><span style="color:${untungPcs>=0?'#2e7d32':'#b71c1c'}">Rp ${untungPcs.toLocaleString()}</span></td>
+                        <td class="stacked-cell">
+                            <div>Pcs/Kg: ${p.originalQtyPcs}</div>
+                            <div>Pack/Sak: ${p.originalQtyPack}</div>
+                        </td>
+                        <td class="stacked-cell">
+                            <div>Pcs: Rp ${p.modalPcs.toLocaleString()}</div>
+                            <div>Pack: Rp ${p.modalPack.toLocaleString()}</div>
+                        </td>
+                        <td class="stacked-cell">
+                            <div>Pcs: Rp ${p.jualPcs.toLocaleString()}</div>
+                            <div>Pack: Rp ${p.jualPack.toLocaleString()}</div>
+                        </td>
+                        <td class="stacked-cell">
+                            <div>Pcs: <span style="color:${labaPcs>=0?'#2e7d32':'#c62828'}; font-weight:700;">Rp ${labaPcs.toLocaleString()}</span></div>
+                            <div>Pack: <span style="color:${labaPack>=0?'#2e7d32':'#c62828'}; font-weight:700;">Rp ${labaPack.toLocaleString()}</span></div>
+                        </td>
                         <td><button class="btn-delete" onclick="hapusProduk(${idx})">Hapus</button></td>
                     </tr>`;
                 }).join('');
             }
 
-            // RENDERING DATA KETERSEDIAAN STOK
+            // 2. Render Tabel Stok
             let tabelStok = document.getElementById('tabel_stok');
             if(tabelStok) {
                 tabelStok.innerHTML = dataStore.produk.map(p => {
-                    let badgeClass = p.qty === 0 ? "badge-danger" : (p.qty <= 5 ? "badge-warning" : "badge-success");
-                    let txt = p.qty === 0 ? "Habis" : (p.qty <= 5 ? "Menipis" : "Aman");
-                    return `<tr><td><strong>${p.nama}</strong></td><td><strong>${p.qty}</strong> Unit Sisa</td><td><span class="badge ${badgeClass}">${txt}</span></td></tr>`;
+                    let statusKeterangan = "Stok Aman";
+                    let badgeClass = "badge-success";
+                    if(p.qtyPcs === 0 && p.qtyPack === 0) { badgeClass = "badge-danger"; statusKeterangan = "Habis total!"; }
+                    else if(p.qtyPcs <= 3 || p.qtyPack <= 1) { badgeClass = "badge-warning"; statusKeterangan = "Menipis!"; }
+
+                    return `<tr>
+                        <td><strong>${p.nama}</strong></td>
+                        <td class="stacked-cell">
+                            <div>Pcs/Kg: <strong>${p.qtyPcs}</strong> sisa</div>
+                            <div>Pack/Sak: <strong>${p.qtyPack}</strong> sisa</div>
+                        </td>
+                        <td><span class="badge ${badgeClass}">${statusKeterangan}</span></td>
+                    </tr>`;
                 }).join('');
             }
 
-            // RENDERING MUTASI BUKU KAS BESAR
-            let blnLaporan = parseInt(document.getElementById('filter_bulan_laporan').value);
+            // 3. Rekap Laporan Alur Kas Bulanan
+            let blnLaporan = document.getElementById('filter_bulan_laporan').value;
             let bundelKas = [];
 
             dataStore.transaksiKeluar.forEach(t => {
-                if((new Date(t.tanggal).getMonth() + 1) === blnLaporan) {
+                if((new Date(t.tanggal).getMonth() + 1) == blnLaporan) {
                     bundelKas.push({
                         tanggal: t.tanggal,
                         keterangan: `Penjualan: ${t.nama} (${t.qty} ${t.satuan})`,
-                        masuk: t.qty * t.jual, 
-                        keluar: 0 
+                        masuk: t.qty * t.jual, keluar: t.qty * t.modal
                     });
                 }
             });
 
             dataStore.kasManual.forEach(k => {
-                if((new Date(k.tanggal).getMonth() + 1) === blnLaporan) {
+                if((new Date(k.tanggal).getMonth() + 1) == blnLaporan) {
                     bundelKas.push({ tanggal: k.tanggal, keterangan: k.keterangan, masuk: k.masuk, keluar: k.keluar });
                 }
             });
@@ -649,101 +830,138 @@
             bundelKas.sort((a, b) => new Date(a.tanggal) - new Date(b.tanggal));
 
             let saldoBerjalan = 0; let totalMasuk = 0; let totalKeluar = 0;
-            let tabelBukuKas = document.getElementById('tabel_buku_kas');
             
+            let tabelBukuKas = document.getElementById('tabel_buku_kas');
             if(tabelBukuKas) {
-                tabelBukuKas.innerHTML = bundelKas.map((item, idx) => {
+                tabelBukuKas.innerHTML = bundelKas.map((item, index) => {
                     saldoBerjalan += (item.masuk - item.keluar);
                     totalMasuk += item.masuk; totalKeluar += item.keluar;
+
                     return `<tr>
-                        <td>${idx + 1}</td>
+                        <td>${index + 1}</td>
                         <td>${item.tanggal}</td>
                         <td><strong>${item.keterangan}</strong></td>
-                        <td style="color:#b71c1c;">${item.keluar > 0 ? 'Rp ' + item.keluar.toLocaleString() : '-'}</td>
+                        <td style="color:#c62828;">${item.keluar > 0 ? 'Rp ' + item.keluar.toLocaleString() : '-'}</td>
                         <td style="color:#2e7d32;">${item.masuk > 0 ? 'Rp ' + item.masuk.toLocaleString() : '-'}</td>
                         <td><strong>Rp ${saldoBerjalan.toLocaleString()}</strong></td>
                     </tr>`;
                 }).join('');
+            } else {
+                bundelKas.forEach(item => {
+                    saldoBerjalan += (item.masuk - item.keluar);
+                    totalMasuk += item.masuk; totalKeluar += item.keluar;
+                });
             }
 
             if(document.getElementById('rep_total_masuk')) document.getElementById('rep_total_masuk').innerText = 'Rp ' + totalMasuk.toLocaleString();
             if(document.getElementById('rep_total_keluar')) document.getElementById('rep_total_keluar').innerText = 'Rp ' + totalKeluar.toLocaleString();
             if(document.getElementById('rep_netto')) {
                 document.getElementById('rep_netto').innerText = 'Rp ' + saldoBerjalan.toLocaleString();
-                document.getElementById('rep_netto').style.color = saldoBerjalan >= 0 ? '#2e7d32' : '#b71c1c';
+                document.getElementById('rep_netto').style.color = saldoBerjalan >= 0 ? '#2e7d32' : '#c62828';
             }
 
-            // RENDERING ANALISIS REPURCHASE
+            // 4. Analisis Perputaran Barang
             let tabelAnalisis = document.getElementById('tabel_analisis');
             if(tabelAnalisis) {
                 tabelAnalisis.innerHTML = dataStore.produk.map(p => {
                     let listT = dataStore.transaksiKeluar.filter(t => t.nama === p.nama);
                     let totalSold = listT.reduce((sum, t) => sum + t.qty, 0);
-                    let badge = "badge-warning"; let teks = "Belum Ada Perputaran";
+                    
+                    let kesimpulan = "Data Transaksi Kurang";
+                    let badgeColor = "badge-warning";
 
                     if(totalSold > 0) {
-                        if(p.qty === 0) { badge = "badge-success"; teks = "Sangat Direkomendasikan (Laris Manis)"; }
-                        else if(totalSold > 15) { badge = "badge-success"; teks = "Prioritas Tinggi Kulakan"; }
-                        else { badge = "badge-warning"; teks = "Perputaran Normal"; }
+                        let d1 = new Date(p.tanggal);
+                        let d2 = new Date(listT[listT.length - 1].tanggal);
+                        let selisihHari = Math.ceil(Math.abs(d2 - d1) / (1000 * 60 * 60 * 24)) || 1;
+                        let speedRatio = totalSold / selisihHari;
+
+                        if(speedRatio >= 1.2 || (p.qtyPcs === 0 && p.qtyPack === 0 && selisihHari <= 15)) {
+                            kesimpulan = "Sangat Layak Direpurchase (Sangat Cepat Habis)";
+                            badgeColor = "badge-success";
+                        } else if (speedRatio >= 0.3 || selisihHari <= 31) {
+                            kesimpulan = "Layak Direpurchase (Perputaran Stabil)";
+                            badgeColor = "badge-success";
+                        } else {
+                            kesimpulan = "Kurang Layak (Perputaran Lambat)";
+                            badgeColor = "badge-danger";
+                        }
                     }
-                    return `<tr><td><strong>${p.nama}</strong></td><td><strong>${totalSold}</strong> Unit</td><td><span class="badge ${badge}">${teks}</span></td></tr>`;
+
+                    return `<tr>
+                        <td><strong>${p.nama}</strong></td>
+                        <td><strong>${totalSold}</strong> Transaksi Terjual</td>
+                        <td><span class="badge ${badgeColor}">${kesimpulan}</span></td>
+                    </tr>`;
                 }).join('');
             }
         }
 
-        // RENDERING DIAGRAM BATANG KEUANGAN
+        // 5. Render Diagram Batang Keuangan Bulanan & Tahunan
         function renderDiagramKeuangan() {
             if(!currentUser) return;
             let blnTarget = parseInt(document.getElementById('filter_bulan_kas').value);
-            let masukBulan = 0, keluarBulan = 0; let masukTahun = 0, keluarTahun = 0;
+            
+            let masukBulan = 0, keluarBulan = 0;
+            let masukTahun = 0, keluarTahun = 0;
 
             dataStore.transaksiKeluar.forEach(t => {
                 let m = new Date(t.tanggal).getMonth() + 1;
                 masukTahun += (t.qty * t.jual);
-                if(m === blnTarget) { masukBulan += (t.qty * t.jual); }
+                keluarTahun += (t.qty * t.modal);
+
+                if(m === blnTarget) {
+                    masukBulan += (t.qty * t.jual);
+                    keluarBulan += (t.qty * t.modal);
+                }
             });
 
             dataStore.kasManual.forEach(k => {
                 let m = new Date(k.tanggal).getMonth() + 1;
-                masukTahun += k.masuk; keluarTahun += k.keluar;
-                if(m === blnTarget) { masukBulan += k.masuk; keluarBulan += k.keluar; }
+                masukTahun += k.masuk;
+                keluarTahun += k.keluar;
+
+                if(m === blnTarget) {
+                    masukBulan += k.masuk;
+                    keluarBulan += k.keluar;
+                }
             });
 
             let maxBulan = Math.max(masukBulan, keluarBulan, 1000);
             if(document.getElementById('bar_omset_bulan')) document.getElementById('bar_omset_bulan').style.height = `${(masukBulan / maxBulan) * 100}%`;
             if(document.getElementById('bar_modal_bulan')) document.getElementById('bar_modal_bulan').style.height = `${(keluarBulan / maxBulan) * 100}%`;
-            document.getElementById('val_omset_bulan').innerText = "Rp " + masukBulan.toLocaleString();
-            document.getElementById('val_modal_bulan').innerText = "Rp " + keluarBulan.toLocaleString();
+            if(document.getElementById('val_omset_bulan')) document.getElementById('val_omset_bulan').innerText = "Rp " + masukBulan.toLocaleString();
+            if(document.getElementById('val_modal_bulan')) document.getElementById('val_modal_bulan').innerText = "Rp " + keluarBulan.toLocaleString();
 
             let maxTahun = Math.max(masukTahun, keluarTahun, 1000);
             if(document.getElementById('bar_omset_tahun')) document.getElementById('bar_omset_tahun').style.height = `${(masukTahun / maxTahun) * 100}%`;
             if(document.getElementById('bar_modal_tahun')) document.getElementById('bar_modal_tahun').style.height = `${(keluarTahun / maxTahun) * 100}%`;
-            document.getElementById('val_omset_tahun').innerText = "Rp " + masukTahun.toLocaleString();
-            document.getElementById('val_modal_tahun').innerText = "Rp " + keluarTahun.toLocaleString();
+            if(document.getElementById('val_omset_tahun')) document.getElementById('val_omset_tahun').innerText = "Rp " + masukTahun.toLocaleString();
+            if(document.getElementById('val_modal_tahun')) document.getElementById('val_modal_tahun').innerText = "Rp " + keluarTahun.toLocaleString();
         }
 
-        // RENDERING DIAGRAM TRACKING PENJUALAN PRODUK
+        // 6. Tracking Qty Terjual Per Produk (Batang + Line Chart)
         function renderSemuaTrackingPenjualan() {
             let prodName = document.getElementById('filter_produk_penjualan').value;
             if(!prodName) return;
+
             let blnTarget = parseInt(document.getElementById('filter_bulan_penjualan').value);
             
-            document.getElementById('judul_grafik_batang_produk').innerText = `1. Distribusi Mingguan - ${prodName}`;
-            
+            if(document.getElementById('judul_grafik_batang_produk')) document.getElementById('judul_grafik_batang_produk').innerText = `1. Tracking Bulanan "${prodName}" - Bulan Ke-${blnTarget} (Diagram Batang Qty)`;
+            if(document.getElementById('judul_grafik_garis_produk')) document.getElementById('judul_grafik_garis_produk').innerText = `2. Tracking Tahunan "${prodName}" (Diagram Garis Tren Penjualan)`;
+
             let qtyM1 = 0, qtyM2 = 0, qtyM3 = 0, qtyM4 = 0;
-            let tahunanQtyArray = Array(12).fill(0);
 
             dataStore.transaksiKeluar.forEach(t => {
                 if(t.nama === prodName) {
                     let dObj = new Date(t.tanggal);
                     let m = dObj.getMonth() + 1;
-                    tahunanQtyArray[dObj.getMonth()] += t.qty;
+                    let tglHari = dObj.getDate();
 
                     if(m === blnTarget) {
-                        let tgl = dObj.getDate();
-                        if(tgl <= 7) qtyM1 += t.qty;
-                        else if(tgl <= 14) qtyM2 += t.qty;
-                        else if(tgl <= 21) qtyM3 += t.qty;
+                        if(tglHari <= 7) qtyM1 += t.qty;
+                        else if(tglHari <= 14) qtyM2 += t.qty;
+                        else if(tglHari <= 21) qtyM3 += t.qty;
                         else qtyM4 += t.qty;
                     }
                 }
@@ -755,42 +973,60 @@
             if(document.getElementById('bar_m3')) document.getElementById('bar_m3').style.height = `${(qtyM3 / maxMinggu) * 100}%`;
             if(document.getElementById('bar_m4')) document.getElementById('bar_m4').style.height = `${(qtyM4 / maxMinggu) * 100}%`;
 
-            document.getElementById('val_m1').innerText = qtyM1;
-            document.getElementById('val_m2').innerText = qtyM2;
-            document.getElementById('val_m3').innerText = qtyM3;
-            document.getElementById('val_m4').innerText = qtyM4;
+            if(document.getElementById('val_m1')) document.getElementById('val_m1').innerText = `${qtyM1} Qty`;
+            if(document.getElementById('val_m2')) document.getElementById('val_m2').innerText = `${qtyM2} Qty`;
+            if(document.getElementById('val_m3')) document.getElementById('val_m3').innerText = `${qtyM3} Qty`;
+            if(document.getElementById('val_m4')) document.getElementById('val_m4').innerText = `${qtyM4} Qty`;
 
+            // Line Chart SVG
             let svgContainer = document.getElementById('svg_line_chart');
+            if(!svgContainer) return;
+
             let pathLine = document.getElementById('chart_line_path');
             let pointsGroup = document.getElementById('svg_points_group');
-            if(!svgContainer || !pathLine) return;
-
             pointsGroup.innerHTML = '';
-            let maxQtyTahun = Math.max(...tahunanQtyArray, 1);
-            let widthTotal = svgContainer.clientWidth || 900;
-            let stepX = widthTotal / 12; let paddingLeft = stepX / 2;
-            let koordinatPoin = [];
 
+            let tahunanQtyArray = Array(12).fill(0);
+            dataStore.transaksiKeluar.forEach(t => {
+                if(t.nama === prodName) {
+                    let mIdx = new Date(t.tanggal).getMonth();
+                    if(mIdx >= 0 && mIdx <= 11) { tahunanQtyArray[mIdx] += t.qty; }
+                }
+            });
+
+            let maxQtyTahun = Math.max(...tahunanQtyArray, 1);
+            let widthTotal = svgContainer.clientWidth || 1000;
+            let stepX = widthTotal / 12;
+            let paddingLeft = stepX / 2;
+
+            let koordinatPoin = [];
             for(let i=0; i<12; i++) {
                 let x = paddingLeft + (i * stepX);
                 let y = 230 - ((tahunanQtyArray[i] / maxQtyTahun) * 190);
                 koordinatPoin.push(`${x} ${y}`);
 
                 let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-                circle.setAttribute("cx", x); circle.setAttribute("cy", y); circle.setAttribute("r", "5");
+                circle.setAttribute("cx", x);
+                circle.setAttribute("cy", y);
+                circle.setAttribute("r", "5");
                 circle.setAttribute("class", "svg-point");
                 
                 let title = document.createElementNS("http://www.w3.org/2000/svg", "title");
-                title.textContent = `Bulan ${i+1}: ${tahunanQtyArray[i]} Terjual`;
+                title.textContent = `Bulan ${i+1}: Total ${tahunanQtyArray[i]} Terjual`;
                 circle.appendChild(title);
                 pointsGroup.appendChild(circle);
             }
+
             pathLine.setAttribute('d', 'M ' + koordinatPoin.join(' L '));
         }
 
-        // ENGINE KICKSTART INTERIOR
-        if(currentUser) { loadUserStoreData(); navigateTo('dashboardPage'); } 
-        else { gantiHalamanAuth('authPage'); }
+        if(currentUser) {
+            loadUserStoreData();
+            renderAll();
+            navigateTo('dashboardPage');
+        } else {
+            navigateToAuth('authPage');
+        }
     </script>
 </body>
 </html>
